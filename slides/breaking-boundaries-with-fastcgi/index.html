@@ -21,25 +21,103 @@
             <div class="slides">
                 <section><h1>Breaking boundaries with FastCGI</h1></section>
                 <section>
-                    <p><b>What is the simplest definition of a web application?</b></p>
-                    <p class="fragment"><i>Response = F(Request)</i></p>
+                    <p>
+                        <b>HTTP as a restaurant</b>
+                    </p>
+                    <table>
+                        <tr>
+                            <th>Client</th>
+                            <td><img class="fragment icon inline-icon" src="images/customer.png" /></td>
+                            <td><span class="fragment">Customer</span></td>
+                        </tr>
+                        <tr>
+                            <th>Server</th>
+                            <td><img class="fragment icon inline-icon" src="images/restaurant.png" /></td>
+                            <td><span class="fragment">Restaurant</span></td>
+                        </tr>
+                        <tr>
+                            <th>Request</th>
+                            <td><img class="fragment icon inline-icon" src="images/order.png" /></td>
+                            <td><span class="fragment">Order</span></td>
+                        </tr>
+                        <tr>
+                            <th>Application Interface</th>
+                            <td><img class="fragment icon inline-icon" src="images/waitress.png" /></td>
+                            <td><span class="fragment">Waiter/Waitress</span></td>
+                        </tr>
+                        <tr>
+                            <th>Application</th>
+                            <td><img class="fragment icon inline-icon" src="images/chef.png" /></td>
+                            <td><span class="fragment">Chef</span></td>
+                        </tr>
+                        <tr>
+                            <th>Response</th>
+                            <td><img class="fragment icon inline-icon" src="images/food.png" /></td>
+                            <td><span class="fragment">Food</span></td>
+                        </tr>
+                        <tr><td colspan="3"></td></tr>
+                    </table>
                 </section>
                 <section>
-                    <p>Our job, as...</p>
-                    <p class="fragment">software developers</p>
-                    <p class="fragment">software engineers</p>
-                    <p class="fragment"><s>artisans</s></p>
-                    <p class="fragment">... is to define this function</p>
+                    <p><b>If PHP were a restaurant...</b></p>
+                    <table>
+                        <tr class="fragment">
+                            <td><img class="icon inline-icon" src="images/customer.png" /></td>
+                            <td>Customer enters restaurant</td>
+                            <td><img class="icon inline-icon" src="images/restaurant.png" /></td>
+                        </tr>
+                        <tr class="fragment">
+                            <td><img class="icon inline-icon" src="images/waitress.png" /></td>
+                            <td>Waitress takes order</td>
+                            <td>
+                                <img class="icon inline-icon" src="images/order.png" />
+                            </td>
+                        </tr>
+                        <tr class="fragment">
+                            <td><img class="icon inline-icon" src="images/waitress.png" /></td>
+                            <td>Waitress <b>creates chef</b> and gives order</td>
+                            <td>
+                                <img class="icon inline-icon" src="images/chef.png" />
+                            </td>
+                        </tr>
+                        <tr class="fragment">
+                            <td><img class="icon inline-icon" src="images/chef.png" /></td>
+                            <td>Chef makes food</td>
+                            <td>
+                                <img class="icon inline-icon" src="images/food.png" />
+                            </td>
+                        </tr>
+                        <tr class="fragment">
+                            <td><img class="icon inline-icon" src="images/food.png" /></td>
+                            <td>Waitress gives food to customer</td>
+                            <td>
+                                <img class="icon inline-icon" src="images/customer.png" />
+                            </td>
+                        </tr>
+                        <tr class="fragment">
+                            <td><img class="icon inline-icon" src="images/waitress.png" /></td>
+                            <td>Waitress <b>brutally murders</b> chef</td>
+                            <td>
+                                <img class="icon inline-icon" src="images/dead-chef.png" />
+                            </td>
+                        </tr>
+                        <tr><td colspan="2"></td></tr>
+                    </table>
                 </section>
                 <section>
-                    <p>We can use any language to define this function</p>
-                    <p class="fragment">But we must find a way to tell our web server about it</p>
+                    <p><b>The proposal?</b></p>
+                    <p class="fragment">
+                        <img class="icon inline-icon" src="images/chef.png" /><br />
+                        Don&apos;t kill the chef
+                    </p>
+                </section>
+                <section>
+                    <p><b>But how?</b></p>
                 </section>
                 <section>
                     <p><b>CGI: Common Gateway Interface</b></p>
-                    <p class="fragment">Web server executes our program for each HTTP request</p>
-                    <p class="fragment">Whatever the program prints is our HTTP response</p>
-                    <p class="fragment">Request information passed via environment variables</p>
+                    <p class="fragment">HTTP request given to application through environment variables</p>
+                    <p class="fragment">HTTP response written to standard output by application</p>
                 </section>
                 <section>
                     <p><b>CGI: Common Gateway Interface</b></p>
@@ -69,16 +147,20 @@
                     <p class="fragment">Keep our application alive between requests!</p>
                 </section>
                 <section>
-                    <p><b>Back to PHP-FPM</b></p>
-                    <p class="fragment">Keep the PHP interpreter alive between requests</p>
-                    <p class="fragment">PHP still has to reload our application between requests</p>
-                    <p class="fragment">We can do better...</p>
+                    <p><b>PHP-FPM</b></p>
+                    <p>Keeps the <b>PHP interpreter</b> alive between requests</p>
                 </section>
                 <section>
-                    <p>What if we made our PHP application use FastCGI?</p>
+                    <p>
+                        <img class="icon inline-icon" src="images/dead-chef.png" /><br />
+                        <b>We are still killing our chef</b>
+                    </p>
                 </section>
                 <section>
-                    <p><b>How do we make our application use FastCGI?</b></p>
+                    <p><b>Use FastCGI directly?</b></p>
+                </section>
+                <section>
+                    <p><b>Can we make our legacy application use FastCGI?</b></p>
 					<pre><code data-trim>
 include 'lib/common.php';
 include 'lib/database.php';
@@ -101,7 +183,7 @@ echo $page['html'];
                     <p class="fragment">Output buffering??</p>
                 </section>
                 <section>
-                    <p><b>How do we make our application use FastCGI?</b></p>
+                    <p><b>Can we make our Symfony application use FastCGI?</b></p>
                     <pre><code data-trim>
 use Symfony\Component\ClassLoader\ApcClassLoader;
 use Symfony\Component\HttpFoundation\Request;
@@ -118,123 +200,89 @@ $response = $kernel->handle($request);
 $response->send();
 $kernel->terminate($request, $response);
                     </code></pre>
-                    <p class="fragment">Here, our application is already defined as<br /><i>Response = F(Request)</i></p>
+                    <p class="fragment">Application defined as<br /><i>Response = F(Request)</i></p>
+                </section>
+                <section>
+                    <p><b>The FastCGI protocol</b></p>
+                    <table style="font-size: 0.6em;">
+                        <tr><td>-&gt;</td><td>FCGI_BEGIN_REQUEST</td></tr>
+                        <tr><td>-&gt;</td><td>FCGI_PARAMS</td></tr>
+                        <tr><td>-&gt;</td><td>FCGI_PARAMS</td></tr>
+                        <tr><td>-&gt;</td><td>...</td></tr>
+                        <tr><td>-&gt;</td><td>FCGI_STDIN</td></tr>
+                        <tr><td>-&gt;</td><td>FCGI_STDIN</td></tr>
+                        <tr><td>-&gt;</td><td>...</td></tr>
+                        <tr><td></td><td>FCGI_STDOUT</td><td>&lt;-</td></tr>
+                        <tr><td></td><td>FCGI_STDOUT</td><td>&lt;-</td></tr>
+                        <tr><td></td><td>...</td><td>&lt;-</td></tr>
+                        <tr><td></td><td>FCGI_END_REQUEST</td><td>&lt;-</td></tr>
+                    </table>
+                </section>
+                <section>
+                    <p><b>Binary protocol</b></p>
+                    <p>
+                        <i>pack()</i>, <i>unpack()</i>
+                    </p>
+                </section>
+                <section>
+                    <p><b>Or</b></p>
+                </section>
+                <section>
+                    <p><b>PHPFastCGI</b></p>
+                </section>
+                <section>
+					<pre><code data-trim>
+use PHPFastCGI\FastCGIDaemon\ApplicationFactory;
+use PHPFastCGI\FastCGIDaemon\Http\RequestInterface;
+use Zend\Diactoros\Response\HtmlResponse;
+
+// A simple kernel. This is the core of your application
+$kernel = function (RequestInterface $request) {
+    // $request->getServerRequest()         PSR-7 object
+    // $request->getHttpFoundationRequest() HTTP foundation object
+    return new HtmlResponse('<h1>Hello, World!</h1>');
+};
+
+// Create your Symfony console application using the factory
+$application = (new ApplicationFactory)->createApplication($kernel);
+
+// Run the Symfony console application
+$application->run();
+					</code></pre>
                 </section>
                 <section>
                     <p>
-                        <b>The Restaurant Analogy</b>
+                        <img class="icon inline-icon" src="images/restaurant.png" /><br />
+                        <b>Back to the restaurant</b>
                     </p>
-                    <table>
-                        <tr>
-                            <th>Client</th>
-                            <td><span class="fragment">Customer</span></td>
-                            <td><img class="fragment icon inline-icon" src="images/customer.png" /></td>
-                        </tr>
-                        <tr>
-                            <th>Server</th>
-                            <td><span class="fragment">Restaurant</span></td>
-                            <td><img class="fragment icon inline-icon" src="images/restaurant.png" /></td>
-                        </tr>
-                        <tr>
-                            <th>Request</th>
-                            <td><span class="fragment">Order</span></td>
-                            <td><img class="fragment icon inline-icon" src="images/order.png" /></td>
-                        </tr>
-                        <tr>
-                            <th>Application Interface</th>
-                            <td><span class="fragment">Waiter/Waitress</span></td>
-                            <td><img class="fragment icon inline-icon" src="images/waitress.png" /></td>
-                        </tr>
-                        <tr>
-                            <th>Application</th>
-                            <td><span class="fragment">Chef</span></td>
-                            <td><img class="fragment icon inline-icon" src="images/chef.png" /></td>
-                        </tr>
-                        <tr>
-                            <th>Response</th>
-                            <td><span class="fragment">Food</span></td>
-                            <td><img class="fragment icon inline-icon" src="images/food.png" /></td>
-                        </tr>
-                        <tr><td colspan="3"></td></tr>
-                    </table>
                 </section>
                 <section>
-                    <p><b>The current situation</b></p>
-                    <table>
-                        <tr class="fragment">
-                            <td><img class="icon inline-icon" src="images/customer.png" /></td>
-                            <td>Customer enters restaurant</td>
-                            <td><img class="icon inline-icon" src="images/restaurant.png" /></td>
-                        </tr>
-                        <tr class="fragment">
-                            <td><img class="icon inline-icon" src="images/waitress.png" /></td>
-                            <td>Waitress takes order</td>
-                            <td>
-                                <img class="icon inline-icon" src="images/order.png" />
-                            </td>
-                        </tr>
-                        <tr class="fragment">
-                            <td><img class="icon inline-icon" src="images/waitress.png" /></td>
-                            <td>Waitress creates chef, gives order</td>
-                            <td>
-                                <img class="icon inline-icon" src="images/chef.png" />
-                            </td>
-                        </tr>
-                        <tr class="fragment">
-                            <td><img class="icon inline-icon" src="images/chef.png" /></td>
-                            <td>Chef makes food</td>
-                            <td>
-                                <img class="icon inline-icon" src="images/food.png" />
-                            </td>
-                        </tr>
-                        <tr class="fragment">
-                            <td><img class="icon inline-icon" src="images/food.png" /></td>
-                            <td>Waitress gives food to customer</td>
-                            <td>
-                                <img class="icon inline-icon" src="images/customer.png" />
-                            </td>
-                        </tr>
-                        <tr class="fragment">
-                            <td><img class="icon inline-icon" src="images/waitress.png" /></td>
-                            <td>Waitress brutally murders chef</td>
-                            <td>
-                                <img class="icon inline-icon" src="images/dead-chef.png" />
-                            </td>
-                        </tr>
-                        <tr><td colspan="2"></td></tr>
-                    </table>
-                </section>
-                <section>
-                    <p><b>The proposal?</b></p>
-                    <p class="fragment">
+                    <p>
                         <img class="icon inline-icon" src="images/chef.png" /><br />
-                        Don&apos;t kill the chef
+                        <b>No more chef killing</b>
                     </p>
                 </section>
                 <section>
-                    <p><b>The problem?</b></p>
-                    <p class="fragment">
-                        <img class="icon inline-icon" src="images/chef.png" /><br />
-                        Our chefs get ill if they cook too many meals
-                    </p>
+                    <p><b>Problem</b></p>
+                    <p class="fragment">What if our chef gets ill?</b></p>
                 </section>
                 <section>
-                    <p><b>The solution?</b></p>
+                    <p><b>Solution #1</b></p>
                     <p class="fragment">
                         <img class="icon inline-icon" src="images/dead-chef.png" /><br />
-                        Occasionally kill the chef
+                        Kill the chef before they get ill
                     </p>
-                    <p class="fragment"><b>or</b></p>
+                </section>
+                <section>
+                    <p><b>Solution #2</b></p>
                     <p class="fragment">
                         <img class="icon inline-icon" src="images/gordon-ramsay.jpg" /><br />
                         Use a better chef
                     </p>
                 </section>
                 <section>
-                    <p>
-                        <b>Common Chef Illness #1</b><br /><br />
-                        <img class="icon inline-icon" src="images/chef.png" />
-                    </p>
+                    <p><b>Memory Meltdown</b></p>
+                    <br />
                     <p class="fragment">
                         Chef never forgets some of the meals they have made
                     </p>
@@ -242,46 +290,73 @@ $kernel->terminate($request, $response);
                         Chef can only remember so much
                     </p>
                     <p class="fragment">
+                        Chef's head explodes
+                    </p>
+                    <br />
+                    <p class="fragment">
                         <img class="icon inline-icon" src="images/dead-chef.png" />
                     </p>
-                    <p class="fragment"><br />
+                    <br />
+                    <p class="fragment">
                         <i>This is a memory leak</i>
                     </p>
                 </section>
                 <section>
-                    <p>
-                        <b>Common Chef Illness #2</b><br /><br />
-                        <img class="icon inline-icon" src="images/chef.png" />
-                    </p>
+                    <p><b>Timeouts</b></p>
+                    <br />
                     <p class="fragment">
                         Chef forgets how to use oven after a couple of hours
                     </p>
                     <p class="fragment">
                         Chef needs oven
                     </p>
+                    <br />
                     <p class="fragment">
                         <img class="icon inline-icon" src="images/dead-chef.png" />
                     </p>
-                    <p class="fragment"><br />
+                    <br />
+                    <p class="fragment">
                         <i>ERROR 2006: MySQL server has gone away</i>
                     </p>
                 </section>
                 <section>
                     <p>
-                        <b>Common Chef Illness #3</b><br /><br />
-                        <img class="icon inline-icon" src="images/chef.png" />
+                        <b>Trantrum Handling</b>
+                    </p>
+                    <br />
+                    <p class="fragment">
+                        Chef encounters minor issue
                     </p>
                     <p class="fragment">
-                        Chef encounters minor issue and cannot fulfill order
+                        Chef throws big tantrum
                     </p>
-                    <p class="fragment">
-                        Chef dies in shame
-                    </p>
+                    <br />
                     <p class="fragment">
                         <img class="icon inline-icon" src="images/dead-chef.png" />
                     </p>
-                    <p class="fragment"><br />
-                        <i>Make sure you catch all errors and exceptions</i>
+                    <br />
+                    <p class="fragment">
+                        <i>Make sure you catch, log and handle all errors and exceptions</i>
+                    </p>
+                </section>
+                <section>
+                    <p>
+                        <b>Evil Customer</b>
+                    </p>
+                    <br />
+                    <p class="fragment">
+                        Evil customer brainwashes chef
+                    </p>
+                    <p class="fragment">
+                        Chef poisons other customers
+                    </p>
+                    <br />
+                    <p class="fragment">
+                        <img class="icon inline-icon" src="images/dead-chef.png" />
+                    </p>
+                    <br />
+                    <p class="fragment">
+                        <i>Avoid static and global memory</i>
                     </p>
                 </section>
             </div>
