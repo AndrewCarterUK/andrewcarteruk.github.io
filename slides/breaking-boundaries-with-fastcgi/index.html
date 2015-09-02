@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+
+        <title>Breaking boundaries with FastCGI - Andrew Carter</title>
+        <meta name="description" content="How to turbocharge PHP using FastCGI" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui" />
+
+        <link rel="stylesheet" type="text/css" href="css/reveal.css" />
+        <link rel="stylesheet" type="text/css" href="css/theme/league.css" />
+        <link rel="stylesheet" type="text/css" href="lib/css/zenburn.css" />
+
+        <!--[if lt IE 9]>
+            <script type="text/javascript" src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+                <section><h1>Breaking boundaries with FastCGI</h1></section>
+                <section>
+                    <p><b>What is the simplest definition of a web application?</b></p>
+                    <p class="fragment"><i>Response = F(Request)</i></p>
+                </section>
+                <section>
+                    <p>Our job, as...</p>
+                    <p class="fragment">software developers</p>
+                    <p class="fragment">software engineers</p>
+                    <p class="fragment"><s>artisans</s></p>
+                    <p class="fragment">... is to define this function</p>
+                </section>
+                <section>
+                    <p>We can use any language to define this function</p>
+                    <p class="fragment">But we must find a way to tell our web server about it</p>
+                </section>
+                <section>
+                    <p><b>CGI: Common Gateway Interface</b></p>
+                    <p class="fragment">Web server executes our program for each HTTP request</p>
+                    <p class="fragment">Whatever the program prints is our HTTP response</p>
+                    <p class="fragment">Request information passed via environment variables</p>
+                </section>
+                <section>
+                    <p><b>CGI: Common Gateway Interface</b></p>
+                    <p class="fragment">Application must be executable by the web server</p>
+                    <p class="fragment">One instance of our application per request</p>
+                </section>
+                <section>
+                    <p><b>Back in the day...</b></p>
+                    <p class="fragment">when I was 3</p>
+                    <p class="fragment">PHP was just a set of CGI binaries</p>
+                </section>
+                <section>
+                    <p>We can still integrate PHP using CGI</p>
+                    <p class="fragment">We can also use native web server modules</p>
+                    <p class="fragment">We can also use PHP-FPM</p>
+                </section>
+                <section>
+                    <p><b>PHP-FPM?</b></p>
+                    <p class="fragment">PHP FastCGI Process manager</p>
+                    <p class="fragment"><b>FastCGI?</b></p>
+                    <p class="fragment">Like CGI... but faster</p>
+                </section>
+                <section>
+                    <p><b>How can we make CGI faster?</b></p>
+                    <p class="fragment">Wrap our communication in a protocol</p>
+                    <p class="fragment">Implement this protocol over a socket connection</p>
+                    <p class="fragment">Keep our application alive between requests!</p>
+                </section>
+                <section>
+                    <p><b>Back to PHP-FPM</b></p>
+                    <p class="fragment">Keep the PHP interpreter alive between requests</p>
+                    <p class="fragment">PHP still has to reload our application between requests</p>
+                    <p class="fragment">We can do better...</p>
+                </section>
+                <section>
+                    <p>What if we made our PHP application use FastCGI?</p>
+                </section>
+                <section>
+                    <p><b>How do we make our application use FastCGI?</b></p>
+					<pre><code data-trim>
+include 'lib/common.php';
+include 'lib/database.php';
+
+$escaped_url = mysql_real_escape_string($_SERVER['REQUEST_URI']);
+
+$result = mysql_query(
+    'SELECT html ' .
+    'FROM pages ' .
+    'WHERE url=\'' . $escaped_url . '\''
+);
+
+if (false === $result || !($page = mysql_fetch_assoc($result))) {
+    header('HTTP/1.1 404 Not Found');
+    $page = get_404_page();
+}
+
+echo $page['html'];
+					</code></pre>
+                    <p class="fragment">Output buffering??</p>
+                </section>
+                <section>
+                    <p><b>How do we make our application use FastCGI?</b></p>
+                    <pre><code data-trim>
+use Symfony\Component\ClassLoader\ApcClassLoader;
+use Symfony\Component\HttpFoundation\Request;
+
+$loader = require_once __DIR__.'/../app/bootstrap.php.cache';
+
+require_once __DIR__.'/../app/AppKernel.php';
+
+$kernel = new AppKernel('prod', false);
+$kernel->loadClassCache();
+
+$request = Request::createFromGlobals();
+$response = $kernel->handle($request);
+$response->send();
+$kernel->terminate($request, $response);
+                    </code></pre>
+                    <p class="fragment">Here, our application is already defined as<br /><i>Response = F(Request)</i></p>
+                </section>
+                <section>
+                    <p>
+                        <b>The Restaurant Analogy</b>
+                    </p>
+                    <table>
+                        <tr>
+                            <th>Client</th>
+                            <td><span class="fragment">Customer</span></td>
+                            <td><img class="fragment icon inline-icon" src="images/customer.png" /></td>
+                        </tr>
+                        <tr>
+                            <th>Server</th>
+                            <td><span class="fragment">Restaurant</span></td>
+                            <td><img class="fragment icon inline-icon" src="images/restaurant.png" /></td>
+                        </tr>
+                        <tr>
+                            <th>Request</th>
+                            <td><span class="fragment">Order</span></td>
+                            <td><img class="fragment icon inline-icon" src="images/order.png" /></td>
+                        </tr>
+                        <tr>
+                            <th>Application Interface</th>
+                            <td><span class="fragment">Waiter/Waitress</span></td>
+                            <td><img class="fragment icon inline-icon" src="images/waitress.png" /></td>
+                        </tr>
+                        <tr>
+                            <th>Application</th>
+                            <td><span class="fragment">Chef</span></td>
+                            <td><img class="fragment icon inline-icon" src="images/chef.png" /></td>
+                        </tr>
+                        <tr>
+                            <th>Response</th>
+                            <td><span class="fragment">Food</span></td>
+                            <td><img class="fragment icon inline-icon" src="images/food.png" /></td>
+                        </tr>
+                        <tr><td colspan="3"></td></tr>
+                    </table>
+                </section>
+                <section>
+                    <p><b>The current situation</b></p>
+                    <table>
+                        <tr class="fragment">
+                            <td><img class="icon inline-icon" src="images/customer.png" /></td>
+                            <td>Customer enters restaurant</td>
+                            <td><img class="icon inline-icon" src="images/restaurant.png" /></td>
+                        </tr>
+                        <tr class="fragment">
+                            <td><img class="icon inline-icon" src="images/waitress.png" /></td>
+                            <td>Waitress takes order</td>
+                            <td>
+                                <img class="icon inline-icon" src="images/order.png" />
+                            </td>
+                        </tr>
+                        <tr class="fragment">
+                            <td><img class="icon inline-icon" src="images/waitress.png" /></td>
+                            <td>Waitress creates chef, gives order</td>
+                            <td>
+                                <img class="icon inline-icon" src="images/chef.png" />
+                            </td>
+                        </tr>
+                        <tr class="fragment">
+                            <td><img class="icon inline-icon" src="images/chef.png" /></td>
+                            <td>Chef makes food</td>
+                            <td>
+                                <img class="icon inline-icon" src="images/food.png" />
+                            </td>
+                        </tr>
+                        <tr class="fragment">
+                            <td><img class="icon inline-icon" src="images/food.png" /></td>
+                            <td>Waitress gives food to customer</td>
+                            <td>
+                                <img class="icon inline-icon" src="images/customer.png" />
+                            </td>
+                        </tr>
+                        <tr class="fragment">
+                            <td><img class="icon inline-icon" src="images/waitress.png" /></td>
+                            <td>Waitress brutally murders chef</td>
+                            <td>
+                                <img class="icon inline-icon" src="images/dead-chef.png" />
+                            </td>
+                        </tr>
+                        <tr><td colspan="2"></td></tr>
+                    </table>
+                </section>
+                <section>
+                    <p><b>The proposal?</b></p>
+                    <p class="fragment">
+                        <img class="icon inline-icon" src="images/chef.png" /><br />
+                        Don&apos;t kill the chef
+                    </p>
+                </section>
+                <section>
+                    <p><b>The problem?</b></p>
+                    <p class="fragment">
+                        <img class="icon inline-icon" src="images/chef.png" /><br />
+                        Our chefs get ill if they cook too many meals
+                    </p>
+                </section>
+                <section>
+                    <p><b>The solution?</b></p>
+                    <p class="fragment">
+                        <img class="icon inline-icon" src="images/dead-chef.png" /><br />
+                        Occasionally kill the chef
+                    </p>
+                    <p class="fragment"><b>or</b></p>
+                    <p class="fragment">
+                        <img class="icon inline-icon" src="images/gordon-ramsay.jpg" /><br />
+                        Use a better chef
+                    </p>
+                </section>
+                <section>
+                    <p>
+                        <b>Common Chef Illness #1</b><br /><br />
+                        <img class="icon inline-icon" src="images/chef.png" />
+                    </p>
+                    <p class="fragment">
+                        Chef never forgets some of the meals they have made
+                    </p>
+                    <p class="fragment">
+                        Chef can only remember so much
+                    </p>
+                    <p class="fragment">
+                        <img class="icon inline-icon" src="images/dead-chef.png" />
+                    </p>
+                    <p class="fragment"><br />
+                        <i>This is a memory leak</i>
+                    </p>
+                </section>
+                <section>
+                    <p>
+                        <b>Common Chef Illness #2</b><br /><br />
+                        <img class="icon inline-icon" src="images/chef.png" />
+                    </p>
+                    <p class="fragment">
+                        Chef forgets how to use oven after a couple of hours
+                    </p>
+                    <p class="fragment">
+                        Chef needs oven
+                    </p>
+                    <p class="fragment">
+                        <img class="icon inline-icon" src="images/dead-chef.png" />
+                    </p>
+                    <p class="fragment"><br />
+                        <i>ERROR 2006: MySQL server has gone away</i>
+                    </p>
+                </section>
+                <section>
+                    <p>
+                        <b>Common Chef Illness #3</b><br /><br />
+                        <img class="icon inline-icon" src="images/chef.png" />
+                    </p>
+                    <p class="fragment">
+                        Chef encounters minor issue and cannot fulfill order
+                    </p>
+                    <p class="fragment">
+                        Chef dies in shame
+                    </p>
+                    <p class="fragment">
+                        <img class="icon inline-icon" src="images/dead-chef.png" />
+                    </p>
+                    <p class="fragment"><br />
+                        <i>Make sure you catch all errors and exceptions</i>
+                    </p>
+                </section>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="lib/js/head.min.js"></script>
+        <script type="text/javascript" src="js/reveal.js"></script>
+        <script type="text/javascript">
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+                transition: 'slide',
+                dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/notes/notes.js', async: true }
+                ]
+            });
+        </script>
+    </body>
+</html>
