@@ -307,7 +307,7 @@ $application->run();
                     </p>
                     <br />
                     <p class="fragment">
-                        <i>This is a memory leak</i>
+                        <i>Remove references to unrequired objects</i>
                     </p>
                 </section>
                 <section>
@@ -354,10 +354,10 @@ $application->run();
                     </p>
                     <br />
                     <p class="fragment">
-                        Evil customer brainwashes Chef
+                        Chef brainwashed by evil customer
                     </p>
                     <p class="fragment">
-                        Makes Chef poison other customers
+                        Chef tricked into poisoning other customers
                     </p>
                     <br />
                     <p class="fragment">
@@ -367,6 +367,91 @@ $application->run();
                     <p class="fragment">
                         <i>Avoid static and global memory</i>
                     </p>
+                </section>
+                <section>
+                    <p>
+                        <b>Chef Upgrade</b>
+                    </p>
+                    <br />
+                    <p class="fragment">
+                        Restaurant owner wants Chef with new recipes
+                    </p>
+                    <p class="fragment">
+                        Chef is pretty set in their ways
+                    </p>
+                    <p class="fragment">
+                        Restaurant owner forgets to kill old Chef
+                    </p>
+                    <p class="fragment">
+                        Chef keeps serving up old recipes
+                    </p>
+                    <br />
+                    <p class="fragment">
+                        <img class="icon inline-icon" src="images/dead-chef.png" />
+                    </p>
+                    <br />
+                    <p class="fragment">
+                        <i>Remember to kill old Chef(s)</i>
+                    </p>
+                </section>
+                <section>
+                    <p><b>Leaving behind our restaurant...</b></p>
+                </section>
+                <section>
+                    <p><b>An application to benchmark</b></p>
+                    <p class="fragment">500 page Symfony application</p>
+                    <p class="fragment">Single route which selects a random page from database (Doctrine, MySQL)</p>
+                    <p class="fragment">Renders using Twig</p>
+                    <p class="fragment">Clears entity repository after each request</p>
+                </section>
+                <section>
+                    <p><b>Benchmarking System</b></p>
+                    <p class="fragment">VMWare Fusion - 2GB RAM - 4 cores (Intel Core i7, 3.4 GHz)</p>
+                    <p class="fragment">Ubuntu 64-bit Server 15.04</p>
+                    <p class="fragment">PHP 5.6.4</p>
+                    <p class="fragment">NGINX</p>
+                    <p class="fragment">'ab', 50000 requests, concurrency level of 20</p>
+                </section>
+                <section>
+                    <p><b>For the control</b></p>
+                    <p class="fragment">OPcache enabled</p>
+                    <p class="fragment">PHP-FPM</p>
+                    <br />
+                    <p class="fragment"><b>For the test</b></p>
+                    <p class="fragment">6 worker processes</p>
+                </section>
+                <section>
+                    <p><b>The results</b></p>
+                    <br />
+                    <p class="fragment">Using PHP-FPM</p>
+                    <p class="fragment"><b>282.55 rq/s</b></p>
+                    <br />
+                    <p class="fragment">Using PHPFastCGI</p>
+                    <p class="fragment"><b>1334.64 rq/s</b></p>
+                </section>
+                <section>
+                    <p><b>To conclude...</b></p>
+                </section>
+                <section>
+                    <p><b>FastCGI is designed to allow applications to stay alive between requests</b></p>
+                </section>
+                <section>
+                    <p><b>PHP is <small><s>not</s></small> designed to stay alive between requests</b></p>
+                </section>
+                <section>
+                    <p><b>That is possibly why no one has made a serious effort to do this</b></p>
+                </section>
+                <section>
+                    <p><b>Used carefully, this can break performance boundaries</b></p>
+                </section>
+                <section>
+                    <p>Thank you for listening</p>
+                    <br />
+                    <p><b>Any questions?</b></p>
+                    <br />
+                    <p>@AndrewCarterUK</p>
+                    <br />
+                    <p>http://phpfastcgi.github.io<br />http://github.com/PHPFastCGI/SpeedfonyBundle</p>
                 </section>
             </div>
         </div>
