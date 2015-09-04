@@ -18,10 +18,16 @@
     </head>
     <body>
         <div class="reveal">
+            <div style="position: absolute; top: 1em; left: 1em; text-align: left; font-size: 0.5em;">
+                Breaking Boundaries with FastCGI - Andrew Carter
+            </div>
+            <div style="position: absolute; top: 1em; right: 1em; text-align: right; font-size: 0.5em;">
+                @AndrewCarterUK
+            </div>
             <div class="slides">
                 <section><h1>Breaking Boundaries with FastCGI</h1></section>
                 <section>
-                    <p><b>HTTP pipeline <span data-fragment-index="1" class="fragment">- as a restaurant</span></b></p>
+                    <h2>HTTP pipeline <span data-fragment-index="1" class="fragment">- as a restaurant</span></h2>
                     <table>
                         <tr>
                             <th>Client</th>
@@ -57,7 +63,7 @@
                     </table>
                 </section>
                 <section>
-                    <p><b>If PHP were a restaurant...</b></p>
+                    <h2>If PHP were a restaurant...</h2>
                     <table>
                         <tr class="fragment">
                             <td><img class="icon inline-icon" src="images/customer.png" /></td>
@@ -103,17 +109,18 @@
                     </table>
                 </section>
                 <section>
-                    <p><b>The proposal?</b></p>
+                    <h2>The proposal?</h2>
+                    <br />
                     <p class="fragment">
                         <img class="icon inline-icon" src="images/chef.png" /><br />
                         Don&apos;t kill the chef
                     </p>
                 </section>
                 <section>
-                    <p><b>But how?</b></p>
+                    <p>But how?</p>
                 </section>
                 <section>
-                    <p><b>CGI: Common Gateway Interface</b></p>
+                    <h2>CGI: Common Gateway Interface</h2>
                 </section>
                 <section>
                     <p>HTTP request provided via <b>environment variables</b></p>
@@ -128,7 +135,7 @@
                     <p>One instance of our application per request</p>
                 </section>
                 <section>
-                    <p><b>Back in the day...</b></p>
+                    <p>Back in the day...</p>
                     <p class="fragment">when I was 3</p>
                     <p class="fragment">PHP was just a set of CGI binaries</p>
                 </section>
@@ -142,34 +149,34 @@
                     <p>We can also use PHP-FPM</p>
                 </section>
                 <section>
-                    <p><b>PHP-FPM?</b></p>
+                    <h2>PHP-FPM?</h2>
                     <p class="fragment">PHP FastCGI Process manager</p>
                 </section>
                 <section>
-                    <p><b>FastCGI?</b></p>
+                    <h2>FastCGI?</h2>
                     <p class="fragment">Like CGI... but faster</p>
                 </section>
                 <section>
-                    <p><b>How can we make CGI faster?</b></p>
+                    <h2>How can we make CGI faster?</h2>
                     <p class="fragment">Wrap our communication in a protocol</p>
                     <p class="fragment">Implement this protocol over a socket connection</p>
                     <p class="fragment">Keep our application alive between requests!</p>
                 </section>
                 <section>
-                    <p><b>PHP-FPM</b></p>
+                    <h2>PHP-FPM</h2>
                     <p>Keeps the <b>PHP interpreter</b> alive between requests</p>
                 </section>
                 <section>
                     <p>
                         <img class="icon inline-icon" src="images/dead-chef.png" /><br />
-                        <b>We are still killing our chef</b>
+                        We are <b>still killing</b> our chef
                     </p>
                 </section>
                 <section>
-                    <p><b>Use FastCGI directly?</b></p>
+                    <h2>Use FastCGI directly?</h2>
                 </section>
                 <section>
-                    <p><b>Can we make our legacy application use FastCGI?</b></p>
+                    <h2>With a legacy application?</h2>
 					<pre><code data-trim>
 include 'lib/common.php';
 include 'lib/database.php';
@@ -189,10 +196,9 @@ if (false === $result || !($page = mysql_fetch_assoc($result))) {
 
 echo $page['html'];
 					</code></pre>
-                    <p class="fragment">Output buffering??</p>
                 </section>
                 <section>
-                    <p><b>Can we make our Symfony application use FastCGI?</b></p>
+                    <h2>With Symfony?</h2>
                     <pre><code data-trim>
 use Symfony\Component\ClassLoader\ApcClassLoader;
 use Symfony\Component\HttpFoundation\Request;
@@ -209,10 +215,9 @@ $response = $kernel->handle($request);
 $response->send();
 $kernel->terminate($request, $response);
                     </code></pre>
-                    <p class="fragment">Application defined as<br /><i>Response = F(Request)</i></p>
                 </section>
                 <section>
-                    <p><b>The FastCGI protocol</b></p>
+                    <h2>The FastCGI protocol</h2>
                     <table style="font-size: 0.6em;">
                         <tr><td>-&gt;</td><td>FCGI_BEGIN_REQUEST</td></tr>
                         <tr><td>-&gt;</td><td>FCGI_PARAMS</td></tr>
@@ -228,16 +233,18 @@ $kernel->terminate($request, $response);
                     </table>
                 </section>
                 <section>
-                    <p><b>Binary protocol</b></p>
+                    <h2>Binary protocol</h2>
                     <p>
-                        <i>pack()</i>, <i>unpack()</i>
+					    <pre style="display: inline;"><code style="display: inline;" data-trim>
+                            pack() unpack()
+                        </code></pre>
                     </p>
                 </section>
                 <section>
-                    <p><b>Or</b></p>
+                    <p>Or...</p>
                 </section>
                 <section>
-                    <p><b>PHPFastCGI</b></p>
+                    <h2>PHPFastCGI</h2>
                 </section>
                 <section>
 					<pre><code data-trim>
@@ -262,35 +269,35 @@ $application->run();
                 <section>
                     <p>
                         <img class="icon inline-icon" src="images/restaurant.png" /><br />
-                        <b>Back to the restaurant</b>
+                        Back to the restaurant
                     </p>
                 </section>
                 <section>
                     <p>
                         <img class="icon inline-icon" src="images/chef.png" /><br />
-                        <b>No more chef killing</b>
+                        No more chef killing
                     </p>
                 </section>
                 <section>
-                    <p><b>Problem</b></p>
-                    <p class="fragment">What if our chef gets ill?</b></p>
+                    <h2>Problem</h2>
+                    <p class="fragment">What if our chef gets ill?</p>
                 </section>
                 <section>
-                    <p><b>Solution #1</b></p>
+                    <h2>Solution #1</h2>
                     <p class="fragment">
                         <img class="icon inline-icon" src="images/dead-chef.png" /><br />
                         Kill the chef before they get ill
                     </p>
                 </section>
                 <section>
-                    <p><b>Solution #2</b></p>
+                    <h2>Solution #2</h2>
                     <p class="fragment">
                         <img class="icon inline-icon" src="images/gordon-ramsay.jpg" /><br />
                         Use a better chef
                     </p>
                 </section>
                 <section>
-                    <p><b>Memory Meltdown</b></p>
+                    <h2>Memory Meltdown</h2>
                     <br />
                     <p class="fragment">
                         Chef never forgets some of the meals they have made
@@ -305,13 +312,12 @@ $application->run();
                     <p class="fragment">
                         <img class="icon inline-icon" src="images/dead-chef.png" />
                     </p>
-                    <br />
-                    <p class="fragment">
-                        <i>Remove references to unrequired objects</i>
-                    </p>
                 </section>
                 <section>
-                    <p><b>Timeouts</b></p>
+                    <p>Remove references to unrequired objects</p>
+                </section>
+                <section>
+                    <h2>Timeouts</h2>
                     <br />
                     <p class="fragment">
                         Chef forgets how to use oven after a couple of hours
@@ -323,14 +329,12 @@ $application->run();
                     <p class="fragment">
                         <img class="icon inline-icon" src="images/dead-chef.png" />
                     </p>
-                    <br />
-                    <p class="fragment">
-                        <i>ERROR 2006: MySQL server has gone away</i>
-                    </p>
                 </section>
                 <section>
-                    <p>
-                        <b>Tantrum Handling</b>
+                    <p>ERROR 2006: MySQL server has gone away</p>
+                </section>
+                <section>
+                    <h2>Tantrum Handling</h2>
                     </p>
                     <br />
                     <p class="fragment">
@@ -343,15 +347,15 @@ $application->run();
                     <p class="fragment">
                         <img class="icon inline-icon" src="images/dead-chef.png" />
                     </p>
-                    <br />
-                    <p class="fragment">
-                        <i>Make sure you catch, log and handle all errors and exceptions</i>
-                    </p>
                 </section>
                 <section>
-                    <p>
-                        <b>Evil Customer</b>
-                    </p>
+                    <p>Recover all possible errors</p>
+                </section>
+                <section>
+                    <p>Let the application die if recovery is not possible</p>
+                </section>
+                <section>
+                    <h2>Evil Customer</h2>
                     <br />
                     <p class="fragment">
                         Chef brainwashed by evil customer
@@ -363,15 +367,12 @@ $application->run();
                     <p class="fragment">
                         <img class="icon inline-icon" src="images/dead-chef.png" />
                     </p>
-                    <br />
-                    <p class="fragment">
-                        <i>Avoid static and global memory</i>
-                    </p>
                 </section>
                 <section>
-                    <p>
-                        <b>Chef Upgrade</b>
-                    </p>
+                    <p>Avoid static and global memory</p>
+                </section>
+                <section>
+                    <h2>Chef Upgrade</h2>
                     <br />
                     <p class="fragment">
                         Restaurant owner wants Chef with new recipes
@@ -389,23 +390,22 @@ $application->run();
                     <p class="fragment">
                         <img class="icon inline-icon" src="images/dead-chef.png" />
                     </p>
-                    <br />
-                    <p class="fragment">
-                        <i>Remember to kill old Chef(s)</i>
-                    </p>
                 </section>
                 <section>
-                    <p><b>Leaving behind our restaurant...</b></p>
+                    <p>Remember to kill old Chef(s)</p>
                 </section>
                 <section>
-                    <p><b>An application to benchmark</b></p>
+                    <p>Leaving behind our restaurant...</p>
+                </section>
+                <section>
+                    <h2>Benchmarking Application</h2>
                     <p class="fragment">500 page Symfony application</p>
-                    <p class="fragment">Single route which selects a random page from database (Doctrine, MySQL)</p>
+                    <p class="fragment">Single route which selects a random page from database</p>
                     <p class="fragment">Renders using Twig</p>
                     <p class="fragment">Clears entity repository after each request</p>
                 </section>
                 <section>
-                    <p><b>Benchmarking System</b></p>
+                    <h2>Benchmarking System</h2>
                     <p class="fragment">VMWare Fusion - 2GB RAM - 4 cores (Intel Core i7, 3.4 GHz)</p>
                     <p class="fragment">Ubuntu 64-bit Server 15.04</p>
                     <p class="fragment">PHP 5.6.4</p>
@@ -413,43 +413,40 @@ $application->run();
                     <p class="fragment">'ab', 50000 requests, concurrency level of 20</p>
                 </section>
                 <section>
-                    <p><b>For the control</b></p>
+                    <h2>For the control</h2>
                     <p class="fragment">OPcache enabled</p>
                     <p class="fragment">PHP-FPM</p>
-                    <br />
-                    <p class="fragment"><b>For the test</b></p>
+                </section>
+                <section>
+                    <h2>For the test</h2>
                     <p class="fragment">6 worker processes</p>
                 </section>
                 <section>
-                    <p><b>The results</b></p>
+                    <h2>The results</h2>
                     <br />
-                    <p class="fragment">Using PHP-FPM</p>
-                    <p class="fragment"><b>282.55 rq/s</b></p>
-                    <br />
-                    <p class="fragment">Using PHPFastCGI</p>
-                    <p class="fragment"><b>1334.64 rq/s</b></p>
+                    <img src="images/results.png" style="width: 80%;" alt="Results graph" />
                 </section>
                 <section>
-                    <p><b>To conclude...</b></p>
+                    <p>To conclude...</h2>
                 </section>
                 <section>
-                    <p><b>FastCGI is designed to allow applications to stay alive between requests</b></p>
+                    <p>FastCGI is designed to allow applications to stay alive between requests</p>
                 </section>
                 <section>
-                    <p><b>PHP is <small><s>not</s></small> designed to allow applications to stay alive between requests</b></p>
+                    <p>PHP is <small><s>not</s></small> designed to allow applications to stay alive between requests</p>
                 </section>
                 <section>
-                    <p><b>That is possibly why no one has made a serious effort to do this</b></p>
+                    <p>That is possibly why no one has made a serious effort to do this</p>
                 </section>
                 <section>
-                    <p><b>Used carefully, this can break performance boundaries</b></p>
+                    <p>Used carefully, this can break performance boundaries</p>
                 </section>
                 <section>
                     <p>Thank you for listening</p>
                     <br />
-                    <p><b>Any questions?</b></p>
+                    <p>Any questions?</p>
                     <br />
-                    <p>@AndrewCarterUK</p>
+                    <p><b>@AndrewCarterUK</b></p>
                     <br />
                     <p>http://phpfastcgi.github.io<br />http://github.com/PHPFastCGI/SpeedfonyBundle</p>
                 </section>
