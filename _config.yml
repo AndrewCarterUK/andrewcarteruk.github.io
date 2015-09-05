@@ -1,11 +1,10 @@
 # Site settings
-title: Andrew Carter - Programming, Photography and Science
-email: andrewcarter1992@gmail.com
+title: Andrew Carter
+tagline: Programming, Photography and Science
 description: >
   Passionate about programming, photography and science. I'll be
   using this space to talk about all of those. Hopefully you can
   find something interesting!
-baseurl: ""
 url: "http://andrewcarteruk.github.io"
 twitter_username: AndrewCarterUK
 github_username:  AndrewCarterUK
