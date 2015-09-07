@@ -3064,22 +3064,12 @@
 				padding: 6em 0;
 			}
 
-				#banner .inner {
-					background: none;
-					display: block;
-					padding: 0 1.5em;
-				}
-
 					#banner .inner header h2 {
 						font-size: 1.5em;
 					}
 
 					#banner .inner p {
 						text-align: center;
-					}
-
-					#banner .inner br {
-						display: none;
 					}
 
 		/* Main */
