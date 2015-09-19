@@ -55,12 +55,18 @@
                             <td><span data-fragment-index="6" class="fragment">Chef</span></td>
                         </tr>
                         <tr>
-                            <th>Application Interface</th>
+                            <th>HTTP Daemon</th>
                             <td><img data-fragment-index="7" class="fragment icon inline-icon" src="images/waitress.png" /></td>
                             <td><span data-fragment-index="7" class="fragment">Waiter/Waitress</span></td>
                         </tr>
                         <tr><td colspan="3"></td></tr>
                     </table>
+                    <aside class="notes">
+                        <p>
+                            Be aware, over the remainder of this presentation this analogy is going to be stretched to the
+                            point where it will cease to remain useful - <b>but we will give it a go...</b>
+                        </p>
+                    </aside>
                 </section>
                 <section>
                     <h2>If PHP were a restaurant...</h2>
@@ -107,176 +113,20 @@
                         </tr>
                         <tr><td colspan="2"></td></tr>
                     </table>
+                    <aside class="notes">
+                        <p>On every request our application is bootstrapped, executed and destroyed.</p>
+                    </aside>
                 </section>
                 <section>
-                    <h2>The proposal?</h2>
+                    <h2>The Proposal?</h2>
                     <br />
                     <p class="fragment">
                         <img class="icon inline-icon" src="images/chef.png" /><br />
                         Don&apos;t kill the chef
                     </p>
-                </section>
-                <section>
-                    <p>But how?</p>
-                </section>
-                <section>
-                    <h2>CGI: Common Gateway Interface</h2>
-                </section>
-                <section>
-                    <p>HTTP request provided via <b>environment variables</b></p>
-                </section>
-                <section>
-                    <p>HTTP response written to <b>standard output</b> by application</p>
-                </section>
-                <section>
-                    <p>Application must be executable by the web server</p>
-                </section>
-                <section>
-                    <p>One instance of our application per request</p>
-                </section>
-                <section>
-                    <p>Back in the day...</p>
-                    <p class="fragment">when I was 3</p>
-                    <p class="fragment">PHP was just a set of CGI binaries</p>
-                </section>
-                <section>
-                    <p>We can still integrate PHP using CGI</p>
-                </section>
-                <section>
-                    <p>We can also use native web server modules</p>
-                </section>
-                <section>
-                    <p>We can also use PHP-FPM</p>
-                </section>
-                <section>
-                    <h2>PHP-FPM?</h2>
-                    <p class="fragment">PHP FastCGI Process manager</p>
-                </section>
-                <section>
-                    <h2>FastCGI?</h2>
-                    <p class="fragment">Like CGI... but faster</p>
-                </section>
-                <section>
-                    <h2>How can we make CGI faster?</h2>
-                    <p class="fragment">Wrap our communication in a protocol</p>
-                    <p class="fragment">Implement this protocol over a socket connection</p>
-                    <p class="fragment">Keep our application alive between requests!</p>
-                </section>
-                <section>
-                    <h2>PHP-FPM</h2>
-                    <p>Keeps the <b>PHP interpreter</b> alive between requests</p>
-                </section>
-                <section>
-                    <p>
-                        <img class="icon inline-icon" src="images/dead-chef.png" /><br />
-                        We are <b>still killing</b> our chef
-                    </p>
-                </section>
-                <section>
-                    <h2>Use FastCGI directly?</h2>
-                </section>
-                <section>
-                    <h2>With a legacy application?</h2>
-					<pre><code data-trim>
-include 'lib/common.php';
-include 'lib/database.php';
-
-$escaped_url = mysql_real_escape_string($_SERVER['REQUEST_URI']);
-
-$result = mysql_query(
-    'SELECT html ' .
-    'FROM pages ' .
-    'WHERE url=\'' . $escaped_url . '\''
-);
-
-if (false === $result || !($page = mysql_fetch_assoc($result))) {
-    header('HTTP/1.1 404 Not Found');
-    $page = get_404_page();
-}
-
-echo $page['html'];
-					</code></pre>
-                </section>
-                <section>
-                    <h2>With Symfony?</h2>
-                    <pre><code data-trim>
-use Symfony\Component\ClassLoader\ApcClassLoader;
-use Symfony\Component\HttpFoundation\Request;
-
-$loader = require_once __DIR__.'/../app/bootstrap.php.cache';
-
-require_once __DIR__.'/../app/AppKernel.php';
-
-$kernel = new AppKernel('prod', false);
-$kernel->loadClassCache();
-
-$request = Request::createFromGlobals();
-$response = $kernel->handle($request);
-$response->send();
-$kernel->terminate($request, $response);
-                    </code></pre>
-                </section>
-                <section>
-                    <h2>The FastCGI protocol</h2>
-                    <table style="font-size: 0.6em;">
-                        <tr><td>-&gt;</td><td>FCGI_BEGIN_REQUEST</td></tr>
-                        <tr><td>-&gt;</td><td>FCGI_PARAMS</td></tr>
-                        <tr><td>-&gt;</td><td>FCGI_PARAMS</td></tr>
-                        <tr><td>-&gt;</td><td>...</td></tr>
-                        <tr><td>-&gt;</td><td>FCGI_STDIN</td></tr>
-                        <tr><td>-&gt;</td><td>FCGI_STDIN</td></tr>
-                        <tr><td>-&gt;</td><td>...</td></tr>
-                        <tr><td></td><td>FCGI_STDOUT</td><td>&lt;-</td></tr>
-                        <tr><td></td><td>FCGI_STDOUT</td><td>&lt;-</td></tr>
-                        <tr><td></td><td>...</td><td>&lt;-</td></tr>
-                        <tr><td></td><td>FCGI_END_REQUEST</td><td>&lt;-</td></tr>
-                    </table>
-                </section>
-                <section>
-                    <h2>Binary protocol</h2>
-                    <p>
-					    <pre style="display: inline;"><code style="display: inline;" data-trim>
-                            pack() unpack()
-                        </code></pre>
-                    </p>
-                </section>
-                <section>
-                    <p>Or...</p>
-                </section>
-                <section>
-                    <h2>PHPFastCGI</h2>
-                </section>
-                <section>
-					<pre><code data-trim>
-use PHPFastCGI\FastCGIDaemon\ApplicationFactory;
-use PHPFastCGI\FastCGIDaemon\Http\RequestInterface;
-use Zend\Diactoros\Response\HtmlResponse;
-
-// A simple kernel. This is the core of your application
-$kernel = function (RequestInterface $request) {
-    // $request->getServerRequest()         PSR-7 object
-    // $request->getHttpFoundationRequest() HTTP foundation object
-    return new HtmlResponse('<h1>Hello, World!</h1>');
-};
-
-// Create your Symfony console application using the factory
-$application = (new ApplicationFactory)->createApplication($kernel);
-
-// Run the Symfony console application
-$application->run();
-					</code></pre>
-                </section>
-                <section>
-                    <p>
-                        <img class="icon inline-icon" src="images/restaurant.png" /><br />
-                        Back to the restaurant
-                    </p>
-                </section>
-                <section>
-                    <p>
-                        <img class="icon inline-icon" src="images/chef.png" /><br />
-                        No more chef killing
-                    </p>
+                    <aside class="notes">
+                        <p>Which, when you consider it, doesn&apos;t actually sound too radical...</p>
+                    </aside>
                 </section>
                 <section>
                     <h2>Problem</h2>
@@ -286,7 +136,7 @@ $application->run();
                     <h2>Solution #1</h2>
                     <p class="fragment">
                         <img class="icon inline-icon" src="images/dead-chef.png" /><br />
-                        Kill the chef before they get ill
+                        Kill the chefs before they have a chance to get ill
                     </p>
                 </section>
                 <section>
@@ -295,6 +145,9 @@ $application->run();
                         <img class="icon inline-icon" src="images/gordon-ramsay.jpg" /><br />
                         Use a better chef
                     </p>
+                </section>
+                <section>
+                    <p>What can cause our chef to get ill?</p>
                 </section>
                 <section>
                     <h2>Memory Meltdown</h2>
@@ -332,6 +185,9 @@ $application->run();
                 </section>
                 <section>
                     <p>ERROR 2006: MySQL server has gone away</p>
+                    <aside class="notes">
+                        <p>Has anyone had this error before? I have had this with RabbitMQ workers before.</p>
+                    </aside>
                 </section>
                 <section>
                     <h2>Tantrum Handling</h2>
@@ -349,10 +205,14 @@ $application->run();
                     </p>
                 </section>
                 <section>
-                    <p>Recover all possible errors</p>
+                    <p>Distinguish between request errors and application errors</p>
                 </section>
                 <section>
                     <p>Let the application die if recovery is not possible</p>
+                    <aside class="notes">
+                        <p>If your chef is sulking in the corner refusing to work they are a <b>lost cause</b>.</p>
+                        <p>Get the gun out and get a new chef.</p>
+                    </aside>
                 </section>
                 <section>
                     <h2>Evil Customer</h2>
@@ -369,7 +229,8 @@ $application->run();
                     </p>
                 </section>
                 <section>
-                    <p>Avoid static and global memory</p>
+                    <p>Think like an attacker</p>
+                    <p class="fragment">Avoid static and global memory</p>
                 </section>
                 <section>
                     <h2>Chef Upgrade</h2>
@@ -398,6 +259,219 @@ $application->run();
                     <p>Leaving behind our restaurant...</p>
                 </section>
                 <section>
+                    <h2>CGI: Common Gateway Interface</h2>
+                    <aside class="notes">
+                        <p>A history lesson, hands up who has heard of CGI?</p>
+                        <p>And leave them up if you know how it works?</p>
+                        <p>And leave them up if you have ever created a CGI application?</p>
+                    </aside>
+                </section>
+                <section>
+                    <p>CGI application must be executable by the web server</p>
+                </section>
+                <section>
+                    <p>One instance of our application per request</p>
+                </section>
+                <section>
+                    <p>HTTP request provided via <b>environment variables</b></p>
+                    <aside class="notes">
+                        <p>Anybody know where you might encounter these environment variables in PHP?</p>
+                    </aside>
+                </section>
+                <section>
+                    <p>HTTP response written to <b>standard output</b> by application</p>
+                </section>
+                <section>
+                    <p>Back in the day...</p>
+                    <p class="fragment">when I was 3</p>
+                    <p class="fragment">PHP was just a set of CGI binaries</p>
+                </section>
+                <section>
+                    <p>We can still integrate PHP using CGI</p>
+                </section>
+                <section>
+                    <p>We can also use native web server modules</p>
+                </section>
+                <section>
+                    <p>We can also use PHP-FPM</p>
+                </section>
+                <section>
+                    <h2>PHP-FPM?</h2>
+                    <p class="fragment">PHP FastCGI Process manager</p>
+                </section>
+                <section>
+                    <h2>FastCGI?</h2>
+                    <p class="fragment">Like CGI... but faster</p>
+                </section>
+                <section>
+                    <h2>Making CGI Faster</h2>
+                    <p class="fragment">Wrap our communication in a protocol</p>
+                    <p class="fragment">Implement this protocol over a socket connection</p>
+                    <p class="fragment">Keep our application alive between requests!</p>
+                    <aside class="notes">
+                        <p>Each request is a new connection to our application rather than a
+                        new instance of our application.</p>
+                        <p>Send and receive data over this connection rather than i/o streams to
+                        the process and environment variables.</p>
+                    </aside>
+                </section>
+                <section>
+                    <h2>PHP-FPM</h2>
+                    <p>Keeps the <b>PHP interpreter</b> alive between requests using FastCGI</p>
+                </section>
+                <section>
+                    <p>
+                        <img class="icon inline-icon" src="images/dead-chef.png" /><br />
+                        We are <b>still killing</b> our chef
+                    </p>
+                </section>
+                <section>
+                    <h2>Use FastCGI directly?</h2>
+                </section>
+                <section>
+                    <h2>With a legacy application?</h2>
+					<pre><code data-trim>
+include 'lib/common.php';
+include 'lib/database.php';
+
+$escaped_url = mysql_real_escape_string($_SERVER['REQUEST_URI']);
+
+$result = mysql_query(
+    'SELECT html ' .
+    'FROM pages ' .
+    'WHERE url=\'' . $escaped_url . '\''
+);
+
+if (false === $result || !($page = mysql_fetch_assoc($result))) {
+    header('HTTP/1.1 404 Not Found');
+    $page = get_404_page();
+}
+
+echo $page['html'];
+					</code></pre>
+                    <aside class="notes">
+                        <p>Who has ever written a PHP application that looked like this?</p>
+                        <p>We could use output buffering</p>
+                        <p>Have to refactor heavily, dependencies on super globals and static memory are likely everywhere</p>
+                    </aside>
+                </section>
+                <section>
+                    <h2>With Symfony?</h2>
+                    <pre><code data-trim>
+use Symfony\Component\ClassLoader\ApcClassLoader;
+use Symfony\Component\HttpFoundation\Request;
+
+$loader = require_once __DIR__.'/../app/bootstrap.php.cache';
+
+require_once __DIR__.'/../app/AppKernel.php';
+
+$kernel = new AppKernel('prod', false);
+$kernel->loadClassCache();
+
+$request = Request::createFromGlobals();
+$response = $kernel->handle($request);
+$response->send();
+$kernel->terminate($request, $response);
+                    </code></pre>
+                    <aside class="notes">
+                        <p>Kernel class has a method for generating responses from a given request</p>
+                        <p>Could inject the kernel object into a service that uses FastCGI to receive requests</p>
+                    </aside>
+                </section>
+                <section>
+                    <h2>The FastCGI protocol</h2>
+                    <table style="font-size: 0.6em;">
+                        <tr><td>-&gt;</td><td>FCGI_BEGIN_REQUEST</td></tr>
+                        <tr><td>-&gt;</td><td>FCGI_PARAMS</td></tr>
+                        <tr><td>-&gt;</td><td>FCGI_PARAMS</td></tr>
+                        <tr><td>-&gt;</td><td>...</td></tr>
+                        <tr><td>-&gt;</td><td>FCGI_STDIN</td></tr>
+                        <tr><td>-&gt;</td><td>FCGI_STDIN</td></tr>
+                        <tr><td>-&gt;</td><td>...</td></tr>
+                        <tr><td></td><td>FCGI_STDOUT</td><td>&lt;-</td></tr>
+                        <tr><td></td><td>FCGI_STDOUT</td><td>&lt;-</td></tr>
+                        <tr><td></td><td>...</td><td>&lt;-</td></tr>
+                        <tr><td></td><td>FCGI_END_REQUEST</td><td>&lt;-</td></tr>
+                    </table>
+                </section>
+                <section>
+                    <h2>Binary Protocol</h2>
+                    <p>
+					    <pre style="display: inline;"><code style="display: inline;" data-trim>
+                            pack() unpack()
+                        </code></pre>
+                    </p>
+                </section>
+                <section>
+                    <p>Or...</p>
+                </section>
+                <section>
+                    <h2>PHPFastCGI</h2>
+                    <aside class="notes">
+                        <p>And we are already into the plug section of the talk</p>
+                        <p>This is a project I have been working on over the last few months</p>
+                        <p>Allows you to easily create FastCGI applications using frameworks (or without them)</p>
+                    </aside>
+                </section>
+               <section>
+					<pre><code data-trim>
+use PHPFastCGI\FastCGIDaemon\ApplicationFactory;
+use PHPFastCGI\FastCGIDaemon\Http\RequestInterface;
+use Zend\Diactoros\Response\HtmlResponse;
+
+// A simple kernel. This is the core of your application
+$kernel = function (RequestInterface $request) {
+    // $request->getServerRequest()         PSR-7 object
+    // $request->getHttpFoundationRequest() HTTP foundation object
+    return new HtmlResponse('<h1>Hello, World!</h1>');
+};
+
+// Create your Symfony console application using the factory
+$application = (new ApplicationFactory)->createApplication($kernel);
+
+// Run the Symfony console application
+$application->run();
+					</code></pre>
+                </section>
+                <section>
+                    <h2>Speedfony Bundle</h2>
+					<pre class="fragment"><code data-trim>composer require "phpfastcgi/speedfony-bundle:0.6.*"</code></pre>
+                    <aside class="notes">
+                        <p>If you are ever stuck for a name for your project, by the way, come and chat to me. I&apos;m
+                        a multitalented individual as you can see.</p>
+                    </aside>
+                </section>
+                <section>
+                    <pre><code data-trim>
+// app/AppKernel.php
+
+// ...
+class AppKernel extends Kernel
+{
+  public function registerBundles()
+  {
+    $bundles = array(
+      // ...
+      new PHPFastCGI\SpeedfonyBundle\PHPFastCGISpeedfonyBundle(),
+    );
+
+    // ...
+  }
+// ...
+                    </code></pre>
+                </section>
+                <section>
+                    <pre><code data-trim>
+php app/console speedfony:run --env=prod
+php app/console speedfony:run --env=prod --port=5000
+php app/console speedfony:run --env=prod --port=5000 --host=localhost
+php app/console speedfony:run --env=prod [--max-requests=200]
+                    </code></pre>
+                </section>
+                <section>
+                    <p>How much faster is this?</p>
+                </section>
+                <section>
                     <h2>Benchmarking Application</h2>
                     <p class="fragment">500 page Symfony application</p>
                     <p class="fragment">Single route which selects a random page from database</p>
@@ -413,21 +487,56 @@ $application->run();
                     <p class="fragment">'ab', 50000 requests, concurrency level of 20</p>
                 </section>
                 <section>
-                    <h2>For the control</h2>
+                    <h2>Control Test</h2>
                     <p class="fragment">OPcache enabled</p>
                     <p class="fragment">PHP-FPM</p>
                 </section>
                 <section>
-                    <h2>For the test</h2>
+                    <h2>First Test</h2>
                     <p class="fragment">6 worker processes</p>
+                    <p class="fragment">FastCGI protocol implemented in PHP userland</p>
                 </section>
                 <section>
-                    <h2>The results</h2>
+                    <h2>Second Test</h2>
+                    <p class="fragment">6 worker processes</p>
+                    <p class="fragment">FastCGI protocol implemented by PHP extension</p>
+                </section>
+                <section>
+                    <h2>The Results</h2>
                     <br />
                     <img src="images/results.png" style="width: 80%;" alt="Results graph" />
                 </section>
                 <section>
-                    <p>To conclude...</h2>
+                    <h2>Warnings</h2>
+                </section>
+                <section>
+                    <p>PHPFastCGI is not yet production ready</p>
+                </section>
+                <section>
+                    <p>No support yet for uploaded files</p>
+                </section>
+                <section>
+                    <p>The Symfony kernel slowly leaks memory over multiple requests</p>
+                </section>
+                <section>
+                    <h2>Do you need PHPFastCGI?</h2>
+                    <p class="fragment">Is your application fast enough already?</p>
+                    <p class="fragment">Why bother with the risk?</p>
+                </section>
+                <section>
+                    <p>PHPFastCGI is a tool for high performance PHP applications</p>
+                </section>
+                <section>
+                    <h2>However</h2>
+                    <p class="fragment">Well designed applications should not leak memory</p>
+                    <p class="fragment">Well designed applications should handle errors properly</p>
+                    <p class="fragment">PHPFastCGI is very easy to install</p>
+                </section>
+                <section>
+                    <h2>To Conclude</h2>
+                </section>
+                <section>
+                    <p>Consider long running processes when developing components and services</p>
                 </section>
                 <section>
                     <p>FastCGI is designed to allow applications to stay alive between requests</p>
