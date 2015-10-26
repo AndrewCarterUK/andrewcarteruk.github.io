@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  The Command Pattern and the __invoke Magic Method
-date:   2015-20-26 20:00:00
+date:   2015-10-26 20:00:00
 categories: programming php
 ---
 
