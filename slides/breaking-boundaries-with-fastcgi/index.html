@@ -148,7 +148,7 @@
                     </p>
                 </section>
                 <section>
-                    <p>We could configure our application to keep instances fresh (100 rq/s per instance)</p>
+                    <p>We could configure our application to keep instances fresh (100 rqs per instance)</p>
                 </section>
                 <section>
                     <h2>Solution #2</h2>
@@ -240,17 +240,17 @@
                     <h2>Evil Customer</h2>
                     <br />
                     <p class="fragment">
-                        Evil customer (Alex) asks chef what another customer (Chris) ordered
+                        Evil Alex asks chef what another customer Chris ordered
                     </p>
                     <p class="fragment">
-                        Silly chef tells Alex that Chris ordered pizza 
+                        Chef tells Alex that Chris ordered pizza 
                     </p>
                     <p class="fragment">
-                    	Alex answers the forgot password question for Chris's Twitter account
+                    	Alex answers Chris's forgot password questions
                     </p>
                 </section>
                 <section>
-                    <p class="fragment">
+                    <p>
                         <img class="icon inline-icon" src="images/dead-chef.png" />
                     </p>
                 </section>
@@ -260,8 +260,6 @@
                 </section>
                 <section>
                     <h2>New Menu</h2>
-                </section>
-                <section>
                     <p>
                         We want to add fajitas to the menu
                     </p>
@@ -269,7 +267,7 @@
                         "Antonio" can only cook pizza and pasta
                     </p>
                     <p class="fragment">
-                        Bring in new chef: "José"
+                        Bring in new chef, "José"
                     </p>
                     <p class="fragment">
                         Forget to kill "Antonio"
@@ -277,8 +275,9 @@
                     <p class="fragment">
                         Customers keep getting pizza
                     </p>
-                    <br />
-                    <p class="fragment">
+                </section>
+                <section>
+                    <p>
                         <img class="icon inline-icon" src="images/dead-chef.png" />
                     </p>
                 </section>
@@ -360,7 +359,7 @@
                 </section>
                 <section>
                     <h2>With a legacy application?</h2>
-					<pre><code data-trim>
+                    <pre><code data-trim>
 include 'lib/common.php';
 include 'lib/database.php';
 
@@ -378,7 +377,7 @@ if (false === $result || !($page = mysql_fetch_assoc($result))) {
 }
 
 echo $page['html'];
-					</code></pre>
+                    </code></pre>
                     <aside class="notes">
                         <p>Who has ever written a PHP application that looked like this?</p>
                         <p>We could use output buffering</p>
