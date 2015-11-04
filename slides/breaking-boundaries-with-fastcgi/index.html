@@ -588,7 +588,7 @@ php app/console speedfony:run --env=prod [--time-limit=3600]
                     <br />
                     <p><b>@AndrewCarterUK</b></p>
                     <br />
-                    <p>http://phpfastcgi.github.io<br />http://github.com/PHPFastCGI/SpeedfonyBundle</p>
+                    <p>http://phpfastcgi.github.io<br />http://github.com/PHPFastCGI/FastCGIDaemon</p>
                 </section>
             </div>
         </div>
@@ -603,7 +603,7 @@ php app/console speedfony:run --env=prod [--time-limit=3600]
                 center: true,
                 transition: 'none',
                 dependencies: [
-					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
 					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
 					{ src: 'plugin/notes/notes.js', async: true }
                 ]
