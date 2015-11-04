@@ -240,7 +240,7 @@
                     <h2>Evil Customer</h2>
                     <br />
                     <p class="fragment">
-                        Evil Alex asks chef what another customer Chris ordered
+                        Evil Alex asks chef what Chris ordered
                     </p>
                     <p class="fragment">
                         Chef tells Alex that Chris ordered pizza 
@@ -494,7 +494,9 @@ class AppKernel extends Kernel
 php app/console speedfony:run --env=prod
 php app/console speedfony:run --env=prod --port=5000
 php app/console speedfony:run --env=prod --port=5000 --host=localhost
-php app/console speedfony:run --env=prod [--max-requests=200]
+php app/console speedfony:run --env=prod [--request-limit=200]
+php app/console speedfony:run --env=prod [--memory-limit=50000000]
+php app/console speedfony:run --env=prod [--time-limit=3600]
                     </code></pre>
                 </section>
                 <section>
