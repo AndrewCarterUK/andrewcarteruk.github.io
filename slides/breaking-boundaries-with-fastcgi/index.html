@@ -129,19 +129,31 @@
                     </aside>
                 </section>
                 <section>
-                    <h2>Problem</h2>
-                    <p class="fragment">What if our chef gets ill?</p>
+                    <h2>Problems</h2>
+                </section>
+                <section>
+                    <p>What if our chef gets ill?</p>
+                </section>
+                <section>
+                    <p>What if our application encounters issues that stop it from responding to new requests?</p>
                 </section>
                 <section>
                     <h2>Solution #1</h2>
-                    <p class="fragment">
+                </section>
+                <section>
+                    <p>
                         <img class="icon inline-icon" src="images/dead-chef.png" /><br />
-                        Kill the chefs before they have a chance to get ill
+                        Kill the chef... occasionally?
                     </p>
                 </section>
                 <section>
+                    <p>We could configure our application to keep instances fresh (100 rq/s per instance)</p>
+                </section>
+                <section>
                     <h2>Solution #2</h2>
-                    <p class="fragment">
+                </section>
+                <section>
+                    <p>
                         <img class="icon inline-icon" src="images/gordon-ramsay.jpg" /><br />
                         Use a better chef
                     </p>
@@ -161,8 +173,9 @@
                     <p class="fragment">
                         Chef's head explodes
                     </p>
-                    <br />
-                    <p class="fragment">
+                </section>
+                <section>
+                    <p>
                         <img class="icon inline-icon" src="images/dead-chef.png" />
                     </p>
                 </section>
@@ -170,16 +183,23 @@
                     <p>Remove references to unrequired objects</p>
                 </section>
                 <section>
+               	  	<p>What services might store references?</p>
+               	  	<br />
+               	  	<p class="fragment">ORMs</p>
+               	  	<p class="fragment">Loggers</p>
+                </section>
+                <section>
                     <h2>Timeouts</h2>
                     <br />
                     <p class="fragment">
-                        Chef forgets how to use oven after a couple of hours
+                        Chef forgets how to breath after a couple of hours
                     </p>
                     <p class="fragment">
-                        Chef needs oven
+                        Chef needs to breath
                     </p>
-                    <br />
-                    <p class="fragment">
+                </section>
+                <section>
+                    <p>
                         <img class="icon inline-icon" src="images/dead-chef.png" />
                     </p>
                 </section>
@@ -199,8 +219,9 @@
                     <p class="fragment">
                         Chef throws big tantrum
                     </p>
-                    <br />
-                    <p class="fragment">
+                </section>
+                <section>
+                    <p>
                         <img class="icon inline-icon" src="images/dead-chef.png" />
                     </p>
                 </section>
@@ -218,12 +239,16 @@
                     <h2>Evil Customer</h2>
                     <br />
                     <p class="fragment">
-                        Chef brainwashed by evil customer
+                        Evil customer (Alex) asks chef what another customer (Chris) ordered
                     </p>
                     <p class="fragment">
-                        Chef tricked into poisoning other customers
+                        Silly chef tells Alex that Chris ordered pizza 
                     </p>
-                    <br />
+                    <p class="fragment">
+                    	Alex answers the forgot password question for Chris's Twitter account
+                    </p>
+                </section>
+                <section>
                     <p class="fragment">
                         <img class="icon inline-icon" src="images/dead-chef.png" />
                     </p>
@@ -233,19 +258,23 @@
                     <p class="fragment">Avoid static and global memory</p>
                 </section>
                 <section>
-                    <h2>Chef Upgrade</h2>
-                    <br />
-                    <p class="fragment">
-                        Restaurant owner wants Chef with new recipes
+                    <h2>New Menu</h2>
+                </section>
+                <section>
+                    <p>
+                        We want to add fajitas to the menu
                     </p>
                     <p class="fragment">
-                        Chef is pretty set in their ways
+                        "Antonio" can only cook pizza and pasta
                     </p>
                     <p class="fragment">
-                        Restaurant owner forgets to kill old Chef
+                        Bring in new chef: "José"
                     </p>
                     <p class="fragment">
-                        Chef keeps serving up old recipes
+                        Forget to kill "Antonio"
+                    </p>
+                    <p class="fragment">
+                        Customers keep getting pizza
                     </p>
                     <br />
                     <p class="fragment">
