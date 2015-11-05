@@ -196,7 +196,10 @@ $repository = $this->getDoctrine()->getRepository('Bundle:Page');
 
 $page = $repository->find($id);
 
-$response = $this->render('Bundle:Default:page.html.twig', ['page' => $page]);
+$response = $this->render(
+    'Bundle:Default:page.html.twig',
+    ['page' => $page]
+);
 
 $repository->clear();
 
