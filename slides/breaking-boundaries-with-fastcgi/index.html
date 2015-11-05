@@ -192,11 +192,11 @@
                 </section>
                 <section>
                     <pre><code data-trim>
-$repository = $this->getDoctrine()->getRepository('PHPFastCGISpeedfonyBenchmarkingBundle:Page');
+$repository = $this->getDoctrine()->getRepository('Bundle:Page');
 
 $page = $repository->find($id);
 
-$response = $this->render('PHPFastCGISpeedfonyBenchmarkingBundle:Default:page.html.twig', array('page' => $page));
+$response = $this->render('Bundle:Default:page.html.twig', array('page' => $page));
 
 $repository->clear();
 
