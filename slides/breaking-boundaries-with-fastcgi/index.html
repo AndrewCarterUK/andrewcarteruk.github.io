@@ -136,19 +136,20 @@
                     <p>What if our chef gets ill?</p>
                 </section>
                 <section>
-                    <p>What if our application encounters issues that stop it from responding to new requests?</p>
+                    <p>What if our application encounters issues that stops it from responding to new requests?</p>
                 </section>
                 <section>
                     <h2>Solution #1</h2>
                 </section>
                 <section>
                     <p>
-                        <img class="icon inline-icon" src="images/dead-chef.png" /><br />
-                        Kill the chef... occasionally?
+                        <img class="icon inline-icon" src="images/dead-chef.png" /><br /><br />
+                        Kill the chef...<br /><br />
+                        Occasionally?
                     </p>
                 </section>
                 <section>
-                    <p>Configure application to keep instances fresh (100 rqs per instance)</p>
+                    <p>Configure application to keep instances fresh<br /><br />100 rqs per instance</p>
                 </section>
                 <section>
                     <h2>Solution #2</h2>
@@ -188,6 +189,19 @@
                	  	<br />
                	  	<p class="fragment">ORMs</p>
                	  	<p class="fragment">Loggers</p>
+                </section>
+                <section>
+                    <pre><code data-trim>
+$repository = $this->getDoctrine()->getRepository('PHPFastCGISpeedfonyBenchmarkingBundle:Page');
+
+$page = $repository->find($id);
+
+$response = $this->render('PHPFastCGISpeedfonyBenchmarkingBundle:Default:page.html.twig', array('page' => $page));
+
+$repository->clear();
+
+return $response;
+		            </code></pre>
                 </section>
                 <section>
                     <h2>Timeouts</h2>
