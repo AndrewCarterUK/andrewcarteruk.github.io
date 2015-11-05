@@ -542,12 +542,12 @@ php app/console speedfony:run --env=prod [--time-limit=3600]
                 <section>
                     <h2>First Test</h2>
                     <p class="fragment">6 worker processes</p>
-                    <p class="fragment">FastCGI protocol implemented in PHP userland</p>
+                    <p class="fragment">FastCGI protocol implemented in <b>PHP userland</b></p>
                 </section>
                 <section>
                     <h2>Second Test</h2>
                     <p class="fragment">6 worker processes</p>
-                    <p class="fragment">FastCGI protocol implemented by PHP extension</p>
+                    <p class="fragment">FastCGI protocol implemented by <b>PHP extension</b></p>
                 </section>
                 <section>
                     <h2>The Results</h2>
@@ -564,9 +564,6 @@ php app/console speedfony:run --env=prod [--time-limit=3600]
                     <p>No support yet for uploaded files</p>
                 </section>
                 <section>
-                    <p>The Symfony kernel slowly leaks memory over multiple requests</p>
-                </section>
-                <section>
                     <h2>Do you need PHPFastCGI?</h2>
                     <p class="fragment">Is your application fast enough already?</p>
                     <p class="fragment">Why bother with the risk?</p>
@@ -581,6 +578,20 @@ php app/console speedfony:run --env=prod [--time-limit=3600]
                     <p class="fragment">PHPFastCGI is very easy to install</p>
                 </section>
                 <section>
+                	<h2>Thinking Forward</h2>
+                </section>
+                <section>
+                	<p>Application Server</p>
+                	<p class="fragment">Framework + Server Environment</p>
+                	<p class="fragment">appserver.io</p>
+                </section>
+                <section>
+                	<h2>An Asynchronous Future</h2>
+                	<p class="fragment">React PHP + Icicle</p>
+                	<p class="fragment">Applications run on an event loop</p>
+                	<p class="fragment">Controller actions return a response promise</p>
+                </section>
+                <section>
                     <h2>To Conclude</h2>
                 </section>
                 <section>
@@ -593,7 +604,7 @@ php app/console speedfony:run --env=prod [--time-limit=3600]
                     <p>PHP is <small><s>not</s></small> designed to allow applications to stay alive between requests</p>
                 </section>
                 <section>
-                    <p>That is possibly why no one has made a serious effort to do this</p>
+                    <p>That is possibly why few make the effort to do this</p>
                 </section>
                 <section>
                     <p>Used carefully, this can break performance boundaries</p>
