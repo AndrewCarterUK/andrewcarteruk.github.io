@@ -274,6 +274,11 @@ return $response;
                 <section>
                     <p>Think like an attacker</p>
                     <p class="fragment">Avoid static and global memory</p>
+					<p>
+					    <pre style="display: inline;" class="fragment"><code style="display: inline;" data-trim>
+                            $_GET, $_POST, $_SESSION
+                        </code></pre>
+					</p>
                 </section>
                 <section>
                     <h2>New Menu</h2>
@@ -481,7 +486,7 @@ $application->run();
                 </section>
                 <section>
                     <h2>Speedfony Bundle</h2>
-					<pre class="fragment"><code data-trim>composer require "phpfastcgi/speedfony-bundle:0.6.*"</code></pre>
+					<pre class="fragment"><code data-trim>composer require "phpfastcgi/speedfony-bundle:^0.7"</code></pre>
                     <aside class="notes">
                         <p>If you are ever stuck for a name for your project, by the way, come and chat to me. I&apos;m
                         a multitalented individual as you can see.</p>
