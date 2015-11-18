@@ -11,7 +11,7 @@ My first comment is a thank you to the organisers, in particular [Jakub Zapletal
 
 As this was my first experience of a conference, I tried to put myself in learning mode to absorb what I could. What follows is a list of mental notes that I made over the course of the weekend for future reference.
 
-## 1. Be Ready to Adapt
+#### 1. Be Ready to Adapt
 
 During the first couple of talks it became apparent that the slides with darker backgrounds were harder to read. This became a problem for a couple of speakers and could have been a problem for me. Luckily, I had two things going in my favour:
 
@@ -22,7 +22,7 @@ Neither of these two points were intentional. I did not choose my time and I pic
 
 If I had been first up to speak, I doubt I would have arrived with enough time to test my presentation and make any necessary adjustments. Luckily, I learnt this lesson the easy way!
 
-## 2. Ask Questions
+#### 2. Ask Questions
 
 Although I am new to speaking, I have given enough talks at user groups to know very well that anxious feeling as the end of the presentation is reached:
 
@@ -40,7 +40,7 @@ Regardless, I knew before the conference that I wanted to try and ask a question
 
 On top of this, many of the speakers at the event were highly skilled developers drawn in from around the continent. It would have been a wasted opportunity had I not got their insight on any of my curiosities.
 
-## 3. Repeat Questions Back
+#### 3. Repeat Questions Back
 
 I had this feedback from a friend who attended a talk of mine at a user group:
 
@@ -50,7 +50,7 @@ This gives you an opportunity to think about your answer and gives anyone who di
 
 This was the first time I had a chance to practice this and I am sure that it made the process clearer.
 
-## 4. Consider Your Audience
+#### 4. Consider Your Audience
 
 One of the things that I try to do when I speak is put a bit of a barrier between myself and my audience. This helps reduce my exposure to nerves, as at any given moment I feel like I am only talking to a single member of the audience.
 
@@ -58,7 +58,7 @@ This sounds like a great idea, and it probably does do my presentation style mor
 
 In Brno, this was especially the case as my audience contained many attendees who did not speak English as a first language.
 
-## 5. Get Feedback
+#### 5. Get Feedback
 
 Do not just throw a link to joind.in at the bottom of your slides and hope that you will receive a plethora of constructive feedback. Make an effort at the end of the talk to explain why feedback is important to you and highlight the channels that they can use to deliver it to you.
 
