@@ -5,7 +5,7 @@ date:   2015-11-17 23:00:00
 categories: programming
 ---
 
-Last weekend I had the pleasure of being invited to speak at the [Brno PHP 2015 conference](https://www.brnophp.cz/conference-2015). Although I have visited and spoken at a few user group meet-ups before, this was my first time attending a conference, let alone speaking at one.
+Last weekend I had the pleasure of being invited to speak at the [Brno PHP 2015 conference](https://www.brnophp.cz/conference-2015). Although I have visited, and spoken at, a few user group meet-ups before, this was my first time attending a conference, let alone speaking at one.
 
 My first comment is a thank you to the organisers, in particular [Jakub Zapletal](https://twitter.com/zapletaljakub), for looking after myself and the other speakers so well. The only thing I had to worry about over the whole trip was my presentation, and it was great to be able to relax and enjoy the whole event without other concerns.
 
