@@ -40,11 +40,15 @@ Regardless, I knew before the conference that I wanted to try and ask a question
 
 On top of this, many of the speakers at the event were highly skilled developers drawn in from around the continent. It would have been a wasted opportunity had I not got their insight on any of my curiosities.
 
-## 3. Be Confident
+## 3. Repeat Questions Back
 
-When chatting to one of the other (more experienced) speakers at the conference, I asked if they got nervous before giving talks. They responded that yes they did, every time. This surprised me, as they did not appear so. Their presentation was calm, cool, clear and confident.
+I had this feedback from a friend who attended a talk of mine at a user group:
 
-I am lucky that so far, in the lead up to the few talks that I have given, I have been able to keep calm. This will not always be the case, especially when the crowd is bigger or the stakes higher. I am going to spend some time thinking about techniques that have helped me handle nerves before, so that if they do creep in, I will be prepared.
+__Repeat all questions back to the audience__
+
+This gives you an opportunity to think about your answer and gives anyone who did not hear the question originally another chance to hear it.
+
+This was the first time I had a chance to practice this and I am sure that it made the process clearer.
 
 ## 4. Consider Your Audience
 
