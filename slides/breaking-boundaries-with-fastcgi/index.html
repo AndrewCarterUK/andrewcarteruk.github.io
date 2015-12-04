@@ -9,8 +9,19 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui" />
 
         <link rel="stylesheet" type="text/css" href="css/reveal.css" />
-        <link rel="stylesheet" type="text/css" href="css/theme/league.css" />
+        <link rel="stylesheet" type="text/css" href="css/theme/sky.css" />
         <link rel="stylesheet" type="text/css" href="lib/css/zenburn.css" />
+
+        <style type="text/css">
+            .reveal img.icon {
+                background: none;
+                border: none;
+                box-shadow: none;
+                margin: 0px !important; }
+
+            .reveal img.inline-icon {
+                height: 1.5em; }
+        </style>
 
         <!--[if lt IE 9]>
             <script type="text/javascript" src="lib/js/html5shiv.js"></script>
@@ -26,8 +37,37 @@
             </div>
             <div class="slides">
                 <section><h1>Breaking Boundaries with FastCGI</h1></section>
+                <section><h3>@AndrewCarterUK</h3></section>
                 <section>
-                    <h2>HTTP pipeline <span data-fragment-index="1" class="fragment">- as a restaurant</span></h2>
+                    <h2>This Talk</h2>
+                    <div style="text-align: left;">
+                        <p class="fragment"><b>30%</b> conceptual</p>
+                        <p class="fragment"><b>30%</b> warnings<p>
+                        <p class="fragment"><b>30%</b> plugging a personal project</p>
+                        <p class="fragment"><b>8%</b> looking to the future</p>
+                        <p class="fragment"><b>4%</b> poor maths and misleading benchmarks</p>
+                    </div>
+                </section>
+                <section>
+                    <h2>Why Application Performance?</h2>
+                </section>
+                <section>
+                    <p>We might want to <b>increase capacity</b></p>
+                </section>
+                <section>
+                    <p>We might want to <b>improve user experience</b></p>
+                </section>
+                <section>
+                    <p>Performance <b>requires</b> efficiency</p>
+                </section>
+                <section>
+                    <p><b>Minimise work performed</b> to create a response</p>
+                </section>
+                <section>
+                    <h2>An Analogy</h2>
+                </section>
+                <section>
+                    <h2>HTTP Pipeline <span data-fragment-index="1" class="fragment">- as a Restaurant</span></h2>
                     <table>
                         <tr>
                             <th>Client</th>
@@ -61,15 +101,9 @@
                         </tr>
                         <tr><td colspan="3"></td></tr>
                     </table>
-                    <aside class="notes">
-                        <p>
-                            Be aware, over the remainder of this presentation this analogy is going to be stretched to the
-                            point where it will cease to remain useful - <b>but we will give it a go...</b>
-                        </p>
-                    </aside>
                 </section>
                 <section>
-                    <h2>If PHP were a restaurant...</h2>
+                    <h2>Restaurant PHP</h2>
                     <table>
                         <tr class="fragment">
                             <td><img class="icon inline-icon" src="images/customer.png" /></td>
@@ -113,9 +147,6 @@
                         </tr>
                         <tr><td colspan="2"></td></tr>
                     </table>
-                    <aside class="notes">
-                        <p>On every request our application is bootstrapped, executed and destroyed.</p>
-                    </aside>
                 </section>
                 <section>
                     <h2>The Proposal?</h2>
@@ -123,20 +154,20 @@
                 <section>
                     <p>
                         <img class="icon inline-icon" src="images/chef.png" /><br />
-                        Don&apos;t kill the chef
+                        <b>Don&apos;t kill the chef</b>
                     </p>
-                    <aside class="notes">
-                        <p>Which, when you consider it, doesn&apos;t actually sound too radical...</p>
-                    </aside>
+                </section>
+                <section>
+                    <p>Make application handle <b>multiple requests</b></p>
                 </section>
                 <section>
                     <h2>Problems</h2>
                 </section>
                 <section>
-                    <p>What if our chef gets ill?</p>
+                    <p>What if our chef gets <b>sick</b>?</p>
                 </section>
                 <section>
-                    <p>What if our application encounters issues that stops it from responding to new requests?</p>
+                    <p>What if our application encounters an issue that prevents it from responding to requests?</p>
                 </section>
                 <section>
                     <h2>Solution #1</h2>
@@ -144,55 +175,56 @@
                 <section>
                     <p>
                         <img class="icon inline-icon" src="images/dead-chef.png" /><br /><br />
-                        Kill the chef...<br /><br />
-                        Occasionally?
+                        Kill the chef...
+                    </p>
+                    <p class="fragment">
+                        <b>...occasionally?</b>
                     </p>
                 </section>
                 <section>
-                    <p>Configure application to keep instances fresh<br /><br />100 rqs per instance</p>
+                    <p>Configure application to keep instances fresh</p>
+                    <p class="fragment">'N' requests or seconds before termination</p>
                 </section>
                 <section>
                     <h2>Solution #2</h2>
                 </section>
                 <section>
                     <p>
-                        <img class="icon inline-icon" src="images/gordon-ramsay.jpg" /><br />
-                        Use a better chef
+                        <img class="icon" src="images/gordon-ramsay.jpg" /><br /><br />
+                        Use a <b>better</b> chef
                     </p>
                 </section>
                 <section>
-                    <p>What can cause our chef to get ill?</p>
+                    <h2>What makes a bad chef?</h2>
                 </section>
                 <section>
                     <h2>Memory Meltdown</h2>
-                    <br />
-                    <p class="fragment">
-                        Chef never forgets some of the meals they have made
+                </section>
+                <section>
+                    <p>
+                        Chef never forgets... <b>anything</b>
                     </p>
                     <p class="fragment">
                         Chef can only remember so much
                     </p>
                     <p class="fragment">
-                        Chef's head explodes
-                    </p>
-                </section>
-                <section>
-                    <p>
-                        <img class="icon inline-icon" src="images/dead-chef.png" />
+                        Chef's <b>head explodes</b>
                     </p>
                 </section>
                 <section>
                     <p>Remove references to unrequired objects</p>
                 </section>
                 <section>
-               	  	<p>What services might store references?</p>
-               	  	<br />
-               	  	<p class="fragment">ORMs</p>
+               	  	<p>What might <b>hide references</b>?</p>
+               	</section>
+                <section>
+               	  	<p>ORMs</p>
                	  	<p class="fragment">Loggers</p>
                 </section>
                 <section>
-                    <pre><code data-trim>
-$repository = $this->getDoctrine()->getRepository('Bundle:Page');
+                    <pre><code class="php" data-trim>
+$em = $this->getDoctrine()->getManager();
+$repository = $em->getRepository('Bundle:Page');
 
 $page = $repository->find($id);
 
@@ -201,88 +233,47 @@ $response = $this->render(
     ['page' => $page]
 );
 
-$repository->clear();
+$em->detach($page);
 
 return $response;
 		            </code></pre>
                 </section>
                 <section>
                     <h2>Timeouts</h2>
-                    <br />
-                    <p class="fragment">
-                        Chef forgets how to breathe after a couple of hours
-                    </p>
-                    <p class="fragment">
-                        Chef needs to breathe
-                    </p>
                 </section>
                 <section>
                     <p>
-                        <img class="icon inline-icon" src="images/dead-chef.png" />
+                        Chef <b>forgets how to breathe</b> after a couple of hours
+                    </p>
+                    <p class="fragment">
+                        Chef <b>needs to breathe</b>
                     </p>
                 </section>
                 <section>
                     <p>ERROR 2006: MySQL server has gone away</p>
-                    <aside class="notes">
-                        <p>Has anyone had this error before? I have had this with RabbitMQ workers before.</p>
-                    </aside>
                 </section>
                 <section>
                     <h2>Tantrum Handling</h2>
-                    </p>
-                    <br />
-                    <p class="fragment">
-                        Chef encounters minor issue
-                    </p>
-                    <p class="fragment">
-                        Chef throws big tantrum
-                    </p>
                 </section>
                 <section>
                     <p>
-                        <img class="icon inline-icon" src="images/dead-chef.png" />
-                    </p>
-                </section>
-                <section>
-                    <p>Distinguish between request errors and application errors</p>
-                </section>
-                <section>
-                    <p>Let the application die if recovery is not possible</p>
-                    <aside class="notes">
-                        <p>If your chef is sulking in the corner refusing to work they are a <b>lost cause</b>.</p>
-                        <p>Get the gun out and get a new chef.</p>
-                    </aside>
-                </section>
-                <section>
-                    <h2>Evil Customer</h2>
-                    <br />
-                    <p class="fragment">
-                        Evil Alex asks Chef what Chris ordered
+                        Chef encounters <b>minor issue</b>
                     </p>
                     <p class="fragment">
-                        Chef tells Alex that Chris ordered pizza 
-                    </p>
-                    <p class="fragment">
-                    	Alex answers Chris's forgot password question
+                        Chef throws <b>big tantrum</b>
                     </p>
                 </section>
                 <section>
-                    <p>
-                        <img class="icon inline-icon" src="images/dead-chef.png" />
-                    </p>
+                    <p>Distinguish between <b>request errors</b> and <b>application errors</b></p>
                 </section>
                 <section>
-                    <p>Think like an attacker</p>
-                    <p class="fragment">Avoid static and global memory</p>
-					<p>
-					    <pre style="display: inline;" class="fragment"><code style="display: inline;" data-trim>
-                            $_GET, $_POST, $_SESSION
-                        </code></pre>
-					</p>
+                    <p><b>Let the application die</b> if recovery is not possible</p>
                 </section>
                 <section>
                     <h2>New Menu</h2>
-                    <p class="fragment">
+                </section>
+                <section>
+                    <p>
                         We want to add fajitas to the menu
                     </p>
                     <p class="fragment">
@@ -292,30 +283,55 @@ return $response;
                         Bring in new chef, José
                     </p>
                     <p class="fragment">
-                        Forget to kill Antonio
+                        <b>Forget to kill Antonio</b>
                     </p>
                     <p class="fragment">
                         Customers keep getting pizza
                     </p>
                 </section>
                 <section>
+                    <p>Remember to kill old Chef(s)</p>
+                </section>
+                <section>
+                    <h2>Evil Customer</h2>
+                </section>
+                <section>
                     <p>
-                        <img class="icon inline-icon" src="images/dead-chef.png" />
+                        Evil Alex asks Chef what Chris ordered
+                    </p>
+                    <p class="fragment">
+                        Chef tells Alex that Chris ordered pizza
+                    </p>
+                    <p class="fragment">
+                    	Alex answers Chris's forgot password question
                     </p>
                 </section>
                 <section>
-                    <p>Remember to kill old Chef(s)</p>
+                    <p><b>Think like an attacker</b></p>
+                </section>
+                <section>
+                    <h3>Three Golden Rules</h3>
+                    <ol>
+                        <li class="fragment">
+                            <p>Separate request and application scope</p>
+                            <ul style="font-size: 0.8em;">
+                                <li class="fragment"><p>Services should be application scope</p></li>
+                                <li class="fragment"><p>If you need the request stack you're doing it wrong</p></li>
+                                <li class="fragment"><p>Do not use static or global variables</p></li>
+                            </ul>
+                        </li>
+                        <li class="fragment">
+                            <p>Only use static methods when stateless</p>
+                            <p class="fragment" style="font-size: 0.8em;">(Or just don't use static methos)</p>
+                        </li>
+                        <li class="fragment"><b>Srsly: Separate request and application scope</b></li>
+                    </ol>
                 </section>
                 <section>
                     <p>Leaving behind our restaurant...</p>
                 </section>
                 <section>
                     <h2>CGI: Common Gateway Interface</h2>
-                    <aside class="notes">
-                        <p>A history lesson, hands up who has heard of CGI?</p>
-                        <p>And leave them up if you know how it works?</p>
-                        <p>And leave them up if you have ever created a CGI application?</p>
-                    </aside>
                 </section>
                 <section>
                     <p>CGI application must be executable by the web server</p>
@@ -325,9 +341,6 @@ return $response;
                 </section>
                 <section>
                     <p>HTTP request provided via <b>environment variables</b></p>
-                    <aside class="notes">
-                        <p>Anybody know where you might encounter these environment variables in PHP?</p>
-                    </aside>
                 </section>
                 <section>
                     <p>HTTP response written to <b>standard output</b> by application</p>
@@ -341,10 +354,10 @@ return $response;
                     <p>We can still integrate PHP using CGI</p>
                 </section>
                 <section>
-                    <p>We can also use native web server modules</p>
+                    <p>We can also use <b>native web server modules</b></p>
                 </section>
                 <section>
-                    <p>We can also use PHP-FPM</p>
+                    <p>We can also use <b>PHP-FPM</b></p>
                 </section>
                 <section>
                     <h2>PHP-FPM?</h2>
@@ -352,19 +365,13 @@ return $response;
                 </section>
                 <section>
                     <h2>FastCGI?</h2>
-                    <p class="fragment">Like CGI... but faster</p>
+                    <p class="fragment">Like CGI... <b>but faster</b></p>
                 </section>
                 <section>
                     <h2>Making CGI Faster</h2>
                     <p class="fragment">Wrap our communication in a protocol</p>
                     <p class="fragment">Implement this protocol over a socket connection</p>
-                    <p class="fragment">Keep our application alive between requests!</p>
-                    <aside class="notes">
-                        <p>Each request is a new connection to our application rather than a
-                        new instance of our application.</p>
-                        <p>Send and receive data over this connection rather than i/o streams to
-                        the process and environment variables.</p>
-                    </aside>
+                    <p class="fragment"><b>Keep our application alive between requests!</b></p>
                 </section>
                 <section>
                     <h2>PHP-FPM</h2>
@@ -377,11 +384,11 @@ return $response;
                     </p>
                 </section>
                 <section>
-                    <h2>Use FastCGI directly?</h2>
+                    <p>Use FastCGI <b>directly</b>?</p>
                 </section>
                 <section>
-                    <h2>With a legacy application?</h2>
-                    <pre><code data-trim>
+                    <h3>With a legacy application?</h3>
+                    <pre><code class="php" data-trim>
 include 'lib/common.php';
 include 'lib/database.php';
 
@@ -400,15 +407,10 @@ if (false === $result || !($page = mysql_fetch_assoc($result))) {
 
 echo $page['html'];
                     </code></pre>
-                    <aside class="notes">
-                        <p>Who has ever written a PHP application that looked like this?</p>
-                        <p>We could use output buffering</p>
-                        <p>Have to refactor heavily, dependencies on super globals and static memory are likely everywhere</p>
-                    </aside>
                 </section>
                 <section>
-                    <h2>With Symfony?</h2>
-                    <pre><code data-trim>
+                    <h3>With Symfony?</h3>
+                    <pre><code class="php" data-trim>
 use Symfony\Component\ClassLoader\ApcClassLoader;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -424,13 +426,9 @@ $response = $kernel->handle($request);
 $response->send();
 $kernel->terminate($request, $response);
                     </code></pre>
-                    <aside class="notes">
-                        <p>Kernel class has a method for generating responses from a given request</p>
-                        <p>Could inject the kernel object into a service that uses FastCGI to receive requests</p>
-                    </aside>
                 </section>
                 <section>
-                    <h2>The FastCGI protocol</h2>
+                    <h3>The FastCGI protocol</h3>
                     <table style="font-size: 0.6em;">
                         <tr><td>-&gt;</td><td>FCGI_BEGIN_REQUEST</td></tr>
                         <tr><td>-&gt;</td><td>FCGI_PARAMS</td></tr>
@@ -446,9 +444,9 @@ $kernel->terminate($request, $response);
                     </table>
                 </section>
                 <section>
-                    <h2>Binary Protocol</h2>
+                    <h3>Binary Protocol</h3>
                     <p>
-					    <pre style="display: inline;"><code style="display: inline;" data-trim>
+                        <pre style="display: inline;"><code class="php" style="display: inline;" data-trim>
                             pack() unpack()
                         </code></pre>
                     </p>
@@ -457,46 +455,53 @@ $kernel->terminate($request, $response);
                     <p>Or...</p>
                 </section>
                 <section>
-                    <h2>PHPFastCGI</h2>
-                    <aside class="notes">
-                        <p>And we are already into the plug section of the talk</p>
-                        <p>This is a project I have been working on over the last few months</p>
-                        <p>Allows you to easily create FastCGI applications using frameworks (or without them)</p>
-                    </aside>
+                    <h3>PHPFastCGI</h3>
                 </section>
-               <section>
-					<pre><code data-trim>
+                <section>
+                    <p>A tool for creating command line FastCGI applications</p>
+                </section>
+                <section>
+                    <pre><code class="php" data-trim>
 use PHPFastCGI\FastCGIDaemon\ApplicationFactory;
 use PHPFastCGI\FastCGIDaemon\Http\RequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
 
-// A simple kernel. This is the core of your application
 $kernel = function (RequestInterface $request) {
     // $request->getServerRequest()         PSR-7 object
     // $request->getHttpFoundationRequest() HTTP foundation object
-    return new HtmlResponse('<h1>Hello, World!</h1>');
+
+    return new HtmlResponse('<h2>Hello, World!</h2>');
 };
 
-// Create your Symfony console application using the factory
 $application = (new ApplicationFactory)->createApplication($kernel);
 
-// Run the Symfony console application
 $application->run();
-					</code></pre>
+                    </code></pre>
                 </section>
                 <section>
-                    <h2>Speedfony Bundle</h2>
-					<pre class="fragment"><code data-trim>composer require "phpfastcgi/speedfony-bundle:^0.7"</code></pre>
+                    <pre><code class="bash" data-trim>
+php bin/fastcgi.php run
+php bin/fastcgi.php run --port=5000
+php bin/fastcgi.php run --port=5000 --host=localhost
+php bin/fastcgi.php run [--request-limit=200]
+php bin/fastcgi.php run [--memory-limit=50000000]
+php bin/fastcgi.php run [--time-limit=3600]
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Speedfony Bundle</h3>
+		                <pre class="fragment"><code class="bash" data-trim>composer require "phpfastcgi/speedfony-bundle:^0.7"</code></pre>
                     <aside class="notes">
                         <p>If you are ever stuck for a name for your project, by the way, come and chat to me. I&apos;m
                         a multitalented individual as you can see.</p>
                     </aside>
                 </section>
                 <section>
-                    <pre><code data-trim>
+                    <pre><code class="php" data-trim>
 // app/AppKernel.php
 
 // ...
+
 class AppKernel extends Kernel
 {
   public function registerBundles()
@@ -508,16 +513,17 @@ class AppKernel extends Kernel
 
     // ...
   }
-// ...
+
+  // ...
                     </code></pre>
                 </section>
                 <section>
-                    <pre><code data-trim>
+                    <pre><code class="bash" data-trim>
 php app/console speedfony:run --env=prod
 php app/console speedfony:run --env=prod --port=5000
 php app/console speedfony:run --env=prod --port=5000 --host=localhost
 php app/console speedfony:run --env=prod [--request-limit=200]
-php app/console speedfony:run --env=prod [--memory-limit=50000000]
+php app/console speedfony:run --end=prod [--memory-limit=50000000]
 php app/console speedfony:run --env=prod [--time-limit=3600]
                     </code></pre>
                 </section>
@@ -525,14 +531,14 @@ php app/console speedfony:run --env=prod [--time-limit=3600]
                     <p>How much faster is this?</p>
                 </section>
                 <section>
-                    <h2>Benchmarking Application</h2>
+                    <h3>Benchmarking Application</h3>
                     <p class="fragment">500 page Symfony application</p>
                     <p class="fragment">Single route which selects a random page from database</p>
                     <p class="fragment">Renders using Twig</p>
                     <p class="fragment">Clears entity repository after each request</p>
                 </section>
                 <section>
-                    <h2>Benchmarking System</h2>
+                    <h3>Benchmarking System</h3>
                     <p class="fragment">VMWare Fusion - 2GB RAM - 4 cores (Intel Core i7, 3.4 GHz)</p>
                     <p class="fragment">Ubuntu 64-bit Server 15.04</p>
                     <p class="fragment">PHP 5.6.4</p>
@@ -540,22 +546,22 @@ php app/console speedfony:run --env=prod [--time-limit=3600]
                     <p class="fragment">'ab', 50000 requests, concurrency level of 20</p>
                 </section>
                 <section>
-                    <h2>Control Test</h2>
+                    <h3>Control Test</h3>
                     <p class="fragment">OPcache enabled</p>
                     <p class="fragment">PHP-FPM</p>
                 </section>
                 <section>
-                    <h2>First Test</h2>
+                    <h3>First Test</h3>
                     <p class="fragment">6 worker processes</p>
                     <p class="fragment">FastCGI protocol implemented in <b>PHP userland</b></p>
                 </section>
                 <section>
-                    <h2>Second Test</h2>
+                    <h3>Second Test</h3>
                     <p class="fragment">6 worker processes</p>
                     <p class="fragment">FastCGI protocol implemented by <b>PHP extension</b></p>
                 </section>
                 <section>
-                    <h2>The Results</h2>
+                    <h3>The Results</h3>
                     <br />
                     <img src="images/results.png" style="width: 80%;" alt="Results graph" />
                 </section>
@@ -563,35 +569,43 @@ php app/console speedfony:run --env=prod [--time-limit=3600]
                     <h2>Warnings</h2>
                 </section>
                 <section>
-                    <p>PHPFastCGI is not yet production ready</p>
+                    <p>PHPFastCGI is <b>not yet production ready</b></p>
                 </section>
                 <section>
                     <p>No support yet for uploaded files</p>
                 </section>
                 <section>
-                    <h2>Do you need PHPFastCGI?</h2>
-                    <p class="fragment">Is your application fast enough already?</p>
+                    <h2>Do you need it?</h2>
+                </section>
+                <section>
+                    <p>Is your application fast enough already?</p>
                     <p class="fragment">Why bother with the risk?</p>
                 </section>
                 <section>
-                    <p>PHPFastCGI is a tool for high performance PHP applications</p>
+                    <p>PHPFastCGI is a tool for <b>high performance PHP applications</b></p>
                 </section>
                 <section>
-                    <h2>However</h2>
-                    <p class="fragment">Well designed applications should not leak memory</p>
-                    <p class="fragment">Well designed applications should handle errors properly</p>
-                    <p class="fragment">PHPFastCGI is very easy to install</p>
+                    <h3>However</h3>
+                </section>
+                <section>
+                    <p>Well designed applications <b>should not leak memory</b></p>
+                </section>
+                <section>
+                    <p>Well designed applications <b>should handle errors properly</b></p>
+                </section>
+                <section>
+                    <p>PHPFastCGI is very easy to install</p>
                 </section>
                 <section>
                 	<h2>Thinking Forward</h2>
                 </section>
                 <section>
-                	<h2>Application Server</h2>
+                	<h3>Application Server</h3>
                 	<p class="fragment">Framework + Server Environment</p>
                 	<p class="fragment">appserver.io</p>
                 </section>
                 <section>
-                	<h2>An Asynchronous Future</h2>
+                	<h3>An Asynchronous Future</h3>
                 	<p class="fragment">React PHP + Icicle</p>
                 	<p class="fragment">Applications run on an event loop</p>
                 	<p class="fragment">Controller actions return a response promise</p>
@@ -619,9 +633,9 @@ php app/console speedfony:run --env=prod [--time-limit=3600]
                     <br />
                     <p><b>@AndrewCarterUK</b></p>
                     <br />
-                    <p>https://joind.in/talk/view/16170</p>
+                    <p>http://joind.in/talk/view/16471</p>
                     <br />
-                    <p>http://phpfastcgi.github.io<br />http://github.com/PHPFastCGI/FastCGIDaemon</p>
+                    <p>http://phpfastcgi.github.io<br />http://github.com/PHPFastCGI/FastCGIDaemon<br />http://github.com/PHPFastCGI/SpeedfonyBundle</p>
                 </section>
             </div>
         </div>
@@ -637,8 +651,8 @@ php app/console speedfony:run --env=prod [--time-limit=3600]
                 transition: 'none',
                 dependencies: [
                     { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: 'plugin/notes/notes.js', async: true }
+                    { src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+                    { src: 'plugin/notes/notes.js', async: true }
                 ]
             });
         </script>
