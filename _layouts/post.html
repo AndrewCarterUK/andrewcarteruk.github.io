@@ -7,7 +7,7 @@ layout: default
             <header>
                 <h3>{{ page.title }}</h3>
             </header>
-            <small>{{ page.date | date: "%b %-d, %Y" }}{% if page.author %} • {{ page.author }}{% endif %}{% if page.meta %} • {{ page.meta }}{% endif %}</small><br /><br />
+            <small>{{ page.date | date: "%b %-d, %Y" }} • <a href="https://twitter.com/AndrewCarterUK">@AndrewCarterUK</a> {% if page.meta %} • {{ page.meta }}{% endif %}</small><br /><br />
             {{ content }}
         </section>
     </div>

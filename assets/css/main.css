@@ -1,5 +1,5 @@
 @import url("font-awesome.min.css");
-@import url("http://fonts.googleapis.com/css?family=Lato:300,400,900");
+@import url("http://fonts.googleapis.com/css?family=Lato:400,700,900");
 
 /*
 	Twenty by HTML5 UP
@@ -1565,7 +1565,7 @@
 		color: #7c8081;
 		font-family: 'Lato', sans-serif;
 		font-size: 15pt;
-		font-weight: 300;
+		font-weight: 400;
 		letter-spacing: 0.025em;
 		line-height: 1.75em;
 	}
@@ -1585,7 +1585,7 @@
 		}
 
 	strong, b {
-		font-weight: 400;
+		font-weight: 700;
 	}
 
 	p, ul, ol, dl, table, blockquote {
@@ -1594,7 +1594,7 @@
 
 	h1, h2, h3, h4, h5, h6 {
 		color: inherit;
-		font-weight: 300;
+		font-weight: 700;
 		line-height: 1.75em;
 		margin-bottom: 1em;
 		text-transform: uppercase;
@@ -1973,7 +1973,7 @@
 			}
 
 			table.default th {
-				font-weight: 400;
+				font-weight: 700;
 				padding: 0.5em 1em 0.5em 1em;
 				text-align: left;
 			}
@@ -2162,7 +2162,7 @@
 		}
 
 			#header h1 span {
-				font-weight: 300;
+				font-weight: 400;
 			}
 
 		#header nav {
