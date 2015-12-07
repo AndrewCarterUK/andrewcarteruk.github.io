@@ -50,7 +50,7 @@ interface InvalidArgumentException extends CacheException {}
 
 One of the first '-1' votes on the proposal at the moment is a resounding no from the Doctrine team. The actual comment on the [voting thread](https://groups.google.com/forum/#!topic/php-fig/dSw5IhpKJ1g) is:
 
-__"Unanimous -1 from Doctrine among all core developers. List of deficiencies too big and not pertinent to this thread."__
+_"Unanimous -1 from Doctrine among all core developers. List of deficiencies too big and not pertinent to this thread."_
 
 The Doctrine team are the maintainers of ([according to packagist](https://packagist.org/search/?q=cache)) the most popular cache library in the PHP ecosystem.
 
