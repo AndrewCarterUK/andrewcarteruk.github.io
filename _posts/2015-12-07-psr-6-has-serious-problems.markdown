@@ -51,7 +51,10 @@ The exception system in PHP was **designed to be extended**. The issue here is t
 This leads to the ridiculous situation where the following situation is not only plausible, but completely in agreement with the specification:
 
 {% highlight php startinline=true %}
-if ($exception instanceof Psr\Cache\InvalidArgumentException and ! $exception instanceof \InvalidArgumentException) {
+if (
+     $exception instanceof Psr\Cache\InvalidArgumentException &&
+    !$exception instanceof \InvalidArgumentException
+) {
     echo 'Huh?';
 }
 {% endhighlight %}
