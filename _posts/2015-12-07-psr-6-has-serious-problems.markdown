@@ -42,7 +42,7 @@ interface CacheException {}
 interface InvalidArgumentException extends CacheException {}
 {% endhighlight %}
 
-## Problem 1
+### Problem 1
 
 The first problem is the last two interfaces in that **they pretend to be classes**. This might provide a minor irritation for anyone implementing the interface, but to the user it should not be a problem. You can still catch it the same, right?
 
@@ -72,7 +72,7 @@ try {
 
 This might not sound so significant, but I cannot for the life of me understand why the proposal decided to use interfaces in the first place. It doesn't appear to solve any problems and it actually creates one.
 
-## Problem 2
+### Problem 2
 
 On the interfaces it is possible to set a time to live on a cache item using the following methods;
 
