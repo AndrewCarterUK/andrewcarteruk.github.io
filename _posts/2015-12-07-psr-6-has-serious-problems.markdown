@@ -84,7 +84,7 @@ $item->expiresAt(new \DateTime(...));
 
 However, there is no method available to retrieve this expiry information from the item. There are good reasons for this. Primarily, if you retrieve an item from memcached it is not actually possible to find out when it expires, at least not without some serious wizardry and expensive operations. This is the case for many other cache systems too.
 
-On the surface, this is not a problem. If you cannot know the expiration of an item there shouldn't be a method promising to provide it, as long as you can still set it.
+On the surface this is not a problem. If you cannot know the expiration of an item, there shouldn't be a method promising to provide it.
 
 The problem only becomes apparent when you think of how the cache pool handles this information; after all, it is the cache pool that actually persists the cache item. Somehow, the cache pool needs to know the expiration time that you set on the cache item.
 
