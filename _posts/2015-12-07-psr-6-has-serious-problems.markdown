@@ -60,7 +60,7 @@ The proposal should be moved back and the concerns of Doctrine, Guzzle and Larav
 
 ### Problem 2
 
-The second problem is with the last two interfaces. They not make it clear that they are interfaces and **they also pretend to be exception classes**. This might provide a minor irritation to anyone implementing the interface, but to the user it should not be a problem. You can still catch it the same, right?
+The second problem is with the last two interfaces. They fail to make it clear that they are interfaces and **they also pretend to be exception classes**. This might provide a minor irritation to anyone implementing the interface, but to the user it should not be a problem. You can still catch it the same, right?
 
 The exception system in PHP was **designed to be extended**. The issue here is that there is no guarantee that a class implenting the **InvalidArgumentException** interface defined by the proposal will also extend the root **InvalidArgumentException** class defined by PHP.
 
