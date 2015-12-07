@@ -94,11 +94,11 @@ The first is that the cache item can be provided a method of communication with 
 
 When the item falls out of scope the cache pool will have no way of knowing that it needs to forget all of the information it was storing about the cache item. The only way to control the memory leak in a long running process would be to continuously recreate the cache pool.
 
-The second option is that the implementation could expose a public method on the cache item that is not defined by the specification (i.e. a method not on the CacheItemInterface). This is a particularly unsatisfying solution for two reasons:
+The second option is that the implementation could expose a public method on the cache item that is not defined by the specification (i.e. a method not on the **CacheItemInterface**). This is a particularly unsatisfying solution for two reasons:
 
 1. Public methods are a pain. As soon a class in a library contains a public method it cannot change that without breaking backwards compatability. The last thing any library developer wants to do is create unnecessary public methods that they then have to support until the next major version.
 
-2. Users should not be calling that method. If implementations do decide to add a public 'getExpiration()' method onto their cache items this will ultimately not be the method that users expect it to be, for precisely the reasons that it was removed from the specification in the first place. When you create a method that users should not be calling it should not be public.
+2. Users should not be calling that method. If implementations do decide to add a public **getExpiration()** method onto their cache items this will ultimately not be the method that users expect it to be, for precisely the reasons that it was removed from the specification in the first place. When you create a method that users should not be calling it should not be public.
 
 3. The specification should be complete. There is no reason why, with the exception of constructors, implementations should be forced to define any methods that are not in the original specification.
 
