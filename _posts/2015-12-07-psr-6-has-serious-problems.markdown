@@ -42,9 +42,10 @@ interface CacheException {}
 interface InvalidArgumentException extends CacheException {}
 {% endhighlight %}
 
+
 ### Problem 1
 
-The first problem is the last two interfaces in that **they pretend to be classes**. This might provide a minor irritation for anyone implementing the interface, but to the user it should not be a problem. You can still catch it the same, right?
+The first problem is with the last two interfaces. Not only do they not make it clear that they are interfaces, **they pretend to be exception classes**. This might provide a minor irritation for anyone implementing the interface, but to the user it should not be a problem. You can still catch it the same, right?
 
 **Wrong**
 
