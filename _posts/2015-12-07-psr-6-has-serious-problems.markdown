@@ -56,7 +56,7 @@ The Doctrine team are the maintainers of ([according to packagist](https://packa
 
 Guzzle and Laravel also maintain popular caching libraries and voted '-1'. Other member projects in the FIG group should have alarm bells ringing loudly in their ears when they see these votes.
 
-I would strongly suggest that the proposal is moved back to review or draft and the concerns of Doctrine, Guzzle and Laravel are listened to.
+The proposal should be moved back and the concerns of Doctrine, Guzzle and Laravel should be listened to.
 
 ### Problem 2
 
