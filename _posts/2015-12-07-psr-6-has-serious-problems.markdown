@@ -90,7 +90,9 @@ The problem only becomes apparent when you think of how the cache pool handles t
 
 Now there are two options here for an implementation.
 
-The first is that the constructor for the cache item can be passed some method of communication from the cache pool when it is instantiated. But this leads to a new problem, **memory leaks**. When the item falls out of scope this method of communication will not, the cache pool will still need to hold some reference to it. In a long running process using a cache implementation of this nature, the only way to control the memory leak would be to continuously recreate the cache pool.
+The first is that the cache item can be provided a method of communication with the cache pool when it is constructed. But this leads to a new problem, **memory leaks**.
+
+When the item falls out of scope the cache pool will have no way of knowing that it needs to forget all of the information it was storing about the cache item. The only way to control the memory leak in a long running process would be to continuously recreate the cache pool.
 
 The second option is that the implementation could expose a public method on the cache item that is not defined by the specification (i.e. a method not on the CacheItemInterface). This is a particularly unsatisfying solution for two reasons:
 
