@@ -3126,6 +3126,7 @@
 
 	}
 /** Syntax highlighting styles */
+div.highlight { border: 1px solid #606060; background: #f0f0f0; padding: 0.5em; }
 .highlight { background: #fff; }
 .highlight .c { color: #998; font-style: italic; }
 .highlight .err { color: #a61717; background-color: #e3d2d2; }
