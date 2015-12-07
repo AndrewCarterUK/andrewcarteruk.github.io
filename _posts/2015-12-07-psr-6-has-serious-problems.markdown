@@ -100,9 +100,9 @@ The second option is that the implementation could expose a public method on the
 
 2. Users should not be calling that method. If implementations do decide to add a public **getExpiration()** method onto their cache items this will ultimately not be the method that users expect it to be, for precisely the reasons that it was removed from the specification in the first place. When you create a method that users should not be calling it should not be public.
 
-3. The specification should be complete. There is no reason why, with the exception of constructors, implementations should be forced to define any methods that are not in the original specification.
+3. The specification should be complete for both calling code **and implementations**. With the exception of constructors, implementations should be forced to define any public methods that are not in the original specification.
 
-The solution to this problem would be to set the expiration time when saving the object. So rather than:
+One solution to this specific problem would be to set the expiration time when saving the object. So rather than:
 
 {% highlight php startinline=true %}
 $item->expiresAfter(300);
@@ -115,7 +115,9 @@ We had:
 $pool->save($item, 300);
 {% endhighlight %}
 
-I read Anthony Ferrara's [Open Letter To PHP-FIG](http://blog.ircmaxell.com/2014/10/an-open-letter-to-php-fig.html) regarding PSR-6 about a year ago and didn't agree at the time. I'm now in complete agreement and I think the way the FIG group has voted so far on the proposal highlights a much deeper structural issue within the group.
+## Summary
+
+I read Anthony Ferrara's [Open Letter To PHP-FIG](http://blog.ircmaxell.com/2014/10/an-open-letter-to-php-fig.html) regarding PSR-6 about a year ago and didn't agree at the time. I am now in complete agreement and I think the way the FIG group has voted so far on the proposal highlights a much deeper structural issue within the group.
 
 One of the few '-1' votes on the proposal at the moment is a resounding no from the Doctrine team. The actual comment on the [voting thread](https://groups.google.com/forum/#!topic/php-fig/dSw5IhpKJ1g) was:
 
