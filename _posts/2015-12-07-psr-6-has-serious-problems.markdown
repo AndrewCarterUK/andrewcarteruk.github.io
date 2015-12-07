@@ -94,7 +94,7 @@ The first is that the cache item can be provided a method of communication with 
 
 When the item falls out of scope the cache pool will have no way of knowing that it needs to forget all of the information it was storing about the cache item. The only way to control the memory leak in a long running process would be to continuously recreate the cache pool.
 
-The second option is that the implementation could expose a public method on the cache item that is not defined by the specification (i.e. a method not on the **CacheItemInterface**). This is a particularly unsatisfying solution for two reasons:
+The second option is that the implementation could expose a public method on the cache item that is not defined on the **CacheItemInterface**. This is a particularly unsatisfying solution for a few reasons:
 
 1. Public methods are a pain. As soon a class in a library contains a public method it cannot change that without breaking backwards compatability. The last thing any library developer wants to do is create unnecessary public methods that they then have to support until the next major version.
 
