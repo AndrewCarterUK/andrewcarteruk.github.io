@@ -5,11 +5,9 @@ date:   2015-12-07 20:00:00
 categories: programming
 ---
 
-PSR-6 is the proposal from the [PHP-FIG (PHP Framework Interop Group)](http://www.php-fig.org/) of a set of cache interfaces that can assist programmers in writing decoupled code. The idea is that cache drivers can implement these interfaces and then code can depend on the interface rather than the underlying cache driver or system.
+PSR-6 is the proposal from the [PHP-FIG (PHP Framework Interop Group)](http://www.php-fig.org/) of a set of cache interfaces that can assist programmers in writing decoupled code. The idea is that cache drivers can implement these interfaces and then code can depend on the interface and not the underlying cache driver or system.
 
-By tomorrow, as of the time of writing this article, these interfaces will have been ratified and set in stone.
-
-Here are the basic interfaces that have been proposed:
+Here are the proposed interfaces:
 
 {% highlight php %}
 <?php
@@ -48,7 +46,7 @@ interface InvalidArgumentException extends CacheException {}
 
 **Some of most important projects in the FIG (regarding caching) have voted against it**
 
-One of the first '-1' votes on the proposal at the moment is a resounding no from the Doctrine team. The actual comment on the [voting thread](https://groups.google.com/forum/#!topic/php-fig/dSw5IhpKJ1g) is:
+One of the first '-1' votes on the proposal at the moment is a resounding no from the Doctrine team. The comment on the [voting thread](https://groups.google.com/forum/#!topic/php-fig/dSw5IhpKJ1g) is:
 
 _"Unanimous -1 from Doctrine among all core developers. List of deficiencies too big and not pertinent to this thread."_
 
@@ -62,7 +60,7 @@ The proposal should be moved back and the concerns of Doctrine, Guzzle and Larav
 
 The second problem is with the last two interfaces. They fail to make it clear that they are interfaces and **they also pretend to be exception classes**. This might provide a minor irritation to anyone implementing the interface, but to the user it should not be a problem. You can still catch it the same, right?
 
-The exception system in PHP was **designed to be extended**. The issue here is that there is no guarantee that a class implenting the **InvalidArgumentException** interface defined by the proposal will also extend the root **InvalidArgumentException** class defined by PHP.
+The exception system in PHP was **designed to be extended**. The issue here is that there is no guarantee that a class implementing the **InvalidArgumentException** interface defined by the proposal will also extend the root **InvalidArgumentException** class defined by PHP.
 
 This leads to the ridiculous situation where the following situation is not only plausible, but completely in agreement with the specification:
 
@@ -106,17 +104,17 @@ The problem only becomes apparent when you think of how the cache pool handles t
 
 Now there are two options here for an implementation.
 
-The first is that the cache item can be provided a method of communication with the cache pool when it is constructed. But this leads to a new problem, **memory leaks**.
+The first is that the cache item could be provided a method of communication with the cache pool on construction. However, this leads to a new problem, **memory leaks**.
 
-When the item falls out of scope the cache pool will have no way of knowing that it needs to forget all of the information it was storing about the cache item. The only way to control the memory leak in a long running process would be to continuously recreate the cache pool.
+When the item falls out of scope the cache pool will have no way of knowing that it needs to forget all the information it was storing about the cache item. The only way to control the memory leak in a long running process would be to continuously recreate the cache pool.
 
 The second option is that the implementation could expose a public method on the cache item that is not defined on the **CacheItemInterface**. This is a particularly unsatisfying solution for a few reasons:
 
-1. Public methods are a pain. As soon a class in a library contains a public method it cannot change that without breaking backwards compatability. The last thing any library developer wants to do is create unnecessary public methods that they then have to support until the next major version.
+1. Public methods are a pain. As soon a class in a library has a public method it cannot change that without breaking backwards compatability. The last thing any library developer wants to do is create unnecessary public methods that they then have to support until the next major version.
 
-2. Users should not be calling such a method. If implementations do decide to add a public **getExpiration()** method onto their cache items this will ultimately not be the method that users expect it to be (for precisely the reasons that it was removed from the specification in the first place). When you create a method that users should not be calling **it should not be public**.
+2. Users should not be calling such a method. If implementations do add a public **getExpiration()** method, this will ultimately not be the method that users expect it to be (for precisely the reasons that it was removed from the specification in the first place). When you create a method that users should not be using... **it should not be public**.
 
-3. The specification should be complete for both calling code **and implementations**. With the exception of constructors, implementations should not be forced to define any public methods that are not in the original specification.
+3. The specification should be complete for both calling code **and implementations**.
 
 One solution to this specific problem would be to set the expiration time when saving the object. Something like this:
 
