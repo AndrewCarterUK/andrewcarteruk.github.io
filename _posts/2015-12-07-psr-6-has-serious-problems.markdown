@@ -62,7 +62,7 @@ The second problem is with the last two interfaces. They fail to make it clear t
 
 The exception system in PHP was **designed to be extended**. The issue here is that there is no guarantee that a class implementing the **InvalidArgumentException** interface defined by the proposal will also extend the root **InvalidArgumentException** class defined by PHP.
 
-This leads to the ridiculous situation where the following situation is not only plausible, but completely in agreement with the specification:
+This leads to the following ridiculous situation which is not only plausible, but completely in agreement with the specification:
 
 {% highlight php startinline=true %}
 if (
