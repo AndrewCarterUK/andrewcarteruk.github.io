@@ -7,6 +7,8 @@ categories: programming
 
 PSR-6 is the proposal from the [PHP-FIG (PHP Framework Interop Group)](http://www.php-fig.org/) of a set of cache interfaces that can assist programmers in writing decoupled code. The idea is that cache drivers can implement these interfaces and then code can depend on the interface rather than the underlying cache driver or system.
 
+By tomorrow, as of the time of writing this article, these interfaces will have been ratified and set in stone.
+
 Here are the basic interfaces that have been proposed:
 
 {% highlight php %}
@@ -44,7 +46,21 @@ interface InvalidArgumentException extends CacheException {}
 
 ### Problem 1
 
-The first problem is with the last two interfaces. They not make it clear that they are interfaces and **they also pretend to be exception classes**. This might provide a minor irritation to anyone implementing the interface, but to the user it should not be a problem. You can still catch it the same, right?
+**Some of most important projects in the FIG (regarding caching) have voted against it**
+
+One of the first '-1' votes on the proposal at the moment is a resounding no from the Doctrine team. The actual comment on the [voting thread](https://groups.google.com/forum/#!topic/php-fig/dSw5IhpKJ1g) is:
+
+__"Unanimous -1 from Doctrine among all core developers. List of deficiencies too big and not pertinent to this thread."__
+
+The Doctrine team are the maintainers of ([according to packagist](https://packagist.org/search/?q=cache)) the most popular cache library in the PHP ecosystem.
+
+Guzzle and Laravel also maintain a popular cache libraries and also voted '-1'. In fact, many of the '+1' votes are from projects that have **nothing to do with caching**.
+
+It is definitely the case that member projects of the FIG should be much more careful with their '+1' votes. I would strongly suggest that the proposal is moved back to review or draft and the concerns of Doctrine, Guzzle and Laravel are listened to.
+
+### Problem 2
+
+The second problem is with the last two interfaces. They not make it clear that they are interfaces and **they also pretend to be exception classes**. This might provide a minor irritation to anyone implementing the interface, but to the user it should not be a problem. You can still catch it the same, right?
 
 The exception system in PHP was **designed to be extended**. The issue here is that there is no guarantee that a class implenting the **InvalidArgumentException** interface defined by the proposal will also extend the root **InvalidArgumentException** class defined by PHP.
 
@@ -73,7 +89,7 @@ try {
 
 This might not sound so significant, but I cannot for the life of me understand why the proposal decided to use interfaces in the first place. It doesn't appear to solve any problems and it actually creates one.
 
-### Problem 2
+### Problem 3
 
 The cache item interface lets you set an expiration time using the following methods;
 
@@ -102,27 +118,8 @@ The second option is that the implementation could expose a public method on the
 
 3. The specification should be complete for both calling code **and implementations**. With the exception of constructors, implementations should be forced to define any public methods that are not in the original specification.
 
-One solution to this specific problem would be to set the expiration time when saving the object. So rather than:
-
-{% highlight php startinline=true %}
-$item->expiresAfter(300);
-$pool->save($item);
-{% endhighlight %}
-
-We had:
+One solution to this specific problem would be to set the expiration time when saving the object. Ssomething like this:
 
 {% highlight php startinline=true %}
 $pool->save($item, 300);
 {% endhighlight %}
-
-## Summary
-
-I read Anthony Ferrara's [Open Letter To PHP-FIG](http://blog.ircmaxell.com/2014/10/an-open-letter-to-php-fig.html) regarding PSR-6 about a year ago and didn't agree at the time. I am now in complete agreement and I think the way the FIG group has voted so far on the proposal highlights a much deeper structural issue within the group.
-
-One of the few '-1' votes on the proposal at the moment is a resounding no from the Doctrine team. The actual comment on the [voting thread](https://groups.google.com/forum/#!topic/php-fig/dSw5IhpKJ1g) was:
-
-__"Unanimous -1 from Doctrine among all core developers. List of deficiencies too big and not pertinent to this thread."__
-
-The Doctrine team maintain, [according to packagist](https://packagist.org/search/?q=cache), the most popular cache library in the PHP ecosystem. Guzzle and Laravel also maintain a popular cache libraries and also voted '-1'. In fact, many of the '+1' votes are from projects that have **nothing to do with caching**.
-
-It is definitely the case that member projects of the FIG should be much more careful with their '+1' votes. I would strongly suggest that the proposal is moved back to review or draft and the concerns of Doctrine, Guzzle and Laravel are listened to.
