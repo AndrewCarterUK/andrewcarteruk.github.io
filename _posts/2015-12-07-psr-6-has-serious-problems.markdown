@@ -54,7 +54,7 @@ _"Unanimous -1 from Doctrine among all core developers. List of deficiencies too
 
 The Doctrine team are the maintainers of ([according to packagist](https://packagist.org/search/?q=cache)) the most popular caching library in the PHP ecosystem.
 
-Guzzle and Laravel also maintain popular caching libraries voted '-1'. Other member projects in the FIG group should have alarm bells ringing loudly in their ears when they see these votes.
+Guzzle and Laravel also maintain popular caching libraries and voted '-1'. Other member projects in the FIG group should have alarm bells ringing loudly in their ears when they see these votes.
 
 I would strongly suggest that the proposal is moved back to review or draft and the concerns of Doctrine, Guzzle and Laravel are listened to.
 
