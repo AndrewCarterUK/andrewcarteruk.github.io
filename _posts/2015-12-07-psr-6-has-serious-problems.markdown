@@ -5,7 +5,7 @@ date:   2015-12-07 20:00:00
 categories: programming
 ---
 
-PSR-6 is the proposal from the [PHP-FIG (PHP Framework Interop Group)](http://www.php-fig.org/) of a set of cache interfaces that can assist programmers in writing decoupled code. The idea is that cache drivers can implement these interfaces and then code can depend on the interface and not the underlying cache driver or system.
+PSR-6 is the proposal from the [PHP-FIG (PHP Framework Interop Group)](http://www.php-fig.org/) of a set of cache interfaces that can assist programmers in writing decoupled code. The idea is that cache drivers can implement these interfaces and then code can depend on an interface and not the underlying cache driver or system.
 
 Here are the proposed interfaces:
 
