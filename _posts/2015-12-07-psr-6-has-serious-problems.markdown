@@ -52,11 +52,11 @@ One of the first '-1' votes on the proposal at the moment is a resounding no fro
 
 _"Unanimous -1 from Doctrine among all core developers. List of deficiencies too big and not pertinent to this thread."_
 
-The Doctrine team are the maintainers of ([according to packagist](https://packagist.org/search/?q=cache)) the most popular cache library in the PHP ecosystem.
+The Doctrine team are the maintainers of ([according to packagist](https://packagist.org/search/?q=cache)) the most popular caching library in the PHP ecosystem.
 
-Guzzle and Laravel also maintain a popular cache libraries and also voted '-1'. In fact, many of the '+1' votes are from projects that have **nothing to do with caching**.
+Guzzle and Laravel also maintain popular caching libraries voted '-1'. Other member projects in the FIG group should have alarm bells ringing loudly in their ears when they see these votes.
 
-It is definitely the case that member projects of the FIG should be much more careful with their '+1' votes. I would strongly suggest that the proposal is moved back to review or draft and the concerns of Doctrine, Guzzle and Laravel are listened to.
+I would strongly suggest that the proposal is moved back to review or draft and the concerns of Doctrine, Guzzle and Laravel are listened to.
 
 ### Problem 2
 
