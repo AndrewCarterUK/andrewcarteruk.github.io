@@ -42,18 +42,15 @@ interface CacheException {}
 interface InvalidArgumentException extends CacheException {}
 {% endhighlight %}
 
-
 ### Problem 1
 
-The first problem is with the last two interfaces. Not only do they not make it clear that they are interfaces, **they pretend to be exception classes**. This might provide a minor irritation for anyone implementing the interface, but to the user it should not be a problem. You can still catch it the same, right?
+The first problem is with the last two interfaces. They not make it clear that they are interfaces and **they also pretend to be exception classes**. This might provide a minor irritation to anyone implementing the interface, but to the user it should not be a problem. You can still catch it the same, right?
 
-**Wrong**
-
-The extension system in PHP was **designed to be extended**. The issue here is that there is no guarantee that a class implenting the 'InvalidArgumentException' interface defined by the proposal will also extend the root 'InvalidArgumentException' class defined by PHP.
+The exception system in PHP was **designed to be extended**. The issue here is that there is no guarantee that a class implenting the **InvalidArgumentException** interface defined by the proposal will also extend the root **InvalidArgumentException** class defined by PHP.
 
 This leads to the ridiculous situation where the following situation is not only plausible, but completely in agreement with the specification:
 
-{% highlight php %}
+{% highlight php startinline=true %}
 if ($exception instanceof Psr\Cache\InvalidArgumentException and ! $exception instanceof \InvalidArgumentException) {
     echo 'Huh?';
 }
@@ -61,7 +58,7 @@ if ($exception instanceof Psr\Cache\InvalidArgumentException and ! $exception in
 
 If you wanted to guarantee catching all invalid argument exceptions in a block of code you would need to do this:
 
-{% highlight php %}
+{% highlight php startinline=true %}
 try {
     // code
 } catch (Psr\Cache\InvalidArgumentException $exception) {
@@ -77,7 +74,7 @@ This might not sound so significant, but I cannot for the life of me understand 
 
 On the interfaces it is possible to set a time to live on a cache item using the following methods;
 
-{% highlight php %}
+{% highlight php startinline=true %}
 $item->expiresAfter(300);
 $item->expiresAt(new \DateTime(...));
 {% endhighlight %}
@@ -102,14 +99,14 @@ The second option is that the implementation could expose a public method on the
 
 The solution to this problem would be to set the expiration time when saving the object. So rather than:
 
-{% highlight php %}
+{% highlight php startinline=true %}
 $item->expiresAfter(300);
 $pool->save($item);
 {% endhighlight %}
 
 We had:
 
-{% highlight php %}
+{% highlight php startinline=true %}
 $pool->save($item, 300);
 {% endhighlight %}
 
