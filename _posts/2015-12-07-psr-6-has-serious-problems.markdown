@@ -75,7 +75,7 @@ This might not sound so significant, but I cannot for the life of me understand 
 
 ### Problem 2
 
-On the interfaces it is possible to set a time to live on a cache item using the following methods;
+The cache item interface lets you set an expiration time using the following methods;
 
 {% highlight php startinline=true %}
 $item->expiresAfter(300);
