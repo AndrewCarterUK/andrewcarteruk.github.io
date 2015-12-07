@@ -99,4 +99,25 @@ The second option is that the implementation could expose a public method on the
 
 3. The specification should be complete. There is no reason why, with the exception of constructors, implementations should be forced to define any methods that are not in the original specification.
 
-## The Root Problem
+The solution to this problem would be to set the expiration time when saving the object. So rather than:
+
+{% highlight php %}
+$item->expiresAfter(300);
+$pool->save($item);
+{% endhighlight %}
+
+We had:
+
+{% highlight php %}
+$pool->save($item, 300);
+{% endhighlight %}
+
+I read Anthony Ferrara's [Open Letter To PHP-FIG](http://blog.ircmaxell.com/2014/10/an-open-letter-to-php-fig.html) regarding PSR-6 about a year ago and didn't agree at the time. I'm now in complete agreement and I think the way the FIG group has voted so far on the proposal highlights a much deeper structural issue within the group.
+
+One of the few '-1' votes on the proposal at the moment is a resounding no from the Doctrine team. The actual comment on the [voting thread](https://groups.google.com/forum/#!topic/php-fig/dSw5IhpKJ1g) was:
+
+__"Unanimous -1 from Doctrine among all core developers. List of deficiencies too big and not pertinent to this thread."__
+
+The Doctrine team maintain, [according to packagist](https://packagist.org/search/?q=cache), the most popular cache library in the PHP ecosystem. Guzzle and Laravel also maintain a popular cache libraries and also voted '-1'. In fact, many of the '+1' votes are from projects that have **nothing to do with caching**.
+
+It is definitely the case that member projects of the FIG should be much more careful with their '+1' votes. I would strongly suggest that the proposal is moved back to review or draft and the concerns of Doctrine, Guzzle and Laravel are listened to.
