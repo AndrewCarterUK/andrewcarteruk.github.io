@@ -114,12 +114,18 @@ The second option is that the implementation could expose a public method on the
 
 1. Public methods are a pain. As soon a class in a library contains a public method it cannot change that without breaking backwards compatability. The last thing any library developer wants to do is create unnecessary public methods that they then have to support until the next major version.
 
-2. Users should not be calling that method. If implementations do decide to add a public **getExpiration()** method onto their cache items this will ultimately not be the method that users expect it to be, for precisely the reasons that it was removed from the specification in the first place. When you create a method that users should not be calling it should not be public.
+2. Users should not be calling such a method. If implementations do decide to add a public **getExpiration()** method onto their cache items this will ultimately not be the method that users expect it to be (for precisely the reasons that it was removed from the specification in the first place). When you create a method that users should not be calling **it should not be public**.
 
-3. The specification should be complete for both calling code **and implementations**. With the exception of constructors, implementations should be forced to define any public methods that are not in the original specification.
+3. The specification should be complete for both calling code **and implementations**. With the exception of constructors, implementations should not be forced to define any public methods that are not in the original specification.
 
-One solution to this specific problem would be to set the expiration time when saving the object. Ssomething like this:
+One solution to this specific problem would be to set the expiration time when saving the object. Something like this:
 
 {% highlight php startinline=true %}
 $pool->save($item, 300);
 {% endhighlight %}
+
+## Summary
+
+Anthony Ferrara's [Open Letter To PHP-FIG](http://blog.ircmaxell.com/2014/10/an-open-letter-to-php-fig.html) describes well the core issue of over engineering in PSR-6.
+
+A lot of work has gone into PSR-6 and I can understand everything the authors have tried to do. That said, I think it would be a huge mistake for the PHP-FIG if the proposal was to pass in its current form.
