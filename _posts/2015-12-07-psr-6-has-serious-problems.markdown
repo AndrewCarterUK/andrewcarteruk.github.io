@@ -5,7 +5,7 @@ date:   2015-12-07 20:00:00
 categories: programming
 ---
 
-**UPDATE:** Since publishing this article I have been speaking with Larry Garfield, the editor of PSR-6. I have not included his response in full, so please do not assume that the above is a complete representation of his counter arguments. My personal opinion is that I still feel like the proposal could be improved with regards to problems 2 and 3 and that the mandate of some of the '-1' votes is important, especially given their origin.
+**UPDATE:** Since publishing this article I have been speaking with Larry Garfield, the editor of PSR-6. I have not included his response in full, so please do not assume that the below extracts are a complete representation of his counter arguments. My personal opinion is that I still feel the proposal could be improved with regards to problems 2 and 3 and that the mandate of some of the '-1' votes is important, especially given their origin.
 
 His response the the first problem in this post is that the objections from Doctrine on the mailing list are actually because they would prefer something modeled on Java's Policy framework (more complicated). He also said that some of the '-1' votes have not contributed in the discussions for this proposal. His response to the third problem is that he disagrees with the notion that a public method is automatically a part of an API (as both Symfony and Drupal use annotations to clarify what is and is not part of their API).
 
