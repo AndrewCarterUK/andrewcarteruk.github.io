@@ -5,8 +5,6 @@ date:   2015-12-07 20:00:00
 categories: programming
 ---
 
-## Introduction
-
 PSR-6 is the proposal from the [PHP-FIG (PHP Framework Interop Group)](http://www.php-fig.org/) of a set of cache interfaces that can assist programmers in writing decoupled code. The idea is that cache drivers can implement these interfaces and then code can depend on an interface and not the underlying cache driver or system.
 
 Here are the proposed interfaces:
@@ -43,6 +41,14 @@ interface CacheException {}
 
 interface InvalidArgumentException extends CacheException {}
 {% endhighlight %}
+
+--------------------
+
+**UPDATE:** _Since publishing this article I have been speaking with Larry Garfield, the editor of PSR-6. He has posted his response in the [comments section below](#disqus_thread)._
+
+_My personal opinion remains that the proposal is not ready. I believe that it could still be improved with regards to problems 2 and 3 and that the mandate of some of the '-1' votes is important, especially given their origin._
+
+--------------------
 
 ### Problem 1
 
