@@ -60,6 +60,8 @@ The proposal should be moved back and the concerns of Doctrine, Guzzle and Larav
 
 ### Problem 2
 
+[(See Mailing List)](https://groups.google.com/forum/#!topic/php-fig/Oy1Hs-_dou4)
+
 The second problem is with the last two interfaces. They fail to make it clear that they are interfaces and **they also pretend to be exception classes**. This might provide a minor irritation to anyone implementing the interface, but to the user it should not be a problem. You can still catch it the same, right?
 
 The exception system in PHP was **designed to be extended**. The issue here is that there is no guarantee that a class implementing the **InvalidArgumentException** interface defined by the proposal will also extend the root **InvalidArgumentException** class defined by PHP.
@@ -90,6 +92,8 @@ try {
 This might not sound so significant, but I cannot for the life of me understand why the proposal decided to use interfaces in the first place. It doesn't appear to solve any problems and it actually creates one.
 
 ### Problem 3
+
+[(See Mailing List)](https://groups.google.com/forum/#!topic/php-fig/Qr4OxCf7J5Y)
 
 The cache item interface lets you set an expiration time using the following methods;
 
