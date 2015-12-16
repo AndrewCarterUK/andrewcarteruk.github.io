@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+
+        <title>Drinking Beer With a Raspberry Pi - Andrew Carter</title>
+        <meta name="description" content="How to drink beer in style with a Raspberry Pi" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui" />
+
+        <link rel="stylesheet" type="text/css" href="css/reveal.css" />
+        <link rel="stylesheet" type="text/css" href="css/theme/sky.css" />
+        <link rel="stylesheet" type="text/css" href="lib/css/googlecode.css" />
+
+        <!--[if lt IE 9]>
+            <script type="text/javascript" src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <div class="reveal">
+            <div style="position: absolute; top: 1em; left: 1em; text-align: left; font-size: 0.5em;">
+                Drinking Beer With a Raspberry Pi
+            </div>
+            <div style="position: absolute; top: 1em; right: 1em; text-align: right; font-size: 0.5em;">
+                @AndrewCarterUK
+            </div>
+            <div class="slides">
+                <section><h1>Drinking Beer With a Raspberry Pi</h1></section>
+                <section><h3>@AndrewCarterUK</h3></section>
+                <section>
+                    <h2>What is a Raspberry Pi?</h2>
+                    <p class="fragment">A teeny tiny computer</p>
+                </section>
+                <section>
+                    <img src="images/raspberry-pi.png" alt="Raspberry Pi" />
+                </section>
+                <section>
+                    <h2>What Operating System?</h2>
+                    <p class="fragment">Raspbian</p>
+                </section>
+                <section>
+                    <h2>Raspbian?</h2>
+                    <p class="fragment">Based on Debian Linux</p>
+                </section>
+                <section>
+                    <pre style="width: 22em; font-size: 110%;"><code class="bash" data-trim>
+                        sudo apt-get install all-the-things
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Cool Projects</h2>
+                </section>
+                <section>
+                    <img src="images/media-server.jpg" alt="Media Server" />
+                </section>
+                <section>
+                    <img src="images/super-computer.jpg" alt="Super Computer" />
+                </section>
+                <section>
+                    <h2>Getting Stuck In</h2>
+                </section>
+                <section>
+                    <p>Fasten your seatbelts...</p>
+                </section>
+                <section>
+                    <h2>Electronics</h2>
+                    <p class="fragment">A water analogy</p>
+                </section>
+                <section>
+                    <img src="images/water-analogy.jpg" alt="Water Analogy" /><br />
+                    <span style="font-size: 60%;">Image from Olympia Circuits</span>
+                </section>
+                <section>
+                    <h2>Think Digital</h2>
+                </section>
+                <section>
+                    <p><b>On</b> or <b>Off</b></p>
+                    <p class="fragment"><b>High</b> or <b>Low</b></p>
+                </section>
+                <section>
+                    <img src="images/raspberry-pi.png" alt="Raspberry Pi" />
+                </section>
+                <section>
+                    <h2>GPIO</h2>
+                    <p class="fragment">General Purpose Input Output</p>
+                </section>
+                <section>
+                    <h2>Outputs</h2>
+                    <p class="fragment">LEDs, Motors, LCDs, Valves</p>
+                </section>
+                <section>
+                    <h2>Inputs</h2>
+                    <p class="fragment">Usually sensors</p>
+                </section>
+                <section>
+                    <h2>Inputs and Outputs</h2>
+                    <img src="images/gsm-shield.jpg" alt="GSM Shield" />
+                </section>
+                <section>
+                    <h2>Project:&nbsp;&nbsp;DrinkingBuddy</h2>
+                </section>
+                <section>
+                    <h2>WiFi</h2>
+                    <table>
+                        <tr>
+                            <th style="border: none;">SSID</th>
+                            <td style="border: none;">ANDREW-ROUTER</td>
+                        </tr>
+                        <tr>
+                            <th style="border: none;">Password</th>
+                            <td style="border: none;">smoothviolin491</td>
+                        </tr>
+                        <tr>
+                            <th style="border: none;">URL</th>
+                            <td style="border: none;">http://<b>pi</b>/</td>
+                        </tr>
+                    </table>
+                </section>
+                <section>
+                    <h2>Current Setup</h2>
+                </section>
+                <section>
+                    <p>USB WiFi adapter</p>
+                    <p class="fragment">php5</p>
+                    <p class="fragment">apache2</p>
+                    <p class="fragment">SSH enabled</p>
+                </section>
+                <section>
+                    <h2>Top Tips</h2>
+                </section>
+                <section>
+                    <p>Learning lessons so that you do not have to...&trade;</p>
+                </section>
+                <section>
+                    <ol>
+                        <li>Get a model with multiple USB ports</li>
+                        <li class="fragment">Check the compatability of any WiFi adapter</li>
+                        <li class="fragment">Give it a static internal IP address</li>
+                        <li class="fragment">Make an image of your SD card once configured</li>
+                        <li class="fragment">Be careful what you plug where *</li>
+                    </ol>
+                </section>
+                <section>
+                    <p>* Back to the water analogy...</p>
+                </section>
+                <section>
+                    <img src="images/tsunami.jpg" alt="tsunami" />
+                </section>
+                <section>
+                    <h2>The Original Plan</h2>
+                </section>
+                <section>
+                    <img src="images/flow-sensor.jpg" alt="flow sensor" />
+                </section>
+                <section>
+                    <p><b>82 pulses a second</b> for a flow rate of <b>10 litres a minute</b></p>
+                    <p class="fragment">1 pulse ~ 2 ml</p>
+                </section>
+                <section>
+                    <p>Use an <b>Arduino Uno</b> to read sensor</p>
+                    <p class="fragment">Why?</p>
+                </section>
+                <section>
+                    <h2>Interrupts (ISRs)</h2>
+                </section>
+                <section>
+                    <p>Signal to processor from hardware</p>
+                    <p class="fragment"><b>Interrupts</b> processor to run callback</p>
+                </section>
+                <section>
+                    <p>Key presses</p>
+                    <p class="fragment">Mouse movement</p>
+                    <p class="fragment"><b>Voltage change on input pin</b></p>
+                </section>
+                <section>
+                    <p>A Raspberry Pi works like a normal computer</p>
+                </section>
+                <section>
+                    <img src="images/protection-rings.png" alt="protection rings" />
+                </section>
+                <section>
+                    <p>Code for an Arduino is flashed onto a microcontroller</p>
+                    <p class="fragment">More direct access to hardware</p>
+                </section>
+                <section>
+                    <p><b>However...</b></p>
+                    <p class="fragment">I broke both my Arduinos :(</p>
+                </section>
+                <section>
+                    <h2>The New Plan</h2>
+                </section>
+                <section>
+                    <p><b>"Interrupts" on the Raspberry Pi</b></p>
+                </section>
+                <section>
+                    <p>Difficult in PHP</p>
+                </section>
+                <section>
+                    <p>Python to the rescue...</p>
+                </section>
+                <section>
+                    <pre><code class="python" data-trim>
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(FLOW_SENSOR, GPIO.IN, pull_up_down = GPIO.PUD_UP)
+
+global count
+count = 0
+
+def countPulse(channel):
+    global count
+    count = count + 1
+
+GPIO.add_event_detect(FLOW_SENSOR, GPIO.FALLING, callback=countPulse)
+
+# Event loop code goes here ^.^
+    if count > 0:
+        print count
+        count = 0
+        sys.stdout.flush()
+                    </pre></code>
+                </section>
+                <section>
+                    <h2>Interrupt Top Tip</h2>
+                </section>
+                <section>
+                    <p>Keep them as light as possible</p>
+                </section>
+                <section>
+                    <p>Get the data</p>
+                    <p class="fragment">Push the data</p>
+                    <p class="fragment">Exit</p>
+                </section>
+                <section>
+                    <p>You do not want your interrupts interrupted</p>
+                </section>
+                <section>
+                    <p>You will end up on Stack Overflow asking why your stack has overflown</p>
+                </section>
+                <section>
+                    <h2>Nearly There...</h2>
+                </section>
+                <section>
+                    <pre><code class="php" data-trim>
+use PiPHP\GPIO\PinFactory;
+use Symfony\Component\Process\Process;
+
+require_once __DIR__ . '/vendor/autoload.php';
+
+$pin = (new PinFactory)->getPin(14)->export();
+
+$process = new Process('python pulse-counter.py');
+$process->setTimeout(null);
+
+$process->run(function ($type, $buffer) {
+    $trimmedBuffer = trim($buffer);
+
+    foreach (explode(PHP_EOL, $trimmedBuffer) as $pulseCount) {
+        processPulseCount($pulseCount);
+    }
+});
+                    </code></pre>
+                </section>
+                <section>
+                    <p>PHP now has all the data it needs</p>
+                </section>
+                <section>
+                    <h2>Going Further</h2>
+                </section>
+                <section>
+                    <img src="images/brno.jpg" alt="Brno" /><br />
+                    <span style="font-size: 60%;">@asgrim</span>
+                </section>
+                <section>
+                    <p>Any questions?</p>
+                    <br />
+                    <p><b>@AndrewCarterUK</b></p>
+                    <br />
+                    <p>http://github.com/PiPHP</p>
+                </section>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="lib/js/head.min.js"></script>
+        <script type="text/javascript" src="js/reveal.js"></script>
+        <script type="text/javascript">
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+                transition: 'none',
+                dependencies: [
+                    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+                    { src: 'plugin/notes/notes.js', async: true }
+                ]
+            });
+        </script>
+    </body>
+</html>
