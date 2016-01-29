@@ -125,6 +125,10 @@ http://example.com/?page=../index
 
 ...
 
+include 'pages/../index.php';
+
+...
+
 include 'index.php';
                     </code></pre>
                 </section>
@@ -137,12 +141,20 @@ http://example.com/?page=../scripts/clean-database
 
 ...
 
+include 'pages/../scripts/clean-database.php';
+
+...
+
 include 'scripts/clean-database.php';
                     </code></pre>
                 </section>
                 <section>
                     <pre><code class="sh" data-trim>
 http://example.com/?page=../../../../etc/passwd%00
+
+...
+
+include 'pages/../../../../etc/passwd\0.php';
 
 ...
 
