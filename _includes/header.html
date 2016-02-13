@@ -1,21 +1,5 @@
-<!--
-<nav id="nav">
-    <ul>
-        <li class="current"><a href="/">{{ site.title }}</a></li>
-        {% for page in site.pages %}
-            {% if page.title %}
-                <a class="page-link" href="{{ page.url }}">{{ page.title }}</a>
-            {% endif %}
-        {% endfor %}
-    </ul>
-</nav>
--->
-
 <header id="header">
     <a href="/" class="image avatar"><img src="/images/profile.png" alt="" /></a>
-    <h1>
-        <a href="/"><strong>{{ site.title }}</strong></a>
-        <br />
-        {{ site.tagline }}
-    </h1>
+    <h1><a href="/"><strong>{{ site.title }}</strong></a></h1>
+    <p>{{ site.tagline }}</p>
 </header>

@@ -2,17 +2,21 @@
 layout: default
 ---
 
-<section id="one">
-	<header class="major">
-		<h2>Welcome to the personal website of Andrew Carter</h2>
-	</header>
-    <p>I am young software developer in Wokingham, Berkshire, United Kingdom. I graduated from the University of Warwick with a first class masters degree in Physics in 2014.</p>
-</header>
+<section>
+    <section>
+        <header class="major">
+                <h2>Welcome to the personal website of Andrew Carter</h2>
+        </header>
+        <p>
+            I am young software developer in Wokingham, Berkshire, United Kingdom. I
+            graduated from the University of Warwick with a first class masters
+            degree in Physics in 2014.
+        </p>
+    </section>
 
-<hr />
-
-<section id="two">
     {% for post in site.posts %}
+	<hr />
+
         <section>
             <header>
                 <h3>{{ post.title }}</h3>
@@ -25,9 +29,9 @@ layout: default
                 </ul>
             </footer>
         </section>
-
-	<hr />
     {% endfor %}
+
+    <hr />
 
     <p class="rss-subscribe">subscribe <a href="/feed.xml">via RSS</a></p>
 </section>

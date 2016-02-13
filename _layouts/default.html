@@ -1,6 +1,20 @@
 ---
 layout: base
 ---
+
 <div id="main">
+    <section>
+        <p class="align-center">
+            &nbsp;&nbsp;/&nbsp;&nbsp;
+
+            {% for page in site.pages %}
+                {% if page.title %}
+                    <a href="{{ page.url }}">{{ page.title }}</a>
+                    &nbsp;&nbsp;/&nbsp;&nbsp;
+                {% endif %}
+            {% endfor %}      
+        </p>
+    </section>
+
     {{ content }}
 </div>

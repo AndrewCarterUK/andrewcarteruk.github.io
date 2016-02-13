@@ -1,5 +1,15 @@
 /* Extra CSS Rules */
 
+#main {
+    padding-top: 2em !important;
+}
+
 #one img {
     max-width: 100%;
+}
+
+section {
+    border: none !important;
+    margin-top: 0em !important;
+    padding-top: 0em !important;
 }
