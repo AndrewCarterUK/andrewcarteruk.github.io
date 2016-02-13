@@ -1,13 +1,17 @@
-<header id="header" {% if page.url == '/index.html' %} class="alt" {% endif %}>
-    <h1 id="logo"><a href="/">{{ site.tagline }}</a></h1>
-    <nav id="nav">
-        <ul>
-            <li class="current"><a href="/">{{ site.title }}</a></li>
-            {% for page in site.pages %}
-                {% if page.title %}
-                    <a class="page-link" href="{{ page.url }}">{{ page.title }}</a>
-                {% endif %}
-            {% endfor %}
-        </ul>
-    </nav>
+<!--
+<nav id="nav">
+    <ul>
+        <li class="current"><a href="/">{{ site.title }}</a></li>
+        {% for page in site.pages %}
+            {% if page.title %}
+                <a class="page-link" href="{{ page.url }}">{{ page.title }}</a>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</nav>
+-->
+
+<header id="header">
+    <a href="#" class="image avatar"><img src="https://pbs.twimg.com/profile_images/599173908336611328/OnrZezIL_400x400.jpg" alt="" /></a>
+    <h1><strong>{{ site.title }}</strong> - {{ site.tagline }}</h1>
 </header>
