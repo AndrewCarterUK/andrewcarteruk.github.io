@@ -2,35 +2,24 @@
 layout: default
 ---
 
-<section id="banner">
-    <div class="inner">
-        <header>
-            <h2>Andrew Carter</h2>
-        </header>
-        <p>programming<br />photography<br />science</p>
-        <br />
-        <p>Not necessarily in that order</p>
-    </div>
-</section>
-
-<header class="special container">
-    <h2>Welcome to the personal website of Andrew Carter</h2>
+<section id="one">
+	<header class="major">
+		<h2>Welcome to the personal website of Andrew Carter</h2>
+	</header>
     <p>I am young software developer in Wokingham, Berkshire, United Kingdom. I graduated from the University of Warwick with a first class masters degree in Physics in 2014.</p>
-    <br />
-    <p>Passionate about programming, photography and science. I'll be using this space to talk about all of those. Hopefully you can find something interesting!</p>
 </header>
 
-<section class="container">
+<section id="two">
     {% for post in site.posts %}
-        <section class="wrapper style4 container">
+        <section>
             <header>
                 <h3>{{ post.title }}</h3>
                 <small><i>{{ post.date | date: "%b %-d, %Y" }}</i></small>
             </header>
             <p>{{ post.excerpt }}</p>
             <footer>
-                <ul class="buttons">
-                    <li><a href="{{ post.url }}" class="button small">Read More</a></li>
+                <ul class="actions">
+                    <li><a href="{{ post.url }}" class="button ">Read More</a></li>
                 </ul>
             </footer>
         </section>
