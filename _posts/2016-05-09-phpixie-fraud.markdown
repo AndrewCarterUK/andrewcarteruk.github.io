@@ -18,13 +18,13 @@ This got me thinking, how far does PHPixie take the deception and fraud? I had a
 
 ## Packagist Fraud
 
-As I am writing this, the project comes second on Packagist searches for 'framework' and 'orm' (behind Laravel and Doctrine) - with close to 100,000 downloads on many of its active repositories.
+As I am writing this, the project comes second on Packagist searches for 'framework' and 'orm' (behind Laravel and Doctrine) - with close to 100,000 installs on many of its active repositories.
 
 Suspecting the obvious, I set up a [small script](https://gist.github.com/AndrewCarterUK/038c84082a4d5ab6fd8c129786827ac7) to collect some data that I could use to compare the install pattern to those of well known frameworks. The graph below shows the results of this analysis. The downloads figure has been normalised so that the frameworks can be easily compared.
 
 ![PHPixie downloads versus other frameworks](https://res.cloudinary.com/andrewcarteruk/image/upload/v1462803037/phpixie_rr1cso.png)
 
-As you can see, every day at around 2AM the number of downloads jumps significantly then flat lines. Packagist does implement some protection against this type of fraud. I am not going to go into detail about what this protection is, but let it suffice to say that this install pattern can only be explained by _someone_ actively attempting to bypass this protection. In other words, 2000 fully functional tests on a cron job **would not** affect the install statistics.
+As you can see, every day at around 2AM the number of installs jumps significantly then flat lines. Packagist does implement some protection against this type of fraud. I am not going to go into detail about what this protection is, but let it suffice to say that this install pattern can only be explained by _someone_ actively attempting to bypass this protection. In other words, 2000 fully functional tests on a cron job **would not** affect the install statistics.
 
 ## Doing the Math
 
