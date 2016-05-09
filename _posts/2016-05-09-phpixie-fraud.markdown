@@ -18,7 +18,7 @@ This got me thinking, how far does PHPixie take the deception and fraud? I had a
 
 ## Packagist Fraud
 
-As I am writing this, the project comes second on Packagist searches for 'framework' (behind Laravel) and 'orm' (behind Doctrine) - with close to 100,000 downloads on many of its active repositories.
+As I am writing this, the project comes second on Packagist searches for 'framework' and 'orm' (behind Laravel and Doctrine) - with close to 100,000 downloads on many of its active repositories.
 
 Suspecting the obvious, I set up a [small script](https://gist.github.com/AndrewCarterUK/038c84082a4d5ab6fd8c129786827ac7) to collect some data that I could use to compare the install pattern to those of well known frameworks. The graph below shows the results of this analysis. The downloads figure has been normalised so that the frameworks can be easily compared.
 
