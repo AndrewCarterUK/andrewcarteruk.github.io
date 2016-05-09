@@ -12,7 +12,7 @@ excerpt: As I am writing this, the project comes second on Packagist searches fo
 
 To be transparent, I have already had a run-in with Roman Tsjupa (the author of PHPixie, aka dracony) after I exposed his use of [sock-puppet accounts on reddit](https://gist.github.com/AndrewCarterUK/96bf6fae02ef8b93f93b).
 
-The other day he posted [this tweet](https://twitter.com/dracony_gimp/status/727790568420585472) claiming that PHPixie had just received 40 GitHub stars in 24 hours. Knowing his character, I checked and found that, sure enough, all of the accounts were obvious bots that had been registered on that very day and starred only PHPixie projects ([proof 1](http://web.archive.org/web/20160505151735/https://github.com/PHPixie/Project/stargazers), [proof 2](http://web.archive.org/web/20160505151948/https://github.com/khalilschimmel)). These accounts have since been deleted as I reported them to GitHub.
+The other day he posted [this tweet](https://twitter.com/dracony_gimp/status/727790568420585472) claiming that PHPixie had just received 40 GitHub stars in 24 hours. Knowing his character, I checked and found that all of the accounts were obvious bots that had been registered on that very day and starred only PHPixie projects ([proof 1](http://web.archive.org/web/20160505151735/https://github.com/PHPixie/Project/stargazers), [proof 2](http://web.archive.org/web/20160505151948/https://github.com/khalilschimmel)). These accounts have since been deleted as I reported them to GitHub.
 
 This got me thinking, how far does PHPixie take the deception and fraud? I had always been suspicious of the number of installs that the project claimed, given that the community is pretty inactive and there is only really one project contributor.
 
