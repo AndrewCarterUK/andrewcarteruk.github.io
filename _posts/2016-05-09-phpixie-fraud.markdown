@@ -7,8 +7,6 @@ categories: programming
 
 # 95% of PHPixie Installs on Packagist are Fraudulent
 
-This is quite a bold claim, but one that I will support.
-
 ## Background
 
 To be transparent, I have already a run-in with Roman Tsjupa (the author of PHPixie, aka dracony) after I outed him for using [sock-puppet accounts on reddit](https://gist.github.com/AndrewCarterUK/96bf6fae02ef8b93f93b) to manipulate votes and opinion. 
