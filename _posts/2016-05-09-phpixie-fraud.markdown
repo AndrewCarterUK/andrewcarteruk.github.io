@@ -3,7 +3,7 @@ layout: post
 title:  95% of PHPixie Installs on Packagist are Fraudulent
 date:   2016-05-09 08:00:00
 categories: programming
-excerpt: As I am writing this, the project comes second on Packagist searches for 'framework' (behind Laravel) and 'orm' (behind Doctrine) - with close to 100,000 downloads on many of its active repositories.
+excerpt: As I am writing this, the project comes second on Packagist searches for 'framework' and 'orm' (behind Laravel and Doctrine) - with close to 100,000 downloads on many of its active repositories.
 ---
 
 # 95% of PHPixie Installs on Packagist are Fraudulent
