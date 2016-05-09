@@ -24,7 +24,7 @@ Suspecting the obvious, I set up a [small script](https://gist.github.com/Andrew
 
 ![PHPixie downloads versus other frameworks](https://res.cloudinary.com/andrewcarteruk/image/upload/v1462803037/phpixie_rr1cso.png)
 
-As you can see, every day at around 2AM the number of downloads jumps significantly then flat lines. Packagist does implement some protection against this type of fraud. I am not going to go into detail about what this protection is, but let it suffice to say that this install pattern can only be explained by _someone_ actively attempting to bypass this proection. In other words, 2000 fully functional tests on a cron job **would not** affect the install statistics.
+As you can see, every day at around 2AM the number of downloads jumps significantly then flat lines. Packagist does implement some protection against this type of fraud. I am not going to go into detail about what this protection is, but let it suffice to say that this install pattern can only be explained by _someone_ actively attempting to bypass this protection. In other words, 2000 fully functional tests on a cron job **would not** affect the install statistics.
 
 ## Doing the Math
 
