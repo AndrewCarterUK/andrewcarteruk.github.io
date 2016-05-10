@@ -15,7 +15,7 @@ Now there are likely more than 170 billion galaxies in the universe, of which ab
 
 The probability of biogenesis (the probability of life developing) on terrestrial planets was [recently estimated to be at least 13%][biogenesis article]. That leaves us with 13 billion planets, that developed life, being destroyed each year across the universe.
 
-Now, not all of those planets will have their life forms destroyed by their suns entering the 'giant phase'. There are other possible apocalyptic scenarios (e.g, religious fanatics and nuclear warfare - should they really be that similar to Earth) - but all we are changing now is the method of destruction, rather than the rate. Remeber, we have been generous and ignored 40% of the galaxies and about 75% of the stars from our estimate.
+Now, not all of those planets will have their life forms destroyed by their suns entering the 'giant phase'. There are other possible apocalyptic scenarios (e.g, religious fanatics and nuclear warfare - should they really be that similar to Earth) - but all we are changing now is the method of destruction, rather than the rate. Remember, we have been generous and ignored 40% of the galaxies and about 75% of the stars from our estimate.
 
 Finally, 13 billion planets per year is a rate equivalent to over 400 planets a second.
 
