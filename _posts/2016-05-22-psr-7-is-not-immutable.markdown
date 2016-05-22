@@ -6,8 +6,6 @@ categories: programming
 excerpt: One of the defining aspects of the PSR-7 standard is perceived immutability. It is important to note that these objects are not completely immutable, and cannot be treated as such.
 ---
 
-# PSR-7 Objects Are Not Immutable
-
 Wait, what!? But it says they are, [right here](http://www.php-fig.org/psr/psr-7/meta/#why-value-objects):
 
 > _"Why value objects? The proposal models messages and URIs as value objects._

@@ -6,8 +6,6 @@ categories: programming
 excerpt: As I am writing this, the project comes second on Packagist searches for 'framework' and 'orm' (behind Laravel and Doctrine) - with close to 100,000 downloads on many of its active repositories.
 ---
 
-# 95% of PHPixie Installs on Packagist are Fraudulent
-
 ## Background
 
 To be transparent, I have already had a run-in with Roman Tsjupa (the author of PHPixie, aka dracony) after I exposed his use of [sock-puppet accounts on reddit](https://gist.github.com/AndrewCarterUK/96bf6fae02ef8b93f93b).

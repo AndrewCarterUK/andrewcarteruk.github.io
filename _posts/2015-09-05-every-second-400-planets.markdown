@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Every second at least 400 planets are scorched into oblivion
+title:  Every Second at Least 400 Planets Are Scorched Into Oblivion
 date:   2015-09-05 20:00:00
 categories: science astronomy
 ---
