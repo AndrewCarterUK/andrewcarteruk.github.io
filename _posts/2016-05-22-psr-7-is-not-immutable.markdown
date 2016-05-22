@@ -63,7 +63,7 @@ class MyMiddleware implements Middleware {
 
 For this code to work, the response object would need to be a suitable factory for itself. Because of the stream issue, this is not the case and the middleware is not stateless. This is not actually a very serious bug, and it would only become an issue if you tried to call the `handle()` method more than once (see [PHPFastCGI](https://github.com/PHPFastCGI/FastCGIDaemon)). I should say that the final and preferred solution suggested by Anthony Ferrara does not suffer from this bug and is, in my opinion, the way forward.
 
-The bug is more serious in the post by [Woody Gilk](http://shadowhand.me/all-about-psr-7-middleware/). Here he provides an example of some middleware that is designed to handle exceptions:
+The bug is more serious in [the post by Woody Gilk](http://shadowhand.me/all-about-psr-7-middleware/). Here he provides an example of some middleware that is designed to handle exceptions:
 
 {% highlight php %}
 class ExceptionHandler
@@ -93,5 +93,4 @@ In the description, he even says:
 
 > The critical thing to note here is that the partial response is never used. If an exception occurs, the response that was passed to this middleware is decorated and returned. So long as your middleware stack has this middleware as close to the top as possible, a badly formatted response will never get decorated as an error.
 
-As we know from Zend Expressive, this is not the case. Anything written to the response body will actually be appended to anything that was written to the response before the exception was thrown. Again, these are not a lone mistakes and there are plenty more ([1](https://github.com/oscarotero/psr7-middlewares/blob/f2ff9003fbe29b35a12e288b2310c70c606b0985/src/Middleware/ErrorHandler.php), [2](https://github.com/relayphp/Relay.Middleware/blob/bb6cb63fa083f4883469d449e48ce5025faf542e/src/ExceptionHandler.php)) examples of the immutability assumption bug.
-
+As we know from Zend Expressive, this is not the case. Anything written to the response body will actually be appended to anything that was written to the response before the exception was thrown. Again, these are not lone mistakes and there are plenty more ([1](https://github.com/oscarotero/psr7-middlewares/blob/f2ff9003fbe29b35a12e288b2310c70c606b0985/src/Middleware/ErrorHandler.php), [2](https://github.com/relayphp/Relay.Middleware/blob/bb6cb63fa083f4883469d449e48ce5025faf542e/src/ExceptionHandler.php)) examples of the immutability assumption bug.
