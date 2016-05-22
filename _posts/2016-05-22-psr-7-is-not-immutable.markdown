@@ -32,7 +32,7 @@ You shouldn't expect to see the message that was written to the response actuall
 
 ## What's Happening Here?
 
-What's happening is that the Zend Expressive framework is rendering the error page to the same object that you wrote your message to. Whilst the actual message object itself is immutable, the body stream that it references **is not**. Even when this object was cloned or "modified" (to become a new object) it will still use the same stream.
+What's happening is that the Zend Expressive framework is rendering the error page to the same object that you wrote your message to. Whilst the actual message object itself is immutable, the body stream that it references **is not**. Even when this object is cloned or "modified" (to become a new object) it will still use the same stream.
 
 ## What Does This Mean
 
