@@ -32,7 +32,7 @@ You shouldn't expect to see the message that was written to the response actuall
 
 ## What's Happening Here?
 
-What's happening is that the Zend Expressive framework is rendering the error page to the same object that you wrote your message to. Whilst the actual message object itself is immutable, the body stream that it references **is not**. Even if this object was cloned or modified, to become a new object, it would still use the same stream.
+What's happening is that the Zend Expressive framework is rendering the error page to the same object that you wrote your message to. Whilst the actual message object itself is immutable, the body stream that it references **is not**. Even when this object was cloned or "modified" (to become a new object) it will still use the same stream.
 
 ## What Does This Mean
 
@@ -44,7 +44,7 @@ Regardless of the information out there, it appears that there is a lot of code 
 
 ## The Middleware Debate
 
-At the moment, there is an on-going debate about the standardisation of PSR-7 middleware. Currently two important blog posts have been written about the topic, both of them make the mistake of assuming that PSR-7 objects are completely immutable.
+At the moment, there is an on-going debate about the standardisation of PSR-7 middleware. Two important blog posts have been written about the topic, both of them make the mistake of assuming that PSR-7 objects are completely immutable.
 
 In [the post by Anthony Ferrara](http://blog.ircmaxell.com/2016/05/all-about-middleware.html), he offers the following as an alternative to passing a response instance through to the `handle()` method:
 
@@ -63,9 +63,9 @@ class MyMiddleware implements Middleware {
 }
 {% endhighlight %}
 
-For this code to work, the response object would need to be a suitable factory for itself. Because of the stream issue, this is not the case and the middleware is not stateless. This is not actually a very serious bug, and it would only become an issue if you tried to call the `handle()` method more than once (e.g. in [PHPFastCGI](https://github.com/PHPFastCGI/FastCGIDaemon)). I should say that the final and preferred solution suggested by Anthony Ferrara does not suffer from this bug and is, in my opinion, the way forward.
+For this code to work, the response object would need to be a suitable factory for itself. Because of the stream issue, this is not the case and the middleware is not stateless. This is not actually a very serious bug, and it would only become an issue if you tried to call the `handle()` method more than once (in a context such as [PHPFastCGI](https://github.com/PHPFastCGI/FastCGIDaemon)). I should say that the final and preferred solution suggested by Anthony Ferrara does not suffer from this bug and is, in my opinion, the way forward.
 
-The bug is more serious in the post by [Woody Gilk](http://shadowhand.me/all-about-psr-7-middleware/). Here he provides an example of some middleware designed to handle exceptions:
+The bug is more serious in the post by [Woody Gilk](http://shadowhand.me/all-about-psr-7-middleware/). Here he provides an example of some middleware that is designed to handle exceptions:
 
 {% highlight php %}
 class ExceptionHandler
@@ -96,3 +96,4 @@ In the description, he even says:
 > The critical thing to note here is that the partial response is never used. If an exception occurs, the response that was passed to this middleware is decorated and returned. So long as your middleware stack has this middleware as close to the top as possible, a badly formatted response will never get decorated as an error.
 
 As we know from Zend Expressive, this is not the case. Anything written to the response body will actually be appended to anything that was written to the response before the exception was thrown. Again, these are not a lone mistakes and there are plenty more ([1](https://github.com/oscarotero/psr7-middlewares/blob/f2ff9003fbe29b35a12e288b2310c70c606b0985/src/Middleware/ErrorHandler.php), [2](https://github.com/relayphp/Relay.Middleware/blob/bb6cb63fa083f4883469d449e48ce5025faf542e/src/ExceptionHandler.php)) examples of the immutability assumption bug.
+
