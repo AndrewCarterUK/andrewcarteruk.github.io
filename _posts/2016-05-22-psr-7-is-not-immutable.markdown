@@ -63,7 +63,7 @@ class MyMiddleware implements Middleware {
 }
 {% endhighlight %}
 
-For this code to work, the response object would need to be a suitable factory for itself. Because of the stream issue, this is not the case and the middleware is not stateless. This is not actually a very serious bug, and it would only become an issue if you tried to call the `handle()` method more than once (in a context such as [PHPFastCGI](https://github.com/PHPFastCGI/FastCGIDaemon)). I should say that the final and preferred solution suggested by Anthony Ferrara does not suffer from this bug and is, in my opinion, the way forward.
+For this code to work, the response object would need to be a suitable factory for itself. Because of the stream issue, this is not the case and the middleware is not stateless. This is not actually a very serious bug, and it would only become an issue if you tried to call the `handle()` method more than once (see [PHPFastCGI](https://github.com/PHPFastCGI/FastCGIDaemon)). I should say that the final and preferred solution suggested by Anthony Ferrara does not suffer from this bug and is, in my opinion, the way forward.
 
 The bug is more serious in the post by [Woody Gilk](http://shadowhand.me/all-about-psr-7-middleware/). Here he provides an example of some middleware that is designed to handle exceptions:
 
