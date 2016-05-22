@@ -2565,6 +2565,11 @@
 				padding-top: 0;
 			}
 
+			#main > section img {
+				max-width: 100%;
+			}
+
+
 /* Poptrox */
 
 	@-moz-keyframes spin {
