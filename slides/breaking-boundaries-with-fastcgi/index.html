@@ -198,18 +198,84 @@
                     <h2>What makes a bad chef?</h2>
                 </section>
                 <section>
-                    <h2>Memory Meltdown</h2>
+                    <p>What new considerations are we introducing to our applications?</p>
                 </section>
                 <section>
-                    <p>
-                        Chef never forgets... <b>anything</b>
-                    </p>
-                    <p class="fragment">
-                        Chef can only remember so much
-                    </p>
-                    <p class="fragment">
-                        Chef's <b>head explodes</b>
-                    </p>
+                    <h2>Memory Leaks</h2>
+                </section>
+                <section>
+                    <p>Who has programmed in a language where they had to manually manage memory?</p>
+                </section>
+                <section>
+                    <h2>Task:&nbsp;&nbsp;Join two strings together</h2>
+                </section>
+                <section>
+                    <p>In C...</p>
+                </section>
+                <section>
+                    <pre><code class="c" data-trim>
+char * join_strings(const char * string1, const char * string2)
+{
+    char * new_string;
+
+    new_string = malloc(strlen(string1) + strlen(string2) + 1);
+
+    if (new_string == NULL) {
+      return NULL;
+    }
+
+    strcpy(new_string, string1);
+    strcat(new_string, string2);
+
+    return new_string;
+}
+		                </code></pre>
+                </section>
+                <section>
+                    <pre><code class="c" data-trim>
+char * str;
+
+str = join_strings("Hello, ", name);
+
+// do stuff with str
+
+free(str);
+		                </code></pre>
+                </section>
+                <section>
+                    <p>In PHP...</p>
+                </section>
+                <section>
+                    <pre><code class="php" data-trim>
+$str = 'Hello, ' . $name;
+
+// do stuff with $str
+
+// now what?
+		                </code></pre>
+                </section>
+                <section>
+                    <p>How do we keep our application memory clean in PHP?</p>
+                </section>
+                <section>
+                    <pre><code class="php" data-trim>
+function some_routine($name) {
+    $str = 'Hello, ' . $name;
+
+    // do stuff with $str
+}
+
+// no more $str
+		                </code></pre>
+                </section>
+                <section>
+                    <pre><code class="php" data-trim>
+$str = 'Hello, ' . $name;
+
+// do stuff with $str
+
+unset($str);
+		                </code></pre>
                 </section>
                 <section>
                     <p>Remove references to unrequired objects</p>
@@ -218,10 +284,7 @@
                	  	<p>What might <b>hide references</b>?</p>
                	</section>
                 <section>
-               	  	<p>ORMs</p>
-               	  	<p class="fragment">Loggers</p>
-                </section>
-                <section>
+                    <h3>Doctrine ORM</h3>
                     <pre><code class="php" data-trim>
 $em = $this->getDoctrine()->getManager();
 $repository = $em->getRepository('Bundle:Page');
@@ -236,78 +299,74 @@ $response = $this->render(
 $em->detach($page);
 
 return $response;
-		            </code></pre>
+		                </code></pre>
+                </section>
+                <section>
+                    <h3>Monolog</h3>
+                    <pre><code class="php" data-trim>
+$log = new Logger('app');
+
+$handler = new ErrorLogHandler();
+$fingersCrossedHandler = new FingersCrossedHandler($handler);
+
+$logger->pushHandler($fingersCrossedHandler);
+
+$logger->notice('Hello');
+$logger->notice('It\'s me');
+$logger->notice('I was wondering if...');
+
+// $logger->alert('Something went wrong');
+
+		                </code></pre>
                 </section>
                 <section>
                     <h2>Timeouts</h2>
                 </section>
                 <section>
-                    <p>
-                        Chef <b>forgets how to breathe</b> after a couple of hours
-                    </p>
-                    <p class="fragment">
-                        Chef <b>needs to breathe</b>
-                    </p>
-                </section>
-                <section>
                     <p>ERROR 2006: MySQL server has gone away</p>
                 </section>
                 <section>
-                    <h2>Tantrum Handling</h2>
+                    <p>Can be hard to detect and manage whilst testing</p>
                 </section>
                 <section>
-                    <p>
-                        Chef encounters <b>minor issue</b>
-                    </p>
-                    <p class="fragment">
-                        Chef throws <b>big tantrum</b>
-                    </p>
+                    <h3>Doctrine ORM (2.5)</h3>
+                    <pre><code class="php" data-trim>
+$em = $this->getDoctrine()->getManager();
+
+$connection = $em->getConnection();
+
+if ($connection->ping() === false) {
+    $connection->close();
+    $connection->connect();
+}
+
+$repository = $em->getRepository('Bundle:Page');
+
+$page = $repository->find($id);
+		                </code></pre>
+                </section>
+                <section>
+                    <h2>Error Handling</h2>
                 </section>
                 <section>
                     <p>Distinguish between <b>request errors</b> and <b>application errors</b></p>
                 </section>
                 <section>
+                    <h3>HTTP status codes become more important</h3>
+                    <p class="fragment">4XX - Request Error</p>
+                    <p class="fragment">5XX - Application Error</p>
+                </section>
+                <section>
                     <p><b>Let the application die</b> if recovery is not possible</p>
                 </section>
                 <section>
-                    <h2>New Menu</h2>
+                    <h2>Code Updates</h2>
                 </section>
                 <section>
-                    <p>
-                        We want to add fajitas to the menu
-                    </p>
-                    <p class="fragment">
-                        Antonio can only cook pizza and pasta
-                    </p>
-                    <p class="fragment">
-                        Bring in new chef, José
-                    </p>
-                    <p class="fragment">
-                        <b>Forget to kill Antonio</b>
-                    </p>
-                    <p class="fragment">
-                        Customers keep getting pizza
-                    </p>
+                    <p>Application no longer being re-read from disk between requests</p>
                 </section>
                 <section>
-                    <p>Remember to kill old Chef(s)</p>
-                </section>
-                <section>
-                    <h2>Evil Customer</h2>
-                </section>
-                <section>
-                    <p>
-                        Evil Alex asks Chef what Chris ordered
-                    </p>
-                    <p class="fragment">
-                        Chef tells Alex that Chris ordered pizza
-                    </p>
-                    <p class="fragment">
-                    	Alex answers Chris's forgot password question
-                    </p>
-                </section>
-                <section>
-                    <p><b>Think like an attacker</b></p>
+                    <p>Must reload worker threads to update our applications</p>
                 </section>
                 <section>
                     <h3>Golden Rules</h3>
@@ -322,12 +381,12 @@ return $response;
                         </li>
                         <li class="fragment">
                             <p>Only use static methods when stateless</p>
-                            <p class="fragment" style="font-size: 0.8em;">(Or just don't use static methos)</p>
+                            <p class="fragment" style="font-size: 0.8em;">(Or just don't use static methods)</p>
                         </li>
                     </ol>
                 </section>
                 <section>
-                    <p>Leaving behind our restaurant...</p>
+                    <p>Moving on...</p>
                 </section>
                 <section>
                     <h2>CGI: Common Gateway Interface</h2>
@@ -488,12 +547,28 @@ php bin/fastcgi.php run [--time-limit=3600]
                     </code></pre>
                 </section>
                 <section>
+                    <pre><code class="conf" data-trim>
+upstream workers {
+    server localhost:5000;
+    server localhost:5001;
+    server localhost:5002;
+    server localhost:5003;
+}
+
+server {
+    # ...
+
+    location / {
+        include         /etc/nginx/fastcgi_params;
+        fastcgi_pass    workers;
+        # ...
+    }
+}
+                    </code></pre>
+                </section>
+                <section>
                     <h3>Speedfony Bundle</h3>
-		                <pre class="fragment"><code class="bash" data-trim>composer require "phpfastcgi/speedfony-bundle:^0.7"</code></pre>
-                    <aside class="notes">
-                        <p>If you are ever stuck for a name for your project, by the way, come and chat to me. I&apos;m
-                        a multitalented individual as you can see.</p>
-                    </aside>
+		                <pre class="fragment"><code class="bash" data-trim>composer require "phpfastcgi/speedfony-bundle:^0.8"</code></pre>
                 </section>
                 <section>
                     <pre><code class="php" data-trim>
@@ -568,7 +643,7 @@ php app/console speedfony:run --env=prod [--time-limit=3600]
                     <h2>Warnings</h2>
                 </section>
                 <section>
-                    <p>PHPFastCGI is <b>not yet production ready</b></p>
+                    <p>PHPFastCGI has limited use in production</p>
                 </section>
                 <section>
                     <p>No support yet for uploaded files</p>
@@ -599,15 +674,11 @@ php app/console speedfony:run --env=prod [--time-limit=3600]
                 	<h2>Thinking Forward</h2>
                 </section>
                 <section>
-                	<h3>Application Server</h3>
-                	<p class="fragment">Framework + Server Environment</p>
-                	<p class="fragment">appserver.io</p>
-                </section>
-                <section>
                 	<h3>An Asynchronous Future</h3>
                 	<p class="fragment">React PHP + Icicle</p>
                 	<p class="fragment">Applications run on an event loop</p>
                 	<p class="fragment">Controller actions return a response promise</p>
+                  <p class="fragment">github.com/async-interop</p>
                 </section>
                 <section>
                     <h2>To Conclude</h2>
@@ -629,6 +700,8 @@ php app/console speedfony:run --env=prod [--time-limit=3600]
                 </section>
                 <section>
                     <p>Any questions?</p>
+                    <br />
+                    <p>https://joind.in/talk/c5434</p>
                     <br />
                     <p><b>@AndrewCarterUK</b></p>
                     <br />
