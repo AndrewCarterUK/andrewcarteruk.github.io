@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+
+        <title>Soup up Symfony - Andrew Carter</title>
+        <meta name="description" content="How to turbocharge PHP using FastCGI" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui" />
+
+        <link rel="stylesheet" type="text/css" href="css/reveal.css" />
+        <link rel="stylesheet" type="text/css" href="css/theme/sky.css" />
+        <link rel="stylesheet" type="text/css" href="lib/css/googlecode.css" />
+
+        <style type="text/css">
+            .reveal img.icon {
+                background: none;
+                border: none;
+                box-shadow: none;
+                margin: 0px !important; }
+
+            .reveal img.inline-icon {
+                height: 1.5em; }
+        </style>
+
+        <!--[if lt IE 9]>
+            <script type="text/javascript" src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <div class="reveal">
+            <div style="position: absolute; top: 1em; left: 1em; text-align: left; font-size: 0.5em;">
+                Soup up Symfony - Andrew Carter
+            </div>
+            <div style="position: absolute; top: 1em; right: 1em; text-align: right; font-size: 0.5em;">
+                @AndrewCarterUK
+            </div>
+            <div class="slides">
+                <!------------------------------------------------------------->
+                <section>
+                    <h1>Soup up Symfony</h1>
+                </section>
+                <section><h3>@AndrewCarterUK</h3></section>
+                <section>
+                    <h2>Why Application Performance?</h2>
+                </section>
+                <section>
+                    <p>We might want to <b>increase capacity</b></p>
+                </section>
+                <section>
+                    <p>We might want to <b>improve user experience</b></p>
+                </section>
+                <section>
+                    <p>Performance <b>requires</b> efficiency</p>
+                </section>
+                <section>
+                    <p><b>Minimise work performed</b> to create a response</p>
+                </section>
+
+                <!------------------------------------------------------------->
+                <section>
+                    <h2>An Analogy</h2>
+                </section>
+                <section>
+                    <h2>HTTP Pipeline <span data-fragment-index="1" class="fragment">- as a Restaurant</span></h2>
+                    <table>
+                        <tr>
+                            <th>Client</th>
+                            <td><img data-fragment-index="2" class="fragment icon inline-icon" src="images/customer.png" /></td>
+                            <td><span data-fragment-index="2" class="fragment">Customer</span></td>
+                        </tr>
+                        <tr>
+                            <th>Server</th>
+                            <td><img data-fragment-index="3" class="fragment icon inline-icon" src="images/restaurant.png" /></td>
+                            <td><span data-fragment-index="3" class="fragment">Restaurant</span></td>
+                        </tr>
+                        <tr>
+                            <th>Request</th>
+                            <td><img data-fragment-index="4" class="fragment icon inline-icon" src="images/order.png" /></td>
+                            <td><span data-fragment-index="4" class="fragment">Order</span></td>
+                        </tr>
+                        <tr>
+                            <th>Response</th>
+                            <td><img data-fragment-index="5" class="fragment icon inline-icon" src="images/food.png" /></td>
+                            <td><span data-fragment-index="5" class="fragment">Food</span></td>
+                        </tr>
+                        <tr>
+                            <th>Application</th>
+                            <td><img data-fragment-index="6" class="fragment icon inline-icon" src="images/chef.png" /></td>
+                            <td><span data-fragment-index="6" class="fragment">Chef</span></td>
+                        </tr>
+                        <tr>
+                            <th>HTTP Daemon</th>
+                            <td><img data-fragment-index="7" class="fragment icon inline-icon" src="images/waitress.png" /></td>
+                            <td><span data-fragment-index="7" class="fragment">Waiter/Waitress</span></td>
+                        </tr>
+                        <tr><td colspan="3"></td></tr>
+                    </table>
+                </section>
+                <section>
+                    <h2>Restaurant PHP</h2>
+                    <table>
+                        <tr class="fragment">
+                            <td><img class="icon inline-icon" src="images/customer.png" /></td>
+                            <td>Customer enters restaurant</td>
+                            <td><img class="icon inline-icon" src="images/restaurant.png" /></td>
+                        </tr>
+                        <tr class="fragment">
+                            <td><img class="icon inline-icon" src="images/waitress.png" /></td>
+                            <td>Waitress takes order</td>
+                            <td>
+                                <img class="icon inline-icon" src="images/order.png" />
+                            </td>
+                        </tr>
+                        <tr class="fragment">
+                            <td><img class="icon inline-icon" src="images/waitress.png" /></td>
+                            <td>Waitress <b>creates chef</b> and gives order</td>
+                            <td>
+                                <img class="icon inline-icon" src="images/chef.png" />
+                            </td>
+                        </tr>
+                        <tr class="fragment">
+                            <td><img class="icon inline-icon" src="images/chef.png" /></td>
+                            <td>Chef makes food</td>
+                            <td>
+                                <img class="icon inline-icon" src="images/food.png" />
+                            </td>
+                        </tr>
+                        <tr class="fragment">
+                            <td><img class="icon inline-icon" src="images/food.png" /></td>
+                            <td>Waitress gives food to customer</td>
+                            <td>
+                                <img class="icon inline-icon" src="images/customer.png" />
+                            </td>
+                        </tr>
+                        <tr class="fragment">
+                            <td><img class="icon inline-icon" src="images/waitress.png" /></td>
+                            <td>Waitress <b>brutally murders</b> chef</td>
+                            <td>
+                                <img class="icon inline-icon" src="images/dead-chef.png" />
+                            </td>
+                        </tr>
+                        <tr><td colspan="2"></td></tr>
+                    </table>
+                </section>
+                <section>
+                    <h2>The Proposal?</h2>
+                </section>
+                <section>
+                    <p>
+                        <img class="icon inline-icon" src="images/chef.png" /><br />
+                        <b>Don&apos;t kill the chef</b>
+                    </p>
+                </section>
+
+                <!------------------------------------------------------------->
+                <section>
+                    <h2>A History Lesson</h2>
+                </section>
+                <section>
+                    <h2>CGI: Common Gateway Interface</h2>
+                </section>
+                <section>
+                    <p>CGI application must be executable by the web server</p>
+                </section>
+                <section>
+                    <p>One instance of our application per request</p>
+                </section>
+                <section>
+                    <p>HTTP request provided via <b>environment variables</b></p>
+                </section>
+                <section>
+                    <p>HTTP response written to <b>standard output</b> by application</p>
+                </section>
+                <section>
+                    <p>Back in the day...</p>
+                    <p class="fragment">when I was 3</p>
+                    <p class="fragment">PHP was just a set of CGI binaries</p>
+                </section>
+                <section>
+                    <p>We can still integrate PHP using CGI</p>
+                </section>
+                <section>
+                    <p>We can also use <b>native web server modules</b></p>
+                    <p class="fragment">We can also use <b>PHP-FPM</b></p>
+                </section>
+                <section>
+                    <p>
+                        PHP-FPM uses FastCGI to <b>keep PHP alive between requests</b>
+                    </p>
+                </section>
+                <section>
+                    <p>
+                        <img class="icon inline-icon" src="images/dead-chef.png" /><br />
+                        We are <b>still killing</b> our chef
+                    </p>
+                </section>
+                <section>
+                    <p>
+                        Need to <b>keep Symfony alive between requests</b>
+                    </p>
+                </section>
+
+                <!------------------------------------------------------------->
+                <section>
+                  <h2>How?</h2>
+                </section>
+                <section>
+                    <h3>With a legacy application?</h3>
+                    <pre><code class="php" data-trim>
+include 'lib/common.php';
+include 'lib/database.php';
+
+$escaped_url = mysql_real_escape_string($_SERVER['REQUEST_URI']);
+
+$result = mysql_query(
+    'SELECT html ' .
+    'FROM pages ' .
+    'WHERE url=\'' . $escaped_url . '\''
+);
+
+if (false === $result || !($page = mysql_fetch_assoc($result))) {
+    header('HTTP/1.1 404 Not Found');
+    $page = get_404_page();
+}
+
+echo $page['html'];
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>With Symfony?</h3>
+                    <pre><code class="php" data-trim>
+use Symfony\Component\ClassLoader\ApcClassLoader;
+use Symfony\Component\HttpFoundation\Request;
+
+$loader = require_once __DIR__.'/../app/bootstrap.php.cache';
+
+require_once __DIR__.'/../app/AppKernel.php';
+
+$kernel = new AppKernel('prod', false);
+$kernel->loadClassCache();
+
+$request = Request::createFromGlobals();
+$response = $kernel->handle($request);
+$response->send();
+$kernel->terminate($request, $response);
+                    </code></pre>
+                </section>
+
+                <!------------------------------------------------------------->
+                <section>
+                    <h2>Turning Symfony into a Server</h2>
+                </section>
+                <section>
+                    <h2>PHP-PM</h2>
+                    <p>PHP Process Manager</p>
+                </section>
+                <section>
+                    <p>Turns Symfony into a <b>HTTP server</b></p>
+                </section>
+                <section>
+                    <ul>
+                        <li>Based on ReactPHP</li>
+                        <li class="fragment">Process Manager</li>
+                        <li class="fragment">Load Balancer</li>
+                        <li class="fragment">Hot-Code Reload</li>
+                        <li class="fragment">Static File Serving</li>
+                    </ul>
+                </section>
+                <section>
+                    <p>Can actually be used as a development server</p>
+                </section>
+                <section>
+                    <pre><code class="bash" data-trim>
+$ git clone https://github.com/php-pm/php-pm.git
+$ cd php-pm
+$ composer install
+$ ln -s `pwd`/bin/ppm /usr/local/bin/ppm
+$ ...
+$ cd /path/to/symfony-project
+$ composer require php-pm/httpkernel-adapter:dev-master
+$ ./bin/ppm start --bootstrap=symfony --app-env=prod --workers=20
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>PHPFastCGI</h2>
+                </section>
+                <section>
+                    <p>Turns Symfony into a <b>FastCGI application</b></p>
+                </section>
+                <section>
+                    <ul>
+                        <li>Easy to install bundle</li>
+                        <li class="fragment">Appears as console command</li>
+                        <li class="fragment">Silex, Slim and Zend Expressive adapters too</li>
+                        <li class="fragment">Automatic shutdown mode</li>
+                    </ul>
+                </section>
+                <section>
+                    <pre><code class="bash" data-trim>
+$ composer require phpfastcgi/speedfony-bundle
+                    </code></pre>
+                </section>
+                <section>
+                    <pre><code class="php" data-trim>
+// ...
+class AppKernel extends Kernel
+{
+    public function registerBundles()
+    {
+        $bundles = array(
+            // ...
+            new PHPFastCGI\SpeedfonyBundle\PHPFastCGISpeedfonyBundle(),
+         );
+// ...
+                    </code></pre>
+                </section>
+                <section>
+                    <pre><code class="bash" data-trim>
+$ php bin/console speedfony:run --env=prod --port=8000
+                    </code></pre>
+                </section>
+
+                <!------------------------------------------------------------->
+                <section>
+                    <h2>NGINX Configuration</h2>
+                </section>
+                <section>
+                    <pre><code class="conf" data-trim>
+upstream workers {
+    server localhost:5000;
+    server localhost:5001;
+    server localhost:5002;
+    server localhost:5003;
+}
+
+server {
+    # ...
+
+    location ~ ^/app\.php(/|$) {
+        fastcgi_pass unix:/var/run/php5-fpm.sock; # BEFORE
+        fastcgi_pass workers;                     # AFTER
+        # ...
+    }
+}
+                    </code></pre>
+                </section>
+
+                <!------------------------------------------------------------->
+                <section>
+                    <h2>PHP-PM vs. PHPFastCGI</h2>
+                    <ul>
+                        <li class="fragment">HTTP vs. FastCGI</li>
+                        <li class="fragment">PHP-PM is much more popular</li>
+                        <li class="fragment">PHP-PM is based on ReactPHP</li>
+                    </ul>
+                </section>
+
+                <!------------------------------------------------------------->
+                <section>
+                    <h2>How much faster is this?</h2>
+                </section>
+                <section>
+                    <h3>Benchmarking Application</h3>
+                    <p class="fragment">500 page Symfony application</p>
+                    <p class="fragment">Single route which selects a random page from database</p>
+                    <p class="fragment">Renders using Twig</p>
+                    <p class="fragment">Clears entity repository after each request</p>
+                </section>
+                <section>
+                    <h3>Benchmarking System</h3>
+                    <p>VMWare Fusion - 2GB RAM - 4 cores (Intel Core i7, 3.4 GHz)</p>
+                    <p>Ubuntu 64-bit Server 15.04</p>
+                    <p>PHP 5.6.4</p>
+                    <p>NGINX</p>
+                    <p>'ab', 50000 requests, concurrency level of 20</p>
+                </section>
+                <section>
+                    <h3>Control Test</h3>
+                    <p class="fragment">OPcache enabled</p>
+                    <p class="fragment">PHP-FPM</p>
+                </section>
+                <section>
+                    <h3>First Test</h3>
+                    <p class="fragment">6 worker processes</p>
+                    <p class="fragment">FastCGI protocol implemented in <b>PHP userland</b></p>
+                </section>
+                <section>
+                    <h3>Second Test</h3>
+                    <p class="fragment">6 worker processes</p>
+                    <p class="fragment">FastCGI protocol implemented by <b>PHP extension</b></p>
+                </section>
+                <section>
+                    <h3>The Results</h3>
+                    <br />
+                    <img src="images/results.png" style="width: 80%;" alt="Results graph" />
+                </section>
+
+                <!------------------------------------------------------------->
+                <section>
+                    <h2>Problems in Paradise</h2>
+                </section>
+
+                <!------------------------------------------------------------->
+                <section>
+                    <h2>Memory Leaks</h2>
+                </section>
+                <section>
+                    <p>Who has programmed in a language where they had to manually manage memory?</p>
+                </section>
+                <section>
+                    <h2>Task:&nbsp;&nbsp;Join two strings together</h2>
+                </section>
+                <section>
+                    <p>In C...</p>
+                </section>
+                <section>
+                    <pre><code class="c" data-trim>
+char * join_strings(const char * string1, const char * string2)
+{
+    char * new_string;
+
+    new_string = malloc(strlen(string1) + strlen(string2) + 1);
+
+    if (new_string == NULL) {
+      return NULL;
+    }
+
+    strcpy(new_string, string1);
+    strcat(new_string, string2);
+
+    return new_string;
+}
+		                </code></pre>
+                </section>
+                <section>
+                    <pre><code class="c" data-trim>
+char * str;
+
+str = join_strings("Hello, ", name);
+
+// do stuff with str
+
+free(str);
+		                </code></pre>
+                </section>
+                <section>
+                    <p>In PHP...</p>
+                </section>
+                <section>
+                    <pre><code class="php" data-trim>
+$str = 'Hello, ' . $name;
+
+// do stuff with $str
+
+// now what?
+		                </code></pre>
+                </section>
+                <section>
+                    <p>How do we keep our application memory clean in PHP?</p>
+                </section>
+                <section>
+                    <pre><code class="php" data-trim>
+function some_routine($name) {
+    $str = 'Hello, ' . $name;
+
+    // do stuff with $str
+}
+
+// no more $str
+		                </code></pre>
+                </section>
+                <section>
+                    <pre><code class="php" data-trim>
+$str = 'Hello, ' . $name;
+
+// do stuff with $str
+
+unset($str);
+		                </code></pre>
+                </section>
+                <section>
+                    <p>Remove references to unrequired objects</p>
+                </section>
+                <section>
+               	  	<p>What might <b>hide references</b>?</p>
+               	</section>
+                <section>
+                    <h3>Doctrine ORM</h3>
+                    <pre><code class="php" data-trim>
+$em = $this->getDoctrine()->getManager();
+$repository = $em->getRepository('Bundle:Page');
+
+$page = $repository->find($id);
+
+$response = $this->render(
+    'Bundle:Default:page.html.twig',
+    ['page' => $page]
+);
+
+$em->detach($page);
+
+return $response;
+		                </code></pre>
+                </section>
+                <section>
+                    <h3>Monolog</h3>
+                    <pre><code class="php" data-trim>
+$log = new Logger('app');
+
+$handler = new ErrorLogHandler();
+$fingersCrossedHandler = new FingersCrossedHandler($handler);
+
+$logger->pushHandler($fingersCrossedHandler);
+
+$logger->notice('Hello');
+$logger->notice('It\'s me');
+$logger->notice('I was wondering if...');
+
+// $logger->alert('Something went wrong');
+
+		                </code></pre>
+                </section>
+                <section>
+                    <p>PHPFastCGI and PHP-PM support <b>request limits</b></p>
+                    <p class="fragment">PHPFastCGI also supports <b>memory and time limits</b></p>
+                </section>
+                <section>
+                    <h2>NoMoreLeaksBundle</h2>
+                    <p>github.com/AndrewCarterUK/NoMoreLeaksBundle</p>
+                </section>
+
+                <!------------------------------------------------------------->
+                <section>
+                    <h2>Timeouts</h2>
+                </section>
+                <section>
+                    <p>ERROR 2006: MySQL server has gone away</p>
+                </section>
+                <section>
+                    <p>Can be hard to detect and manage whilst testing</p>
+                </section>
+                <section>
+                    <h3>Doctrine ORM (2.5)</h3>
+                    <pre><code class="php" data-trim>
+$em = $this->getDoctrine()->getManager();
+
+$connection = $em->getConnection();
+
+if ($connection->ping() === false) {
+    $connection->close();
+    $connection->connect();
+}
+
+$repository = $em->getRepository('Bundle:Page');
+
+$page = $repository->find($id);
+		                </code></pre>
+                </section>
+
+                <!------------------------------------------------------------->
+                <section>
+                    <h2>Error Handling</h2>
+                </section>
+                <section>
+                    <p>Distinguish between <b>request errors</b> and <b>application errors</b></p>
+                </section>
+                <section>
+                    <h3>HTTP status codes become more important</h3>
+                    <p class="fragment">4XX - Request Error</p>
+                    <p class="fragment">5XX - Application Error</p>
+                </section>
+                <section>
+                    <p><b>Let the application die</b> if recovery is not possible</p>
+                </section>
+                <section>
+                    <p>PHPFastCGI has an <b>auto-shutdown mode</b> for 5XX responses</p>
+                </section>
+
+                <!------------------------------------------------------------->
+                <section>
+                    <h2>Sessions</h2>
+                </section>
+                <section>
+                    <p>The evil $_SESSION superglobal</p>
+                </section>
+                <section>
+                    <p>PHP-PM provides a handler for regerenating sessions</p>
+                </section>
+                <section>
+                    <p>Anything that hits the $_SESSION superglobal is nasty</p>
+                </section>
+                <section>
+                    <p>Good opportunity to investigate if you have the time</p>
+                </section>
+
+                <!------------------------------------------------------------->
+                <section>
+                    <h2>Do you need PHP-PM / PHPFastCGI?</h2>
+                </section>
+                <section>
+                    <p>Is your application fast enough already?</p>
+                    <p class="fragment">Why bother with the risk?</p>
+                </section>
+                <section>
+                    <p>PHPFastCGI is a tool for <b>high performance PHP applications</b></p>
+                </section>
+                <section>
+                    <h3>However</h3>
+                </section>
+                <section>
+                    <p>Well designed applications <b>should not leak memory</b></p>
+                </section>
+                <section>
+                    <p>Well designed applications <b>should handle errors properly</b></p>
+                </section>
+                <section>
+                    <p>Can be very easy to do this with Symfony</p>
+                </section>
+
+                <!------------------------------------------------------------->
+                <section>
+                    <h2>To Conclude</h2>
+                </section>
+                <section>
+                    <p>Consider long running processes when developing components and services</p>
+                </section>
+                <section>
+                    <p>FastCGI (and HTTP) are designed to allow applications to stay alive between requests</p>
+                </section>
+                <section>
+                    <p>PHP is <small><s>not</s></small> designed to allow applications to stay alive between requests</p>
+                </section>
+                <section>
+                    <p>That is possibly why few make the effort to do this</p>
+                </section>
+                <section>
+                    <p>Used carefully, this can break performance boundaries</p>
+                </section>
+                <section>
+                    <p>Any questions?</p>
+                    <br />
+                    <p>https://joind.in/talk/c5434</p>
+                    <br />
+                    <p><b>@AndrewCarterUK</b></p>
+                    <br />
+                    <p>
+                        https://github.com/php-pm/php-pm<br />
+                        http://phpfastcgi.github.io<br />
+                        http://github.com/PHPFastCGI/SpeedfonyBundle<br />
+                        http://github.com/PHPFastCGI/FastCGIDaemon
+                    </p>
+                </section>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="lib/js/head.min.js"></script>
+        <script type="text/javascript" src="js/reveal.js"></script>
+        <script type="text/javascript">
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+                transition: 'none',
+                dependencies: [
+                    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+                    { src: 'plugin/notes/notes.js', async: true }
+                ]
+            });
+        </script>
+    </body>
+</html>
