@@ -338,9 +338,29 @@ server {
     # ...
 
     location ~ ^/app\.php(/|$) {
-        fastcgi_pass unix:/var/run/php5-fpm.sock; # BEFORE
-        fastcgi_pass workers;                     # AFTER
-        # ...
+        fastcgi_pass unix:/var/run/php5-fpm.sock; # BEFORE (PHP-FPM)
+        fastcgi_pass workers;                     # AFTER  (PHPFastCGI)
+    }
+}
+                    </code></pre>
+                </section>
+                <section>
+                    <pre><code class="conf" data-trim>
+upstream workers {
+    server localhost:5000;
+    server localhost:5001;
+    # ...
+}
+
+server {
+    # ...
+
+    location ~ ^/app\.php(/|$) {
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_pass workers;
     }
 }
                     </code></pre>
