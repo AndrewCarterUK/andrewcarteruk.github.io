@@ -1,0 +1,35 @@
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.themed-button {
+  background: url('images/button.png') no-repeat right;
+  border: 0px;
+  padding-top: 0.4em;
+  padding-bottom: 0.5em;
+  padding-left: 1em;
+  padding-right: 3em;
+  margin-left: -1em;
+  font-size: 18px;
+  font-weight: 600;
+  color: #2C2C2C;
+}
+
+.options {
+  z-index: -1;
+}
+
+.footer {
+  z-index: 999;
+  position: fixed;
+  width: 100%;
+  bottom: 0px;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  background-color: #f0f0f0;
+  border-top: 1px solid #d0d0d0;
+}
+
+.footer-padding {
+  height: 5em;
+}
