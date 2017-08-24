@@ -147,8 +147,6 @@ def calculate_traffic_score(file_path):
     return float(edge_pixels) / float(unmasked_pixels)
 {% endhighlight %}
 
-## The Results
-
 <table style="font-size: 2em; font-weight: 600;">
     <thead>
         <tr>
