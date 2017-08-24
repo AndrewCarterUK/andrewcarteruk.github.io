@@ -3,18 +3,20 @@ layout: post
 title:  Monitoring Road Traffic with Python
 date:   2017-08-24 22:00:00
 categories: programming
-excerpt: Using Python to process images from camera and detect traffic
+excerpt: Using Python to process images from traffic cameras and detect congestion
 ---
 
-Today, one of my colleagues located a nearby traffic camera that monitored a particularly busy road where we work. This road can make the journey home a real pain in the ass, and it is much easier to just stay in the office and work a later until it calms down a bit.
+Today, one of my colleagues located a nearby traffic camera that monitored a particularly busy road near where we work. This road can make the journey home a real pain in the ass, and it is much easier to just stay in the office and work later until it calms down a bit.
 
-By the time I got home the camera near our office was monitoring darkness, so I used [trafficland.com](http://www.trafficland.com/city/LAX) and picked up an alternative in Los Angeles (`I-105 e/o Hawthorne Blvd`).
+By the time I got home the camera near our office was monitoring darkness, so I used [trafficland.com](http://www.trafficland.com/city/LAX) and picked up an alternative in Los Angeles for the purpose of testing (I-105 e/o Hawthorne Blvd).
+
+Here is a sample image from the camera:
 
 ![raw input](/images/traffic-camera/input.jpg)
 
-There is a lot of content in this image that is not relevant to our traffic analysis, such as trees and sky.
+There is a lot of content in this image that is not relevant to the amount of traffic in it. A reasonable first task is to extract the important section of road from the background. The Python library [Pillow](http://pillow.readthedocs.io/en/4.2.x/) makes this very easy.
 
-The first task is to extract the important section of road from the background. The Python library `PIL` (or `Pillow`) makes this very easy. All that is needed is to do is find the coordinates of the polygon that needs to be zeroed (filled black).
+The only fiddly bit is finding the coordinates of the polygon that contains the important section of road.
 
 {% highlight python %}
 from PIL import Image, ImageDraw
@@ -46,11 +48,13 @@ def process(file_path):
     cropped_image.save('output.png')
 {% endhighlight %}
 
+The result:
+
 ![masked](/images/traffic-camera/masked.png)
 
-The next task, is to somehow calculate how much traffic there is in this image. Counting cars is beyond the skill level of this author, but counting pixels is the kind of nasty hack that is right up my street.
+The next task, is to somehow calculate how much traffic there is in this image. Counting cars is beyond the skill level of this author, but counting pixels is the kind of nasty hack that is right his street.
 
-`OpenCV` provides an excellend edge detection algorithm, that outputs a monochrome image with white pixels for identified edges and black pixels otherwise.
+[OpenCV](https://opencv-python-tutroals.readthedocs.io/en/latest/) provides an excellent edge detection algorithm, that outputs a monochrome image with white pixels for identified edges and black pixels otherwise.
 
 {% highlight python %}
 from PIL import Image, ImageDraw
@@ -74,9 +78,13 @@ def process(file_path):
     cv2.imwrite('output.png', edged_image)
 {% endhighlight %}
 
+The result:
+
 ![masked](/images/traffic-camera/edged.png)
 
-A useful metric for traffic would simply be the ratio of white pixels to pixels that could have been white (some of edges from the polygon were filled black).
+A useful metric for traffic would simply be the ratio of white pixels to black pixels.
+
+A slightly better metric would be the ratio of white pixels to pixels that could have been white, remember that some of the pixels from the image where black already from the polygon mask.
 
 {% highlight python %}
 from PIL import Image, ImageDraw
