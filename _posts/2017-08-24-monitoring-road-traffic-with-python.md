@@ -8,7 +8,7 @@ excerpt: Using Python to process images from traffic cameras and detect congesti
 
 Today, one of my colleagues located a nearby traffic camera that monitored a particularly busy road near where we work. This road can make the journey home a real pain in the ass, and it is much easier to just stay in the office and work later until it calms down a bit.
 
-By the time I got home the camera near our office was monitoring darkness, so I used [trafficland.com](http://www.trafficland.com/city/LAX) and picked up an alternative in Los Angeles for the purpose of testing (I-105 e/o Hawthorne Blvd).
+By the time I got home, the camera near our office in darkness, so I used [trafficland.com](http://www.trafficland.com/city/LAX) and picked up an alternative in Los Angeles for the purpose of testing (reference: I-105 e/o Hawthorne Blvd).
 
 Here is a sample image from the camera:
 
@@ -52,7 +52,7 @@ The result:
 
 ![masked](/images/traffic-camera/masked.png)
 
-The next task, is to somehow calculate how much traffic there is in this image. Counting cars is beyond the skill level of this author, but counting pixels is the kind of nasty hack that is right his street.
+The next task, is to somehow calculate how much traffic there is in this image. Counting cars is beyond the skill level of this author, but counting pixels is the kind of nasty hack that is right up his street (get it?).
 
 [OpenCV](https://opencv-python-tutroals.readthedocs.io/en/latest/) provides an excellent edge detection algorithm, that outputs a monochrome image with white pixels for identified edges and black pixels otherwise.
 
@@ -84,7 +84,7 @@ The result:
 
 A useful metric for traffic would simply be the ratio of white pixels to black pixels.
 
-A slightly better metric would be the ratio of white pixels to pixels that could have been white, remember that some of the pixels from the image where black already from the polygon mask.
+A slightly better metric would be the ratio of white pixels to pixels that could have been white, remember that some of the pixels from the image were black already from the polygon mask.
 
 {% highlight python %}
 from PIL import Image, ImageDraw
