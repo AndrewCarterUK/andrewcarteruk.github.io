@@ -8,7 +8,7 @@ excerpt: Using Python to process images from traffic cameras and detect congesti
 
 Today, one of my colleagues located a nearby traffic camera that monitored a particularly busy road near where we work. This road can make the journey home a real pain in the ass, and it is much easier to just stay in the office and work later until it calms down a bit.
 
-By the time I got home, the camera near our office in darkness, so I used [trafficland.com](http://www.trafficland.com/city/LAX) and picked up an alternative in Los Angeles for the purpose of testing (reference: I-105 e/o Hawthorne Blvd).
+By the time I got home, the camera near our office was in darkness. Instead, I used [trafficland.com](http://www.trafficland.com/city/LAX) to find an alternative in Los Angeles for the purpose of testing (reference: I-105 e/o Hawthorne Blvd).
 
 Here is a sample image from the camera:
 
@@ -52,9 +52,9 @@ The result:
 
 ![masked](/images/traffic-camera/masked.png)
 
-The next task, is to somehow calculate how much traffic there is in this image. Counting cars is beyond the skill level of this author, but counting pixels is the kind of nasty hack that is right up his street (get it?).
+The next task is to somehow calculate how much traffic there is in this image. Counting cars is beyond the skill level of this author, but counting pixels is the kind of nasty hack that is right up his street (get it?).
 
-[OpenCV](https://opencv-python-tutroals.readthedocs.io/en/latest/) provides an excellent edge detection algorithm, that outputs a monochrome image with white pixels for identified edges and black pixels otherwise.
+[OpenCV](https://opencv-python-tutroals.readthedocs.io/en/latest/) provides an excellent edge detection algorithm that outputs a monochrome image with white pixels for identified edges and black pixels otherwise.
 
 {% highlight python %}
 from PIL import Image, ImageDraw
@@ -146,3 +146,19 @@ def calculate_traffic_score(file_path):
 
     return float(edge_pixels) / float(unmasked_pixels)
 {% endhighlight %}
+
+## The Results
+
+<table>
+    <thead>
+        <tr>
+            <th>Image</th>
+            <th>Traffic Score</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td><img src="/images/traffic-camera/0753.jpg" alt="" /></td><td>0.0753</td></tr>
+        <tr><td><img src="/images/traffic-camera/1192.jpg" alt="" /></td><td>0.1192</td></tr>
+        <tr><td><img src="/images/traffic-camera/1414.jpg" alt="" /></td><td>0.1414</td></tr>
+    </tbody>
+</table>
