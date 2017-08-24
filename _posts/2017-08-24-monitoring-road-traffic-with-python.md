@@ -149,7 +149,7 @@ def calculate_traffic_score(file_path):
 
 ## The Results
 
-<table>
+<table style="font-size: 2em; font-weight: 600;">
     <thead>
         <tr>
             <th>Image</th>
@@ -157,8 +157,8 @@ def calculate_traffic_score(file_path):
         </tr>
     </thead>
     <tbody>
-        <tr><td><img src="/images/traffic-camera/0753.jpg" alt="" /></td><td>0.0753</td></tr>
-        <tr><td><img src="/images/traffic-camera/1192.jpg" alt="" /></td><td>0.1192</td></tr>
-        <tr><td><img src="/images/traffic-camera/1414.jpg" alt="" /></td><td>0.1414</td></tr>
+        <tr><td><img src="/images/traffic-camera/0753.jpg" alt="" /></td><td style="vertical-align: middle;">0.0753</td></tr>
+        <tr><td><img src="/images/traffic-camera/1192.jpg" alt="" /></td><td style="vertical-align: middle;">0.1192</td></tr>
+        <tr><td><img src="/images/traffic-camera/1414.jpg" alt="" /></td><td style="vertical-align: middle;">0.1414</td></tr>
     </tbody>
 </table>
