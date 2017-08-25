@@ -8,8 +8,6 @@ excerpt: Using Python to process images from traffic cameras and detect congesti
 
 Today, one of my colleagues located a nearby traffic camera that monitored a particularly busy road near where we work. This road can make the journey home a real pain in the ass, and it is much easier to just stay in the office and work later until it calms down a bit.
 
-By the time I got home, the camera near our office was in darkness. Instead, I used [trafficland.com](http://www.trafficland.com/city/LAX) to find an alternative in Los Angeles for the purpose of testing (reference: I-105 e/o Hawthorne Blvd).
-
 Here is a sample image from the camera:
 
 ![raw input](/images/traffic-camera/input.jpg)
@@ -23,15 +21,16 @@ from PIL import Image, ImageDraw
 
 POLYGON_MASK = [
     (0, 0),
+    (0, 288),
+    (44, 288),
+    (140, 125),
+    (160, 125),
+    (164, 288),
+    (352, 288),
     (352, 0),
-    (352, 240),
-    (130, 240),
-    (260, 90),
-    (175, 85),
-    (0, 125),
 ]
 
-CROP_RECT = (0, 85, 260, 240)
+CROP_RECT = (44, 125, 164, 286)
 
 
 def process(file_path):
@@ -42,7 +41,7 @@ def process(file_path):
     ImageDraw.Draw(image).polygon(POLYGON_MASK, fill=(0, 0, 0))
 
     # Crop the image to get ride of unnecessary pixels
-    cropped_image = image.crop((0, 85, 260, 240))
+    cropped_image = image.crop(CROP_RECT)
 
     # Let's look at the result!
     cropped_image.save('output.png')
@@ -61,12 +60,14 @@ from PIL import Image, ImageDraw
 import cv2
 import numpy
 
+# ...
+
 
 def process(file_path):
     # Same as last time
     image = Image.open(file_path)
     ImageDraw.Draw(image).polygon(POLYGON_MASK, fill=(0, 0, 0), outline=True)
-    cropped_image = image.crop((0, 85, 260, 240))
+    cropped_image = image.crop(CROP_RECT)
 
     # Use numpy to convert the image from PIL format to OpenCV
     opencv_image = cv2.cvtColor(numpy.array(cropped_image), cv2.COLOR_RGB2BGR)
@@ -93,13 +94,16 @@ import numpy
 
 POLYGON_MASK = [
     (0, 0),
+    (0, 288),
+    (44, 288),
+    (140, 125),
+    (160, 125),
+    (164, 288),
+    (352, 288),
     (352, 0),
-    (352, 240),
-    (130, 240),
-    (260, 90),
-    (175, 85),
-    (0, 125),
 ]
+
+CROP_RECT = (44, 125, 164, 286)
 
 
 # Count the number of pixels that were not masked by the polygon
@@ -135,7 +139,7 @@ def count_edge_pixels(opencv_image):
 def calculate_traffic_score(file_path):
     image = Image.open(file_path)
     ImageDraw.Draw(image).polygon(POLYGON_MASK, fill=(0, 0, 0), outline=True)
-    cropped_image = image.crop((0, 85, 260, 240))
+    cropped_image = image.crop(CROP_RECT)
 
     unmasked_pixels = count_unmasked_pixels(cropped_image)
 
