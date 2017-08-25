@@ -147,18 +147,12 @@ def calculate_traffic_score(file_path):
     return float(edge_pixels) / float(unmasked_pixels)
 {% endhighlight %}
 
-<br />
+# Results
 
-<table style="font-size: 2em; font-weight: 600;">
-    <thead>
-        <tr>
-            <th>Image</th>
-            <th>Traffic Score</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr><td><img src="/images/traffic-camera/0753.jpg" alt="" /></td><td style="vertical-align: middle;">0.0753</td></tr>
-        <tr><td><img src="/images/traffic-camera/1192.jpg" alt="" /></td><td style="vertical-align: middle;">0.1192</td></tr>
-        <tr><td><img src="/images/traffic-camera/1414.jpg" alt="" /></td><td style="vertical-align: middle;">0.1414</td></tr>
-    </tbody>
-</table>
+Running this algorithm on the camera near my work gives reasonable results for just a few hours of experimentation.
+
+![low traffic](/images/low-traffic.jpg)
+![medium traffic](/images/medium-traffic.jpg)
+![high traffic](/images/high-traffic.jpg)
+
+One of the weaknesses of this algorithm is that more edges will be detected in direct sunlight because of the increased contrast. A solution to this would be to use [tensorflow](https://www.tensorflow.org/) or a more intelligent form of processing to actually count the vehicles.
