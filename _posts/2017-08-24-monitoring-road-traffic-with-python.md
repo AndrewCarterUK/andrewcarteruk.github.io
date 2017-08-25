@@ -151,8 +151,8 @@ def calculate_traffic_score(file_path):
 
 Running this algorithm on the camera near my work gives reasonable results for just a few hours of experimentation.
 
-![low traffic](/images/low-traffic.jpg)
-![medium traffic](/images/medium-traffic.jpg)
-![high traffic](/images/high-traffic.jpg)
+![low traffic](/images/traffic-camera/low-traffic.jpg)
+![medium traffic](/images/traffic-camera/medium-traffic.jpg)
+![high traffic](/images/traffic-camera/high-traffic.jpg)
 
 One of the weaknesses of this algorithm is that more edges will be detected in direct sunlight because of the increased contrast. A solution to this would be to use [tensorflow](https://www.tensorflow.org/) or a more intelligent form of processing to actually count the vehicles.
