@@ -1,11 +1,10 @@
 # Site settings
-title: Andrew Carter
-tagline: Programming, Photography, Travel and Science
+title: notickethome
+tagline: Heading off round the world with a one way ticket to India
 description: >
-  Passionate about programming, photography, travel and science.
-url: "http://andrew.carterlunn.co.uk"
-twitter_username: AndrewCarterUK
-github_username:  AndrewCarterUK
+  Heading off round the world with a one way ticket to India.
+url: "http://notickethome.co.uk"
+instagram_username: notickethome
 
 # Build settings
 markdown: kramdown
