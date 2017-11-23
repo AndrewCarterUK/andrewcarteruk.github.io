@@ -16,7 +16,7 @@ layout: default
     <section>
         <div class="row">
             {% for image in page.gallery %}
-                <article class="6u 12u$(xsmall) work-item">
+                <article class="{% cycle '6u', '6u$' %} 12u$(xsmall) work-item">
                     <a href="{{ image.url }}" class="image fit thumb">
                         <img src="{{ image.url }}" alt="" />
                     </a>
