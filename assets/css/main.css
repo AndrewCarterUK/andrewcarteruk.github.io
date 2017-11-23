@@ -2495,6 +2495,22 @@
 		width: 35%;
 	}
 
+		#header > * {
+			-moz-flex-shrink: 0;
+			-webkit-flex-shrink: 0;
+			-ms-flex-shrink: 0;
+			flex-shrink: 0;
+			width: 100%;
+		}
+
+		#header > .inner {
+			-moz-flex-grow: 1;
+			-webkit-flex-grow: 1;
+			-ms-flex-grow: 1;
+			flex-grow: 1;
+			margin: 0 0 2em 0;
+		}
+
 		#header strong, #header b {
 			color: #ffffff;
 		}
@@ -2937,6 +2953,7 @@
 				text-align: center;
 				top: auto;
 				width: 100%;
+				display: block;
 			}
 
 				#header h1 {
@@ -3034,7 +3051,7 @@
 				padding: 2.25em 1.5em;
 			}
 
-				#header h3 {
+				#header h1 {
 					font-size: 1.35em;
 				}
 
