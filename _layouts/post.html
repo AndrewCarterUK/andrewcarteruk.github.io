@@ -11,3 +11,19 @@ layout: default
 
     {{ content }}
 </section>
+
+{% if page.gallery %}
+    <section>
+        <div class="row">
+            {% for image in page.gallery %}
+                <article class="6u 12u$(xsmall) work-item">
+                    <a href="{{ image.url }}" class="image fit thumb">
+                        <img src="{{ image.url }}" alt="" />
+                    </a>
+                    <h3>{{ image.title }}</h3>
+                    <p>{{ image.description }}</p>
+                </article>
+            {% endfor %}
+        </div>
+    </section>
+{% endif %}
