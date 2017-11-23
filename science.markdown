@@ -1,5 +1,0 @@
----
-title: Science
----
-
-# Science Posts

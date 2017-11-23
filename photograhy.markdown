@@ -1,5 +1,0 @@
----
-title: Photography
----
-
-# Photography Posts
