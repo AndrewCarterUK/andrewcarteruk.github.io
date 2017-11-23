@@ -1,6 +1,6 @@
 /*
 	Strata by HTML5 UP
-	html5up.net | @n33co
+	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
 
@@ -28,7 +28,9 @@
 
 		var $window = $(window),
 			$body = $('body'),
-			$header = $('#header');
+			$header = $('#header'),
+			$footer = $('#footer'),
+			$main = $('#main');
 
 		// Disable animations/transitions until the page has loaded.
 			$body.addClass('is-loading');
@@ -59,6 +61,15 @@
 					'.important\\28 medium\\29',
 					skel.breakpoint('medium').active
 				);
+			});
+
+		// Footer.
+			skel.on('+medium', function() {
+				$footer.insertAfter($main);
+			});
+
+			skel.on('-medium !medium', function() {
+				$footer.appendTo($header);
 			});
 
 		// Header.
@@ -92,7 +103,32 @@
 
 					});
 
+					$window.on('load', function() {
+						$window.triggerHandler('scroll');
+					});
+
 				}
+
+		// Main Sections: Two.
+
+			// Lightbox gallery.
+				$window.on('load', function() {
+
+					$('#two').poptrox({
+						caption: function($a) { return $a.next('h3').text(); },
+						overlayColor: '#2c2c2c',
+						overlayOpacity: 0.85,
+						popupCloserText: '',
+						popupLoaderText: '',
+						selector: '.work-item a.image',
+						usePopupCaption: true,
+						usePopupDefaultStyling: false,
+						usePopupEasyClose: false,
+						usePopupNav: true,
+						windowMargin: (skel.breakpoint('small').active ? 0 : 50)
+					});
+
+				});
 
 	});
 
