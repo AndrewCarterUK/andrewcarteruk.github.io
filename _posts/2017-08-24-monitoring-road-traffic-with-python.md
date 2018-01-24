@@ -16,7 +16,7 @@ There is a lot of content in this image that is not relevant to the amount of tr
 
 The only fiddly bit is finding the coordinates of the polygon that contains the important section of road.
 
-{% highlight python %}
+```python
 from PIL import Image, ImageDraw
 
 POLYGON_MASK = [
@@ -45,7 +45,7 @@ def process(file_path):
 
     # Let's look at the result!
     cropped_image.save('output.png')
-{% endhighlight %}
+```
 
 The result:
 
@@ -55,7 +55,7 @@ The next task is to somehow calculate how much traffic there is in this image. C
 
 [OpenCV](https://opencv-python-tutroals.readthedocs.io/en/latest/) provides an excellent edge detection algorithm that outputs a monochrome image with white pixels for identified edges and black pixels otherwise.
 
-{% highlight python %}
+```python
 from PIL import Image, ImageDraw
 import cv2
 import numpy
@@ -77,7 +77,7 @@ def process(file_path):
 
     # Let's look at the result!
     cv2.imwrite('output.png', edged_image)
-{% endhighlight %}
+```
 
 The result:
 
@@ -87,7 +87,7 @@ A useful metric for traffic would simply be the ratio of white pixels to black p
 
 A slightly better metric would be the ratio of white pixels to pixels that could have been white, remember that some of the pixels from the image were black already from the polygon mask.
 
-{% highlight python %}
+```python
 from PIL import Image, ImageDraw
 import cv2
 import numpy
@@ -149,7 +149,7 @@ def calculate_traffic_score(file_path):
     edge_pixels = count_edge_pixels(edged_image)
 
     return float(edge_pixels) / float(unmasked_pixels)
-{% endhighlight %}
+```
 
 # Results
 
