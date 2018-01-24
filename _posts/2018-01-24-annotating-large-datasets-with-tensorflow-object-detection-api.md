@@ -46,9 +46,17 @@ The end result of this process will be a file named `frozen_inference_graph.pb`.
 
 ## Predicting Annotations
 
-The [pascal-voc-writer](https://github.com/AndrewCarterUK/pascal-voc-writer) library can be used to generate annotations in the PASCAL VOC file format.
+The [pascal-voc-writer](https://github.com/AndrewCarterUK/pascal-voc-writer) library can be used to generate annotations in the PASCAL VOC file format. It has a simple to use API, and the code below shows an example of adding a 'cat' annotation to an image.
 
-The [`annotate.py` file in the example repository](https://github.com/AndrewCarterUK/tf-example-object-detection-api-race-cars/blob/master/annotate.py) adapts the [inference example from the official documentation](https://github.com/tensorflow/models/blob/master/research/object_detection/object_detection_tutorial.ipynb) to create annotations rather than image visualisations.
+{% highlight python %}
+from pascal_voc_writer import Writer
+
+writer = Writer('path/to/img.jpg', 800, 400)
+writer.addObject('cat', 100, 100, 200, 200)
+writer.save('path/to/img.xml')
+{% endhighlight %}
+
+The [`annotate.py` file in the example repository](https://github.com/AndrewCarterUK/tf-example-object-detection-api-race-cars/blob/master/annotate.py) uses this library to adapt the [inference example from the official documentation](https://github.com/tensorflow/models/blob/master/research/object_detection/object_detection_tutorial.ipynb) to create PASCAL VOC annotation files rather than image visualisations.
 
 The threshold score for an annotation to be produced can be optimised to suit the dataset and the needs of the operator. The threshold score should balance the frequency of unhelpful annotations against the miss rate. If removing unhelpful annotations is easier for the operator than generating missed ones, a lower threshold score should be used to reflect this.
 
@@ -58,7 +66,7 @@ Below are three more predictions from the primitive model. Despite having a very
 _In this example two annotations are correctly suggested and one is missed. The suggested annotations on the furthest car could be shrunk slightly._
 
 ![Example 2](https://res.cloudinary.com/andrewcarteruk/image/upload/v1516747768/TensorFlow%20-%20Race%20Cars/1-boxes.jpg)
-_These images take a long time to annotate manually. The primitive model has done a reasonable job at cutting out the bulk of the workload. It has struggled in the case of some of the obsecured cars, but some of the obscured cars would be difficult for humans to spot._
+_These images take a long time to annotate manually. The primitive model has done a reasonable job at cutting out the bulk of the workload. It has struggled in the case of some of the obscured cars, but some of the obscured cars would be difficult for humans to spot._
 
 ![Example 3](https://res.cloudinary.com/andrewcarteruk/image/upload/v1516747767/TensorFlow%20-%20Race%20Cars/4-boxes.jpg)
 _Both cars are identified, however the bounding box is far too wide for the closest car._
