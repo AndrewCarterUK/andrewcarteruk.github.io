@@ -48,7 +48,7 @@ The [pascal-voc-writer](https://github.com/AndrewCarterUK/pascal-voc-writer) lib
 
 The [`annotate.py` file in the example repository](https://github.com/AndrewCarterUK/tf-example-object-detection-api-race-cars/blob/master/annotate.py) adapts the [inference example from the official documentation](https://github.com/tensorflow/models/blob/master/research/object_detection/object_detection_tutorial.ipynb) to create annotations rather than image visualisations.
 
-The threshold score for an annotation to be produced can be optimised to suit the dataset and the needs of the operator. The threshold score should balance the frequency of unhelpful annotations against the miss rate. If removing annotations is easier for the operator than generating missed ones, a lower threshold score should be used to reflect this.
+The threshold score for an annotation to be produced can be optimised to suit the dataset and the needs of the operator. The threshold score should balance the frequency of unhelpful annotations against the miss rate. If removing unhelpful annotations is easier for the operator than generating missed ones, a lower threshold score should be used to reflect this.
 
 Below are three more predictions from the primitive model. Despite having a very small dataset, the model has made useful predictions that would save time annotating these images.
 
