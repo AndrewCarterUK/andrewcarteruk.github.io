@@ -6,7 +6,7 @@ categories: programming
 excerpt: Using the TensorFlow Object Detection API to predict annotations for large datasets.
 ---
 
-![Inferences made by a primitive model looking for race cars](http://res.cloudinary.com/andrewcarteruk/image/upload/v1516747767/TensorFlow%20-%20Race%20Cars/3-boxes.jpg)
+![Inferences made by a primitive model looking for race cars](https://res.cloudinary.com/andrewcarteruk/image/upload/v1516747767/TensorFlow%20-%20Race%20Cars/3-boxes.jpg)
 _Detections of race cars, after training on a small dataset containing only 60 images_
 
 When building datasets for machine learning object detection and recognition models, generating annotations for all of the images in the dataset can be very time consuming. These annotations are required to train and test a model, and they must be accurate. For this reason, human oversight is required for all of the images in a dataset. However, that does not mean that machine learning models cannot be of assistance.
