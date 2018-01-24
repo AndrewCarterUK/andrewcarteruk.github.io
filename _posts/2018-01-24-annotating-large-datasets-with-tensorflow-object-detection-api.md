@@ -11,7 +11,9 @@ _Detections of race cars, after training on a small dataset containing only 60 i
 
 When building datasets for machine learning object detection and recognition models, generating annotations for all of the images in the dataset can be very time consuming. These annotations are required to train and test a model, and they must be accurate. For this reason, human oversight is required for all of the images in a dataset. However, that does not mean that machine learning models cannot be of assistance.
 
-Checking and correcting a set of mostly correct annotations is generally a less time consuming task than creating a complete set of new annotations. When working on a dataset containing thousands of images, saving a few seconds per image could save several hours of work.
+Checking and correcting a set of mostly correct annotations is generally a less time consuming task than creating a complete set of new annotations. When working on a dataset containing thousands of images, saving a few seconds per image could save several hours of work. 
+
+The purpose of this article is to prove that for object recognition and detection tasks where high accuracy is not a necessity, small datasets and "out of the box" models can provide useful results.
 
 Using the example of detecting race cars in an image, this article will guide through the following steps.
 
