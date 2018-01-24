@@ -15,7 +15,7 @@ PSR-6 is the proposal from the [PHP-FIG (PHP Framework Interop Group)](http://ww
 
 Here are the proposed interfaces:
 
-{% highlight php %}
+```php
 <?php
 
 namespace Psr\Cache;
@@ -46,7 +46,7 @@ interface CacheItemInterface
 interface CacheException {}
 
 interface InvalidArgumentException extends CacheException {}
-{% endhighlight %}
+```
 
 ### Problem 1
 
@@ -72,18 +72,18 @@ The exception system in PHP was **designed to be extended**. The issue here is t
 
 This leads to the following ridiculous situation which is not only plausible, but completely in agreement with the specification:
 
-{% highlight php startinline=true %}
+```php
 if (
      $exception instanceof Psr\Cache\InvalidArgumentException &&
     !$exception instanceof \InvalidArgumentException
 ) {
     echo 'Huh?';
 }
-{% endhighlight %}
+```
 
 If you wanted to guarantee catching all invalid argument exceptions in a block of code you would need to do this:
 
-{% highlight php startinline=true %}
+```php
 try {
     // code
 } catch (Psr\Cache\InvalidArgumentException $exception) {
@@ -91,7 +91,7 @@ try {
 } catch (\InvalidArgumentException $exception) {
     // invalid argument exception logic again
 } // ...
-{% endhighlight %}
+```
 
 This might not sound so significant, but I cannot for the life of me understand why the proposal decided to use interfaces in the first place. It doesn't appear to solve any problems and it actually creates one.
 
@@ -101,10 +101,10 @@ This might not sound so significant, but I cannot for the life of me understand 
 
 The cache item interface lets you set an expiration time using the following methods;
 
-{% highlight php startinline=true %}
+```php
 $item->expiresAfter(300);
 $item->expiresAt(new \DateTime(...));
-{% endhighlight %}
+```
 
 However, there is no method available to retrieve this expiry information from the item. There are good reasons for this. Primarily, if you retrieve an item from memcached it is not actually possible to find out when it expires, at least not without some serious wizardry and expensive operations. This is the case for many other cache systems too.
 
@@ -128,9 +128,9 @@ The second option is that the implementation could expose a public method on the
 
 One solution to this specific problem would be to set the expiration time when saving the object. Something like this:
 
-{% highlight php startinline=true %}
+```php
 $pool->save($item, 300);
-{% endhighlight %}
+```
 
 ## Summary
 
