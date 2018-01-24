@@ -9,7 +9,7 @@ excerpt: Using the TensorFlow Object Detection API to predict annotations for la
 ![Inferences made by a primitive model looking for race cars](http://res.cloudinary.com/andrewcarteruk/image/upload/v1516747767/TensorFlow%20-%20Race%20Cars/3-boxes.jpg)
 _Detections of race cars, after training on a small dataset containing only 60 images_
 
-When building datasets for machine learning object detection and recognition models, generating annotations for all of the images in the dataset can be very time consuming. These annotations are required to train and test a model, and they must be accurate. For this reason, human oversight will be required for all of the images in the dataset. However, that does not mean that machine learning models cannot be of assistance.
+When building datasets for machine learning object detection and recognition models, generating annotations for all of the images in the dataset can be very time consuming. These annotations are required to train and test a model, and they must be accurate. For this reason, human oversight is required for all of the images in a dataset. However, that does not mean that machine learning models cannot be of assistance.
 
 Checking and correcting a set of mostly correct annotations is generally a less time consuming task than creating a complete set of new annotations. When working on a dataset containing thousands of images, saving a few seconds per image could save several hours of work.
 
@@ -50,7 +50,7 @@ The [`annotate.py` file in the example repository](https://github.com/AndrewCart
 
 The threshold score for an annotation to be produced can be optimised to suit the dataset and the needs of the operator. The threshold score should balance the frequency of unhelpful annotations against the miss rate. If removing unhelpful annotations is easier for the operator than generating missed ones, a lower threshold score should be used to reflect this.
 
-Below are three more predictions from the primitive model. Despite having a very small dataset, the model has made useful predictions that would save time annotating these images.
+Below are three more predictions from the primitive model. Despite having a very small dataset and only a few training steps, the model has made useful predictions that would save time annotating these images.
 
 ![Example 1](https://res.cloudinary.com/andrewcarteruk/image/upload/v1516747767/TensorFlow%20-%20Race%20Cars/2-boxes.jpg)
 _In this example two annotations are correctly suggested and one is missed. The suggested annotations on the furthest car could be shrunk slightly._
