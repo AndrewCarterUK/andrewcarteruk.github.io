@@ -27,11 +27,11 @@ An easy format to use for image annotations is the PASCAL VOC file format. This 
 
 ![Screenshot of LabelImg annotation process](http://res.cloudinary.com/andrewcarteruk/image/upload/v1516749498/TensorFlow%20-%20Race%20Cars/labelImg.png)
 
-The [data directory in the repository](https://github.com/AndrewCarterUK/tf-example-object-detection-api-race-cars/tree/master/data) provides an example of annotations generated using this method. The [label map file](https://github.com/AndrewCarterUK/tf-example-object-detection-api-race-cars/blob/master/data/map.pbtxt) will need to be created manually, as this is not produced by LabelImg.
+The [data directory in the example repository](https://github.com/AndrewCarterUK/tf-example-object-detection-api-race-cars/tree/master/data) shows annotations generated using this method. The [label map file](https://github.com/AndrewCarterUK/tf-example-object-detection-api-race-cars/blob/master/data/map.pbtxt) will need to be created manually, as this is not produced by LabelImg.
 
 ## Training the Primitive Model
 
-The [TensorFlow Object Detection API](https://github.com/tensorflow/models/tree/master/research/object_detection) provides detailed documentation on adapting and using existing models with custom datasets. These models can be trained locally, on your own computer, or with the assistance of the [Google Cloud Machine Learning Engine](https://cloud.google.com/ml-engine/). 
+The [TensorFlow Object Detection API](https://github.com/tensorflow/models/tree/master/research/object_detection) provides detailed documentation on adapting and using existing models with custom datasets.
 
 The basic process for training a model is:
 
@@ -48,7 +48,7 @@ The [pascal-voc-writer](https://github.com/AndrewCarterUK/pascal-voc-writer) lib
 
 The [`annotate.py` file in the example repository](https://github.com/AndrewCarterUK/tf-example-object-detection-api-race-cars/blob/master/annotate.py) adapts the [inference example from the official documentation](https://github.com/tensorflow/models/blob/master/research/object_detection/object_detection_tutorial.ipynb) to create annotations rather than image visualisations.
 
-The threshold score for an annotation to be produced can be optimised to suit the dataset and the needs of the operator. The threshold score should balance the frequently of unhelpful annotations against the miss rate. If removing annotations is easier for the operator than generating missed ones, a lower threshold score should be used to reflect this.
+The threshold score for an annotation to be produced can be optimised to suit the dataset and the needs of the operator. The threshold score should balance the frequency of unhelpful annotations against the miss rate. If removing annotations is easier for the operator than generating missed ones, a lower threshold score should be used to reflect this.
 
 Below are three more predictions from the primitive model. Despite having a very small dataset, the model has made useful predictions that would save time annotating these images.
 
