@@ -53,7 +53,7 @@ The threshold score for an annotation to be produced can be optimised to suit th
 Below are three more predictions from the primitive model. Despite having a very small dataset, the model has made useful predictions that would save time annotating these images.
 
 ![Example 1](https://res.cloudinary.com/andrewcarteruk/image/upload/v1516747767/TensorFlow%20-%20Race%20Cars/2-boxes.jpg)
-_In this example two annotations are correctly suggested and one is missed. One of the suggested annotations could be shrunk slightly._
+_In this example two annotations are correctly suggested and one is missed. The suggested annotations on the furthest car could be shrunk slightly._
 
 ![Example 2](https://res.cloudinary.com/andrewcarteruk/image/upload/v1516747768/TensorFlow%20-%20Race%20Cars/1-boxes.jpg)
 _These images take a long time to annotate manually. The primitive model has done a reasonable job at cutting out the bulk of the workload. It has struggled in the case of some of the obsecured cars, but some of the obscured cars would be difficult for humans to spot._
