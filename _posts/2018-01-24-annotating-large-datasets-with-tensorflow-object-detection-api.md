@@ -48,13 +48,13 @@ The end result of this process will be a file named `frozen_inference_graph.pb`.
 
 The [pascal-voc-writer](https://github.com/AndrewCarterUK/pascal-voc-writer) library can be used to generate annotations in the PASCAL VOC file format. It has a simple to use API, and the code below shows an example of adding a 'cat' annotation to an image.
 
-{% highlight python %}
+```python
 from pascal_voc_writer import Writer
 
 writer = Writer('path/to/img.jpg', 800, 400)
 writer.addObject('cat', 100, 100, 200, 200)
 writer.save('path/to/img.xml')
-{% endhighlight %}
+```
 
 The [`annotate.py` file in the example repository](https://github.com/AndrewCarterUK/tf-example-object-detection-api-race-cars/blob/master/annotate.py) uses this library to adapt the [inference example from the official documentation](https://github.com/tensorflow/models/blob/master/research/object_detection/object_detection_tutorial.ipynb) to create PASCAL VOC annotation files rather than image visualisations.
 
