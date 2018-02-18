@@ -12,49 +12,47 @@ excerpt: Using the TensorFlow Estimator API to make match predictions that beat 
       <img src="https://res.cloudinary.com/andrewcarteruk/image/upload/v1518978956/TensorFlow%20-%20Bookmakers/alan.png" alt="Alan" />
     </td>
     <td>
-      <blockquote>
-        It says here we should use TensorFlow. Apparently we can use a Deep Neural Network to predict the outcome of football (soccer) matches. Who wants to help me collect training data?
-      </blockquote>
+      It says here we should use TensorFlow. Apparently we can use a Deep Neural Network to predict the outcome of football (soccer) matches. Who wants to help me collect training data.
     </td>
   </tr>
+</table>
+<table>
   <tr>
+    <td>
+      I don't think you should be doing so much gambling tonight Alan.
+    </td>
     <td>
       <img src="https://res.cloudinary.com/andrewcarteruk/image/upload/v1518978956/TensorFlow%20-%20Bookmakers/doug.png" alt="Doug" />
     </td>
-    <td>
-      <blockquote>
-        I don't think you should be doing so much gambling tonight Alan.
-      </blockquote>
-    </td>
   </tr>
+</table>
+<table>
   <tr>
     <td>
       <img src="https://res.cloudinary.com/andrewcarteruk/image/upload/v1518978956/TensorFlow%20-%20Bookmakers/alan.png" alt="Alan" />
     </td>
     <td>
-      <blockquote>
-        Gambling? Who said anything about gambling? It's not gambling if you know you're going to win? Deep Neural Networks are a foolproof system.  
-      </blockquote>
+      Gambling? Who said anything about gambling? It's not gambling if you know you're going to win? Deep Neural Networks are a foolproof system.  
     </td>
   </tr>
+</table>
+<table>
   <tr>
+    <td>
+      It's also illegal.
+    </td>
     <td>
       <img src="https://res.cloudinary.com/andrewcarteruk/image/upload/v1518978956/TensorFlow%20-%20Bookmakers/stu.png" alt="Stu" />
     </td>
-    <td>
-      <blockquote>
-        It's also illegal.
-      </blockquote>
-    </td>
   </tr>
+</table>
+<table>
   <tr>
     <td>
       <img src="https://res.cloudinary.com/andrewcarteruk/image/upload/v1518978956/TensorFlow%20-%20Bookmakers/alan.png" alt="Alan" />
     </td>
     <td>
-      <blockquote>
-        It's not illegal, it's frowned upon. Like mining bitcoin on visitors web browsers.
-      </blockquote>
+      It's not illegal, it's frowned upon. Like mining bitcoin on web browsers.
     </td>
   </tr>
 </table>
