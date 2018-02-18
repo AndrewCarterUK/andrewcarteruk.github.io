@@ -7,11 +7,11 @@ excerpt: Using the TensorFlow Estimator API to make match predictions that beat 
 ---
 
 <blockquote>
-  <b>Alan</b> - It says here we should use TensorFlow. Apparently we can use a Deep Neural Network to predict the outcome of football (soccer) matches. Who wants to help me collect training data?<br /><br />
-  <b>Doug</b> - I don't think you should be doing so much gambling tonight Alan.<br /><br />
-  <b>Alan</b> - Gambling? Who said anything about gambling? It's not gambling if you know you're going to win? Deep Neural Networks are a foolproof system.<br /><br />
-  <b>Stu</b> - It's also illegal.<br /><br />
-  <b>Alan</b> - It's not illegal, it's frowned upon. Like mining bitcoin on web browsers.
+  <b style="font-weight: 700;">Alan</b> - It says here we should use TensorFlow. Apparently we can use a Deep Neural Network to predict the outcome of football (soccer) matches. Who wants to help me collect training data?<br /><br />
+  <b style="font-weight: 700;">Doug</b> - I don't think you should be doing so much gambling tonight Alan.<br /><br />
+  <b style="font-weight: 700;">Alan</b> - Gambling? Who said anything about gambling? It's not gambling if you know you're going to win? Deep Neural Networks are a foolproof system.<br /><br />
+  <b style="font-weight: 700;">Stu</b> - It's also illegal.<br /><br />
+  <b style="font-weight: 700;">Alan</b> - It's not illegal, it's frowned upon. Like mining bitcoin on web browsers.
 </blockquote>
 
 ![The Scene](https://res.cloudinary.com/andrewcarteruk/image/upload/v1518980040/TensorFlow%20-%20Bookmakers/hangover-07.jpg)
