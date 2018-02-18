@@ -8,50 +8,50 @@ excerpt: Using the TensorFlow Estimator API to make match predictions that beat 
 
 <table>
   <tr>
-    <td>
-      <img src="https://res.cloudinary.com/andrewcarteruk/image/upload/v1518978956/TensorFlow%20-%20Bookmakers/alan.png" alt="Alan" />
+    <td valign="middle">
+      <img style="width: 120px; height: 156px;" src="https://res.cloudinary.com/andrewcarteruk/image/upload/v1518978956/TensorFlow%20-%20Bookmakers/alan.png" alt="Alan" />
     </td>
-    <td>
+    <td valign="middle">
       It says here we should use TensorFlow. Apparently we can use a Deep Neural Network to predict the outcome of football (soccer) matches. Who wants to help me collect training data.
     </td>
   </tr>
 </table>
 <table>
   <tr>
-    <td>
+    <td valign="middle">
       I don't think you should be doing so much gambling tonight Alan.
     </td>
-    <td>
-      <img src="https://res.cloudinary.com/andrewcarteruk/image/upload/v1518978956/TensorFlow%20-%20Bookmakers/doug.png" alt="Doug" />
+    <td valign="middle">
+      <img style="width: 120px; height: 156px;" src="https://res.cloudinary.com/andrewcarteruk/image/upload/v1518978956/TensorFlow%20-%20Bookmakers/doug.png" alt="Doug" />
     </td>
   </tr>
 </table>
 <table>
   <tr>
-    <td>
-      <img src="https://res.cloudinary.com/andrewcarteruk/image/upload/v1518978956/TensorFlow%20-%20Bookmakers/alan.png" alt="Alan" />
+    <td valign="middle">
+      <img style="width: 120px; height: 156px;" src="https://res.cloudinary.com/andrewcarteruk/image/upload/v1518978956/TensorFlow%20-%20Bookmakers/alan.png" alt="Alan" />
     </td>
-    <td>
+    <td valign="middle">
       Gambling? Who said anything about gambling? It's not gambling if you know you're going to win? Deep Neural Networks are a foolproof system.  
     </td>
   </tr>
 </table>
 <table>
   <tr>
-    <td>
+    <td valign="middle">
       It's also illegal.
     </td>
-    <td>
-      <img src="https://res.cloudinary.com/andrewcarteruk/image/upload/v1518978956/TensorFlow%20-%20Bookmakers/stu.png" alt="Stu" />
+    <td valign="middle">
+      <img style="width: 120px; height: 156px;" src="https://res.cloudinary.com/andrewcarteruk/image/upload/v1518978956/TensorFlow%20-%20Bookmakers/stu.png" alt="Stu" />
     </td>
   </tr>
 </table>
 <table>
   <tr>
-    <td>
-      <img src="https://res.cloudinary.com/andrewcarteruk/image/upload/v1518978956/TensorFlow%20-%20Bookmakers/alan.png" alt="Alan" />
+    <td valign="middle">
+      <img style="width: 120px; height: 156px;" src="https://res.cloudinary.com/andrewcarteruk/image/upload/v1518978956/TensorFlow%20-%20Bookmakers/alan.png" alt="Alan" />
     </td>
-    <td>
+    <td valign="middle">
       It's not illegal, it's frowned upon. Like mining bitcoin on web browsers.
     </td>
   </tr>
