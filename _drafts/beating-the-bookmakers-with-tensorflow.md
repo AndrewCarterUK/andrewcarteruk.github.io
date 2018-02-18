@@ -6,19 +6,24 @@ categories: programming
 excerpt: Using the TensorFlow Estimator API to make match predictions that beat the bookmakers.
 ---
 
-Alan
+<img src="https://res.cloudinary.com/andrewcarteruk/image/upload/v1518978956/TensorFlow%20-%20Bookmakers/alan.png" alt="Alan" />
+
 > It says here we should use TensorFlow. Apparently we can use a Deep Neural Network to predict the outcome of football (soccer) matches. Who wants to help me collect training data?
 
-Doug
+<img src="https://res.cloudinary.com/andrewcarteruk/image/upload/v1518978956/TensorFlow%20-%20Bookmakers/doug.png" alt="Doug" />
+
 > I don't think you should be doing so much gambling tonight Alan.
 
-Alan
+<img src="https://res.cloudinary.com/andrewcarteruk/image/upload/v1518978956/TensorFlow%20-%20Bookmakers/alan.png" alt="Alan" />
+
 > Gambling? Who said anything about gambling? It's not gambling if you know you're going to win? Deep Neural Networks are a foolproof system.
 
-Stu
+<img src="https://res.cloudinary.com/andrewcarteruk/image/upload/v1518978956/TensorFlow%20-%20Bookmakers/stu.png" alt="Stu" />
+
 > It's also illegal.
 
-Alan
+<img src="https://res.cloudinary.com/andrewcarteruk/image/upload/v1518978956/TensorFlow%20-%20Bookmakers/alan.png" alt="Alan" />
+
 > It's not illegal, it's frowned upon. Like mining bitcoin on visitors web browsers.
 
 My pitch for a remake of The Hangover didn't go down very well, but hopefully the research I did for the script will still be useful to someone.
