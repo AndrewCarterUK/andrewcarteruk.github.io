@@ -9,3 +9,7 @@ github_username:  AndrewCarterUK
 
 # Build settings
 markdown: kramdown
+
+collections:
+  drafts:
+    output: true
