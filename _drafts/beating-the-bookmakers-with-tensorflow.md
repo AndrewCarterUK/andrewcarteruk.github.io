@@ -79,9 +79,9 @@ There are [other classification and regression classes available from the Tensor
 
 ## Features
 
-Google Developers did an excellent [blog post explaining TensorFlow Feature Columns](https://developers.googleblog.com/2017/11/introducing-tensorflow-feature-columns.html) that goes into far more detail about the options available than this article will.
+Google Developers have an excellent [blog post explaining TensorFlow Feature Columns](https://developers.googleblog.com/2017/11/introducing-tensorflow-feature-columns.html) that goes into good detail about the options available.
 
-Our model will only use the `numeric_column` that is provided, but there are others available (such as a category column).
+Our model will only use the `numeric_column` that is provided, but there are others available (such as a `category_column`).
 
 The `DNNClassifier` class we mentioned earlier requires an array of feature columns to be provided. Looking above to the test data section, we have quite a few features available to select.
 
@@ -127,7 +127,7 @@ model = tf.estimator.DNNClassifier(
 
 This is where we create our model object. The `model_dir` parameter is used to save training progress so that you don't have to retrain your model every time you want to make a prediction. The `hidden_units` parameter describes the shape of the neural network, `[10]` corresponds to one hidden layer with 10 neurons in it. We define the output that we expect from our model with `n_classes` and `label_vocabulary`. Here we state that the three classes our model will analyse are labelled by `H`, `D` or `A`.
 
-The `optimizer` parameter is optional and the default value is reasonable for many cases. Here the default is not used because it was necessary to add [regularization to prevent overfitting](https://en.wikipedia.org/wiki/Regularization_(mathematics)).
+The `optimizer` parameter is optional and the default value is reasonable for many cases. Here the default value is not used because it was necessary to add [regularization to prevent overfitting](https://en.wikipedia.org/wiki/Regularization_(mathematics)).
 
 We can train our model using the `train()` method. A model can be trained indefinitely, but with diminishing returns. Different models descend at different rates, so it is important to watch the loss function to see if and when it has converged (and stopped descending).
 
@@ -165,18 +165,18 @@ The code in [predict.py](https://github.com/AndrewCarterUK/football-predictor/bl
 
 It is important to know that bookmakers do not optimise odds soley for to reflect event probabilities. Fortunately for us, they have to consider markets and their exposure to risk too.
 
-Most casual gamblers are uninterested in betting that the outcome of a football match will be a draw, this is because it is not such an exciting prospect for a football fan. Bookmakers tend to reduce the odds of popular bets to minimise their exposure to risk, and this makes it easier to be profitable when betting on draws rather than wins.
+Casual gamblers and football fans are generally motivated by opinions, excitement and loyalty. Thus, most are uninterested in betting that the outcome of a match will be a draw. Bookmakers tend to reduce the odds of popular bets to minimise their exposure to risk, and this makes it easier to be profitable when betting on draws rather than wins.
 
-The [betting.py](https://github.com/AndrewCarterUK/football-predictor/blob/master/betting.py) shows an example betting strategy that utilises this logic. If our model believes that the bookmaker has underestimated the chance of a draw by 5% or more, it places a bet.
+The [betting.py](https://github.com/AndrewCarterUK/football-predictor/blob/master/betting.py) script shows an example betting strategy that utilises this logic. If our model believes that the bookmaker has underestimated the chance of a draw by 5% or more, it places a bet.
 
 ## The Results
 
-![training graph](https://res.cloudinary.com/andrewcarteruk/image/upload/v1519090844/model_pgbuej.png)
+![training graph](https://res.cloudinary.com/andrewcarteruk/image/upload/v1519094225/model_af3byz.png)
 
 The above graph shows how the model developed as it was trained. The DNN converges quickly on a solution and achieves an accuracy of 51%. This accuracy is slightly below the performance of Bookmakers, Bet365 achieves around 53-54% on the same results.
 
-The betting return finishes at about 32% above investment. It achieved this by placing 14 bets after considering 172 possible matches. Treat the 32% figure with appropriate care, as only 14 bets were placed. There were other logical betting strategies that placed more bets (40-60) and achieved returns of between 10% and 20%, depending on when you stopped the training and what betting margin was used.
+The betting return is less stable, and is in the region of a 50% on investment. This was achieved by placing 35 bets after considering 172 possible matches. However, it is clear there is not enough available test data to generate an accurate return figure.
 
 The odds used were only from Bet365, and further gains could probably be achieved by shopping around a bit. That said, Bet365 often provided the most competitive odds available in the dataset.
 
-If you would like to learn more about machine learning, I can highly recommend [Standford University - Machine Learning by Andrew Ng](https://www.coursera.org/learn/machine-learning). I am about halfway through the course at the time of writing, and thoroughly appreciating its bottom up approach to these subjects.
+If you would like to learn more about machine learning, I can highly recommend [Stanford University - Machine Learning by Andrew Ng](https://www.coursera.org/learn/machine-learning). I am about halfway through the course at the time of writing, and thoroughly appreciating its bottom up approach to these subjects.
