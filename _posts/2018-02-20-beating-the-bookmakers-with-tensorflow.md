@@ -65,9 +65,9 @@ The `Dataset` class converts the CSV data to an array of processed football resu
 
 ## Classification or Regression
 
-The next step is to look at the options available for the type of predictions our model will make. In this regard, there are two primary model types, and they are known as **classification** or **regression** models.
+The next step is to look at the options available for the type of predictions our model will make. In this regard, there are two primary model types, and these are known as **classification** or **regression** models.
 
-A classification model will output probabilities that the input matches a set of classes. An example of this would be using biometric measurements to predict whether a subject was of class male or female. Here, the output from our model would be two variables - the probability that the subject was male and the probability that the subject was female. All classification probabilities in a prediction sum to one.
+A classification model will output a prediction that the input features match a set of classes. An example of this would be using biometric measurements to predict whether a subject was of class male or female. Here, the output from our model would be a two dimensional vector containing the probability that the subject was male and the probability that the subject was female. All classification probabilities in a prediction sum to one.
 
 A regression model outputs a continuous variable (or a vector of continuous variables). An example of this would be using house features (such as location, size and bedrooms) to predict house price.
 
@@ -93,20 +93,20 @@ feature_columns = [
   tf.feature_column.numeric_column(key='home-draws'),
   tf.feature_column.numeric_column(key='home-losses'),
   tf.feature_column.numeric_column(key='home-goals'),
-  tf.feature_column.numeric_column(key='home-goals-conceeded'),
+  tf.feature_column.numeric_column(key='home-opposition-goals'),
   tf.feature_column.numeric_column(key='home-shots'),
-  tf.feature_column.numeric_column(key='home-shots-conceeded'),
-  tf.feature_column.numeric_column(key='home-shots-accuracy'),
-  tf.feature_column.numeric_column(key='home-shots-accuracy-conceeded'),
+  tf.feature_column.numeric_column(key='home-shots-on-target'),
+  tf.feature_column.numeric_column(key='home-opposition-shots'),
+  tf.feature_column.numeric_column(key='home-opposition-shots-on-target'),
   tf.feature_column.numeric_column(key='away-wins'),
   tf.feature_column.numeric_column(key='away-draws'),
   tf.feature_column.numeric_column(key='away-losses'),
   tf.feature_column.numeric_column(key='away-goals'),
-  tf.feature_column.numeric_column(key='away-goals-conceeded'),
+  tf.feature_column.numeric_column(key='away-opposition-goals'),
   tf.feature_column.numeric_column(key='away-shots'),
-  tf.feature_column.numeric_column(key='away-shots-conceeded'),
-  tf.feature_column.numeric_column(key='away-shots-accuracy'),
-  tf.feature_column.numeric_column(key='away-shots-accuracy-conceeded'),
+  tf.feature_column.numeric_column(key='away-shots-on-target'),
+  tf.feature_column.numeric_column(key='away-opposition-shots'),
+  tf.feature_column.numeric_column(key='away-opposition-shots-on-target'),
 ]
 ```
 
@@ -147,12 +147,12 @@ train_input_fn = tf.estimator.inputs.numpy_input_fn(
   )
 ```
 
-In the example above, with only 3 training examples, `train_features` and `train_labels` would have the structure shown below. The keys of `train_features` should correspond to the key used when creating the feature column.
+In the example above, if we had only 3 training examples, `train_features` and `train_labels` would have the structure shown below. The keys of `train_features` must match the keys used when creating the feature columns array.
 
 ```python
 train_features = {
   'home-goals': np.array([7, 3, 4]),
-  'home-goals-conceeded': np.array([3, 8, 6]),
+  'home-opposition-goals': np.array([3, 8, 6]),
   # ... for each feature
 }
 
@@ -175,7 +175,7 @@ The [betting.py](https://github.com/AndrewCarterUK/football-predictor/blob/maste
 
 The above graph shows how the model developed as it was trained. The DNN converges quickly on a solution and achieves an accuracy of 51%. This accuracy is slightly below the performance of Bookmakers, Bet365 achieves around 53-54% on the same results.
 
-The betting return is less stable, and is in the region of a 50% on investment. This was achieved by placing 35 bets after considering 172 possible matches. However, it is clear there is not enough available test data to generate an accurate betting return figure.
+The betting return is less stable, and is in the region of a 50% return on investment. This strategy simulation placed 35 bets whilst considering 172 possible matches. It is difficult to generate an accurate betting return figure as the strategy places a statistically small number of bets and there is not much test data.
 
 The odds used were only from Bet365, and further gains could probably be achieved by shopping around. That said, Bet365 often provided the most competitive odds available in the dataset.
 
