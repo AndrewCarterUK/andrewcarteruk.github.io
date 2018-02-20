@@ -1594,6 +1594,10 @@
 		font-weight: 400;
 	}
 
+        #main strong {
+		font-weight: 700;
+	}
+
 	em, i {
 		font-style: italic;
 	}
