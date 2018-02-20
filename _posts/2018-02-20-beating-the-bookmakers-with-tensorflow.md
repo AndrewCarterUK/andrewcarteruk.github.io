@@ -163,7 +163,7 @@ The code in [predict.py](https://github.com/AndrewCarterUK/football-predictor/bl
 
 ## Developing a Betting Strategy
 
-It is important to know that bookmakers do not optimise odds solely for to reflect event probabilities. Fortunately for us, they have to consider markets and their exposure to risk too.
+It is important to know that bookmakers do not optimise odds solely to reflect event probabilities. Fortunately for us, they have to consider markets and their exposure to risk too.
 
 Casual gamblers and football fans are generally motivated by opinions, excitement and loyalty. Thus, most are uninterested in betting that the outcome of a match will be a draw. Bookmakers tend to reduce the odds of popular bets to minimise their exposure to risk, and this makes it easier to be profitable when betting on draws rather than wins.
 
@@ -175,7 +175,7 @@ The [betting.py](https://github.com/AndrewCarterUK/football-predictor/blob/maste
 
 The above graph shows how the model developed as it was trained. The DNN converges quickly on a solution and achieves an accuracy of 51%. This accuracy is slightly below the performance of Bookmakers, Bet365 achieves around 53-54% on the same results.
 
-The betting return is less stable, and is in the region of a 50% return on investment. This strategy simulation placed 35 bets whilst considering 172 possible matches. It is difficult to generate an accurate betting return figure as the strategy places a statistically small number of bets and there is not much test data.
+The betting return is less stable, and is in the region of a 50% return on investment. This strategy simulation placed 35 bets whilst considering 172 possible matches. It is difficult to generate an accurate betting return figure, as the strategy places a statistically small number of bets and there is not much test data.
 
 The odds used were only from Bet365, and further gains could probably be achieved by shopping around. That said, Bet365 often provided the most competitive odds available in the dataset.
 
