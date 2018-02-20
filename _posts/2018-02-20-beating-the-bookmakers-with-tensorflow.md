@@ -163,7 +163,7 @@ The code in [predict.py](https://github.com/AndrewCarterUK/football-predictor/bl
 
 ## Developing a Betting Strategy
 
-It is important to know that bookmakers do not optimise odds soley for to reflect event probabilities. Fortunately for us, they have to consider markets and their exposure to risk too.
+It is important to know that bookmakers do not optimise odds solely for to reflect event probabilities. Fortunately for us, they have to consider markets and their exposure to risk too.
 
 Casual gamblers and football fans are generally motivated by opinions, excitement and loyalty. Thus, most are uninterested in betting that the outcome of a match will be a draw. Bookmakers tend to reduce the odds of popular bets to minimise their exposure to risk, and this makes it easier to be profitable when betting on draws rather than wins.
 
