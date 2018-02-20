@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  A Beginners Guide to Beating the Bookmakers with TensorFlow
-date:   2018-01-24 22:00:00
+date:   2018-02-20 09:00:00
 categories: programming
 excerpt: Using the TensorFlow Estimator API to make match predictions that beat the bookmakers.
 ---
