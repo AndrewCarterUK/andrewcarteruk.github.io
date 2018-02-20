@@ -42,24 +42,24 @@ The `Dataset` class converts the CSV data to an array of processed football resu
   'odds-home': 1.6, # Decimal odds from Bet365 on a home team win
   'odds-draw': 4.8, # Decimal odds from Bet365 on a draw
   'odds-away': 6.0, # Decimal odds from Bet365 on an away team win
-  'home-wins': 3, # Number of wins by the home team in the last 10 games
-  'home-draws': 1, # Number of draws by the home team in the last 10 games
-  'home-losses': 1, # Number of losses by the home team in the last 10 games
-  'home-goals': 8, # Number of goals scored by the home team in the last 10 games
-  'home-opposition-goals': 6, # Number of goals scored against the home team in the last 10 games
+  'home-wins': 6, # Number of wins by the home team in the last 10 games
+  'home-draws': 2, # Number of draws by the home team in the last 10 games
+  'home-losses': 2, # Number of losses by the home team in the last 10 games
+  'home-goals': 16, # Number of goals scored by the home team in the last 10 games
+  'home-opposition-goals': 12, # Number of goals scored against the home team in the last 10 games
   'home-shots': 68, # Number of shots made by the home team in the last 10 games
   'home-shots-on-target': 53, # Number of shots on target made by the home team in the last 10 games
-  'home-opposition-shots': 0.43, # Number of shots made against the home team in the last 10 games
-  'home-opposition-shots-on-target': 0.56, # Number of shots on target made against the home team in the last 10 games
+  'home-opposition-shots': 20, # Number of shots made against the home team in the last 10 games
+  'home-opposition-shots-on-target': 14, # Number of shots on target made against the home team in the last 10 games
   'away-wins': 3, # Number of wins by the away team in the last 10 games
-  'away-draws': 1, # Number of draws by the away team in the last 10 games
-  'away-losses': 1, # Number of losses by the away team in the last 10 games
-  'away-goals': 8, # Number of goals scored by the away team in the last 10 games
-  'away-opposition-goals': 6, # Number of goals scored against the away team in the last 10 games
-  'away-shots': 68, # Number of shots made by the away team in the last 10 games
-  'away-shots-on-target': 53, # Number of shots on target made by the away team in the last 10 games
-  'away-opposition-shots': 0.43, # Number of shots made against the away team in the last 10 games
-  'away-opposition-shots-on-target': 0.56, # Number of shots on target made against the away team in the last 10 games
+  'away-draws': 4, # Number of draws by the away team in the last 10 games
+  'away-losses': 3, # Number of losses by the away team in the last 10 games
+  'away-goals': 13, # Number of goals scored by the away team in the last 10 games
+  'away-opposition-goals': 17, # Number of goals scored against the away team in the last 10 games
+  'away-shots': 32, # Number of shots made by the away team in the last 10 games
+  'away-shots-on-target': 13, # Number of shots on target made by the away team in the last 10 games
+  'away-opposition-shots': 47, # Number of shots made against the away team in the last 10 games
+  'away-opposition-shots-on-target': 21, # Number of shots on target made against the away team in the last 10 games
 ]}
 ```
 
@@ -175,8 +175,10 @@ The [betting.py](https://github.com/AndrewCarterUK/football-predictor/blob/maste
 
 The above graph shows how the model developed as it was trained. The DNN converges quickly on a solution and achieves an accuracy of 51%. This accuracy is slightly below the performance of Bookmakers, Bet365 achieves around 53-54% on the same results.
 
-The betting return is less stable, and is in the region of a 50% on investment. This was achieved by placing 35 bets after considering 172 possible matches. However, it is clear there is not enough available test data to generate an accurate return figure.
+The betting return is less stable, and is in the region of a 50% on investment. This was achieved by placing 35 bets after considering 172 possible matches. However, it is clear there is not enough available test data to generate an accurate betting return figure.
 
-The odds used were only from Bet365, and further gains could probably be achieved by shopping around a bit. That said, Bet365 often provided the most competitive odds available in the dataset.
+The odds used were only from Bet365, and further gains could probably be achieved by shopping around. That said, Bet365 often provided the most competitive odds available in the dataset.
 
 If you would like to learn more about machine learning, I can highly recommend [Stanford University - Machine Learning by Andrew Ng](https://www.coursera.org/learn/machine-learning). I am about halfway through the course at the time of writing, and thoroughly appreciating its bottom up approach to these subjects.
+
+You may also be interested in my previous [article on object detection and recognition in images with TensorFlow](https://andrew.carterlunn.co.uk/programming/2018/01/24/annotating-large-datasets-with-tensorflow-object-detection-api.html).
