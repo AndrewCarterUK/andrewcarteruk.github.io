@@ -6,7 +6,7 @@ categories: programming
 excerpt: The PHP core functions are a complete mess. With PHP 8 on the horizon, and more competition than ever in the programming ecosystem, this might be a last chance to make PHP great again.
 ---
 
-Apologies for the clickbait title, but I really think that this topic deserves your attention.
+Apologies for the clickbait title, but if you are a PHP developer, I really think that this topic deserves your attention.
 
 PHP has had a love-hate relationship with much of the programming community for a while. An almost complete introduction to the topic of PHP hate can be achieved by reading the famous blog post [PHP: a fractal of bad design](https://eev.ee/blog/2012/04/09/php-a-fractal-of-bad-design/). In this post, the author hilariously cuts down almost every aspect of the PHP language, and sets out a rather convincing argument for consigning PHP to the archives of programming history. The article is now slightly out of date (it was published in 2012), but much of its criticism remains valid.
 
@@ -47,8 +47,8 @@ $upperCaseFruit = $lowerCaseFruit->map(function ($fruit) {
 });
 ```
 
-In reality, the process for fixing the PHP core functions is more difficult. The first step is convincing the PHP internals group that this cause is worth the effort and the backwards compatibility break. Joining the internals community is a pretty opaque process, it takes time (and goat sacrifices) to accrue the karma and respect necessary to actually action something yourself. But, if the wider community bangs its collective drum loudly enough, there is a chance that some of the key players in the group will set their brilliant minds to this task. If they did, we might soon see everyone on [/r/programming](https://www.reddit.com/r/programming/) adding PHP back as a skill on their LinkedIn profiles.
+In reality, the process for fixing the PHP core functions is more difficult. The first step is actually convincing the PHP internals group that this cause is worth the effort and the backwards compatibility break. Joining the internals community is a pretty opaque process, it takes time (and goat sacrifices) to accrue the karma and respect necessary to actually action something yourself. But, if the wider community bangs its collective drum loudly enough, there is a chance that some of the key players in the group will set their brilliant minds to this task.
 
-The reason for this post, is that [the release of PHP 8 is current being discussed on the internals mailing list](https://externals.io/message/102415). The current suggestion is that PHP 7.3 (which is about to feature freeze) will be the last version before PHP 8 (except for a deprecations only PHP 7.4). A feature as major as this would almost certainly be rolled into a major version, and [there are a lot of significant features already tabled for PHP 8](https://externals.io/message/102415) with no mention of cleaning up the core.
+The reason for this post, is that [the release of PHP 8 is current being discussed on the internals mailing list](https://externals.io/message/102415). The current suggestion is that PHP 7.3 (which is about to feature freeze) will be the last version before PHP 8 (except for a deprecations only PHP 7.4). A feature as major as this would almost certainly be rolled into a major version, and [there are a lot of significant features already tabled for PHP 8](https://externals.io/message/102415) with no mention of cleaning up the core functions.
 
-If we want to "Make PHP Great Again", or at least "Make PHP Great Before 2025", now is probably a good time to start banging that drum!
+If we want to "Make PHP Great Again", or at least "Make PHP Slightly Better Before 2025", now is probably a good time to start banging that drum!
