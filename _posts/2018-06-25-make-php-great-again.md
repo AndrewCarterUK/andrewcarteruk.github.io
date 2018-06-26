@@ -36,14 +36,14 @@ Good replacements have been discussed before too. There was an RFC for [fixing t
 $lowerCaseFruit = ['apples', 'oranges', 'grapes'];
 
 $upperCaseFruit = array_map(function ($fruit) {
-    return strtolower($fruit);
+    return strtoupper($fruit);
 }, $lowerCaseFruit);
 
 // We could have
 $lowerCaseFruit = ['apples', 'oranges', 'grapes'];
 
 $upperCaseFruit = $lowerCaseFruit->map(function ($fruit) {
-    return $fruit->toLower();
+    return $fruit->toUpper();
 });
 ```
 
