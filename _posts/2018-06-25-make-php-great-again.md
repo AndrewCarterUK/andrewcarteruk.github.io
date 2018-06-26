@@ -12,7 +12,7 @@ PHP has had a love-hate relationship with much of the programming community for 
 
 Personally, I simultaneously love and hate pretty much every language that I have ever been introduced to. I love C and how it taught me low level programming concepts, but I hate how it takes two hours to try and join two strings together. I love Python because of the machine learning and Raspberry Pi communities, but I hate how it is practically impossible to achieve type safety and proper object oriented design. I love JavaScript and the asynchronous programming techniques that it has encouraged, but I hate how I need about 9000 dependencies in my `node_modules` directory to serve a hello world application on port 80.
 
-There is lots that I love about PHP too. When I was a youngster without funding for servers, shared free PHP hosting was all I had. It made object oriented programming accessible to me and I love the package manager and its ecosystem.
+There is lots that I love about PHP too. When I was younger, without funding for servers, shared free PHP hosting was all I had. It made object oriented programming accessible to me, and I love the package manager and its ecosystem.
 
 With all that said, I **passionaly hate** the PHP core functions.
 
