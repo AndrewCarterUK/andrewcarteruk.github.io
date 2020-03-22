@@ -171,7 +171,7 @@ Given the length of time required for a human to say "box box", a clip duration 
 
 ## Training Data
 
-The network can be trained to recognise "known words", but for the task of command recognition we must also teach it how to recognise words that it does not know ("unknown words") and background noise.
+The network can be trained to recognise "known words", but for the task of keyword spotting we must also teach it how to recognise words that it does not know ("unknown words") and background noise.
 
 I explained this to my partner by having her imagine teaching a young child to recognise a picture of a Ferarri. If the child had only ever seen pictures of Ferarris before, and none of other cars, then when shown a picture of a Toyota they might mistakenly identify this as a Ferarri (as both have a windscreen, four wheels, doors and the ability to move). Similarly, if the child had never seen pictures of things that were not cars at all, they might classify a picture of a horse, or even a blank picture, as a car - simply because they never learned what something that was not a car looked like.
 
