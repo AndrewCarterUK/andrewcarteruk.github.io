@@ -27,7 +27,7 @@ The architecture used in this program has been taken from the primary source pap
 
 A spectrogram is a two dimensional representation of a signal, where the dimensions are time and frequency. As the representation of the signal is two dimensional, the best network will be one that exploits this geometry. Convolutional Network Networks (CNNs) have been used for this purpose in image classification tasks for some time now.
 
-The representation in the frequency domain is more complex then the output from a fast fourier transform (FFT). The reason for this is that the human ear does not perceive sound in a linear manner. If the chosen representation in the frequency domain presents the difference between a 1 kHz signal and a 2 kHz signal in the same way as it presents the difference between a 11 kHz signal and a 12 kHz signal, then it is not a suitable representation. The human ear would hear a large difference between the first signal pair and a smaller difference between the second, however an FFT would not emphasise the difference between these cases.
+The representation in the frequency domain is more complex then the output from a fast fourier transform (FFT). The reason for this is that the human ear does not perceive sound in a linear manner. If the chosen representation in the frequency domain presents the difference between a 1 kHz signal and a 2 kHz signal in the same way that it presents the difference between a 11 kHz signal and a 12 kHz signal, then it is not a suitable representation. The human ear would hear a large difference between the first signal pair and a smaller difference between the second, however an FFT would not emphasise the difference between these cases.
 
 For speech recognition tasks it is common to use either log mel-filterbank energies or Mel Frequency Ceptral Coefficients (MFCCs) as a representation in the frequency domain. [This article](https://haythamfayek.com/2016/04/21/speech-processing-for-machine-learning.html) goes into more depth about these processing techniques and their differences.
 
@@ -107,7 +107,7 @@ class System:
             self.model.compile(loss='categorical_crossentropy', optimizer=sgd)
 {% endhighlight %}
 
-The JSON configuration files shown below can now be used to tweak the hyperparameters of the network. As the [primary source paper](https://www.isca-speech.org/archive/interspeech_2015/papers/i15_1478.pdf) describes a number of possible network configurations, this setup allows them all to be easily tested without changing the code. The variables `m`, `r`, `n`, `p` and `q` are defined in the [primary source paper](https://www.isca-speech.org/archive/interspeech_2015/papers/i15_1478.pdf), and the architecture used in this project and shown in the configuration below is referred to within as `cnn-trad-fpool3`.
+The JSON configuration files shown below can now be used to tweak the hyperparameters of the network. As the [primary source paper](https://www.isca-speech.org/archive/interspeech_2015/papers/i15_1478.pdf) describes a number of possible network configurations, this setup allows them all to be easily tested without changing the code. The variables `m`, `r`, `n`, `p` and `q` are defined in the [primary source paper](https://www.isca-speech.org/archive/interspeech_2015/papers/i15_1478.pdf). The architecture used in this project is referred to within as `cnn-trad-fpool3`, and shown in the configuration below.
 
 {% highlight C %}
 {
