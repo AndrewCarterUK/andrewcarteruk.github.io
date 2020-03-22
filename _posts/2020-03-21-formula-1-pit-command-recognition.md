@@ -180,9 +180,9 @@ A further extension to this train of thought, is to imagine that you have succes
 Thus, a good keyword spotting dataset will contain samples of:
 
 1. Background noise
-2. Words that are not the command words
-3. Words that sound similar to the command words
-4. The actual command words that you are hoping to eventually identify.
+2. Words that are not the keywords
+3. Words that sound similar to the keywords
+4. The actual keywords that you are hoping to eventually identify.
 
 {% highlight C %}
 {
