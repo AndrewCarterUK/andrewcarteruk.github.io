@@ -256,7 +256,7 @@ For this demonstration, the program has been split into two parts. The first, re
 
 ![server](/images/box-box/server.png)
 
-The second part of the program, the Detector, performs a rolling log-mel filterbank translation on the samples as they are received. These spectrograms are then continuously fed into a trained network to make predictions. If the known words are spotted, then a callback is triggered. Currently, the callback only triggers a message being output to the console.
+The second part of the program, the Detector, performs a rolling log-mel filterbank translation on the samples as they are received from the server. These spectrograms are then continuously fed into a trained network to make predictions. If the known words are spotted, then a callback is triggered. Currently, the callback only triggers a message being output to the console.
 
 The [Detector](https://github.com/AndrewCarterUK/box-box/blob/master/boxbox/command/detector.py) class contains the code for this part of the process, and the methods of interest are shown below.
 
