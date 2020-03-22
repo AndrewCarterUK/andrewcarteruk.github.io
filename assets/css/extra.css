@@ -13,3 +13,7 @@ section {
     margin-top: 0em !important;
     padding-top: 0em !important;
 }
+
+.highlight {
+    padding-bottom: 2em;
+}
