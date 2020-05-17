@@ -15,7 +15,7 @@ This article will ignore the first point, and examine the second in more detail.
 
 ## Sequential Primary Keys
 
-Consider an application that needed to manage a table of orders. With a sequential primary key, the schema for this table might look like this:
+Consider an application that needs to manage a table of orders. With a sequential primary key, the schema for the table might look like this:
 
 ```sql
 CREATE TABLE orders (
