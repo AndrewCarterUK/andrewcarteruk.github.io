@@ -213,3 +213,11 @@ class PrimaryKeyEncryptor:
 
         return int.from_bytes(plain_bytes[:8], byteorder='big')
 ```
+
+## Ordered UUIDs
+
+When I shared this post on Twitter, somebody pointed out another alternative:
+
+<div style="margin-bottom: 2em;"><blockquote class="twitter-tweet"><p lang="en" dir="ltr">There is also the possibility to rearrange the structure of the uuid to have the time part up front. We have done this with <a href="https://twitter.com/ramsey?ref_src=twsrc%5Etfw">@ramsey</a> /uuid<a href="https://t.co/qeuWs9jZO4">https://t.co/qeuWs9jZO4</a><a href="https://t.co/q0WhjfZGRb">https://t.co/q0WhjfZGRb</a></p>&mdash; Andreas &#39;Ando 🦆&#39; Frömer (@icanhazstring) <a href="https://twitter.com/icanhazstring/status/1262013888628953091?ref_src=twsrc%5Etfw">May 17, 2020</a></blockquote><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+
+The basic concept is that a UUID is constructed of many different components, including a timestamp. However, the structure of a UUID does not ensure that UUIDs appear in chronological order when they are sorted. By rearranging the UUID such that this is true, it is possible to improve their performance as a primary key quite significantly. [A blog post on Percona](https://www.percona.com/blog/2014/12/19/store-uuid-optimized-way/) covers this topic with benchmarks in detail.
