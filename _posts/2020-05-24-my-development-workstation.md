@@ -12,7 +12,7 @@ As I am not a gamer, all of the decisions I have had to make have focused entire
 
 Luckily, I built my computer just before the United Kingdom entered lockdown due to COVID-19. I have noticed that the price of a lot of the items that I purchased creating this workstation has since increased by quite a bit. I imagine that this is because the pandemic has caused a shortage in supply and an increase in demand for many computing components.
 
-![my development workstation](/images/development-workstation.png)
+![my development workstation](/images/development-workstation.jpg)
 
 ## Quick Links
 
