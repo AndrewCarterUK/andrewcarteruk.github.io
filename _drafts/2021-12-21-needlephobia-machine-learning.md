@@ -6,8 +6,6 @@ categories: programming
 excerpt: How to create a Google Chrome extension that protects you from pictures of needles on the internet.
 ---
 
-# Dealing with Needlephobia using Machine Learning
-
 Recently, news websites have been overloaded with images of people getting vaccinated. As a needlephobe, this invasion of my [safe space](https://www.youtube.com/watch?v=sXQkXXBqj_U) has not gone unnoticed. Previously I thought that this news cycle might soon pass, but I have come to realise that we will be talking about vaccinations and boosters for a while yet.
 
 This left me with two options:
