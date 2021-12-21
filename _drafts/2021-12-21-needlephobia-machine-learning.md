@@ -27,9 +27,9 @@ The second problem is that I need some software that can find, test and hide ima
 
 Image classification is a supervised machine learning problem. In the simplest terms, I need to start with a dataset and a mathematical function that accepts an image and return a prediction (a _model_).
 
-My dataset needs to contain images of things that are needles and also things that are not needles. Then I can test my model against images my dataset and see how well it does. At the start it wont do very well, the predictions that it makes will be as good as random guesses. However, I can use calculus to work out how I need to change the model so it gives better predictions on the dataset. If I repeat this process enough times, then eventually I will end up with a model that does a lot better than random. This is called _training_. The more images I have in my dataset, the better my model will be.
-
 <iframe width="560" height="315" src="https://www.youtube.com/embed/R9OHn5ZF4Uo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+My dataset needs to contain images of things that are needles and also things that are not needles. Then I can test my model against images my dataset and see how well it does. At the start it wont do very well, the predictions that it makes will be as good as random guesses. However, I can use calculus to work out how I need to change the model so it gives better predictions on the dataset. If I repeat this process enough times, then eventually I will end up with a model that does a lot better than random. This is called _training_. The more images I have in my dataset, the better my model will be.
 
 The more astute readers will have noticed my first predicament: How does someone with needlephobia gather a big dataset of images that contain needles?
 
