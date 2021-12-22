@@ -6,7 +6,7 @@ categories: programming
 excerpt: How to create a Google Chrome extension that protects you from pictures of needles on the internet.
 ---
 
-Recently, news websites have been overloaded with images of people getting vaccinated. As a needlephobe, this invasion of my [safe space](https://www.youtube.com/watch?v=sXQkXXBqj_U) has not gone unnoticed. I had previously thought that this news cycle might soon pass, but I recently came to the realisation that we will be talking about vaccinations and boosters for a while yet.
+Recently, news websites have been overloaded with images of people getting vaccinated. As a needlephobe, this invasion of my [safe space](https://www.youtube.com/watch?v=sXQkXXBqj_U) has not gone unnoticed. I had previously thought that this news cycle might soon pass, but I recently realised that we will be talking about vaccinations and boosters for a while yet.
 
 ![news website](/images/needlephobia/news-website.png)
 
@@ -21,7 +21,7 @@ Naturally, the second option was far more appealing.
 
 A good first step for any software project is to break the problem that you are trying to solve down into smaller problems. In this case, there were two clear problems that required solving.
 
-The first problem was that I needed some software that could look at an image and detect whether or not it contains a needle. This is an [image classification](https://cs231n.github.io/classification/) problem, and these problems used to be [very difficult to solve](https://xkcd.com/1425/). However, recent advances in the field of machine learning have made creating and using image classification models quite easy.
+The first problem was that I needed some software that could look at an image and detect whether it contains a needle. This is an [image classification](https://cs231n.github.io/classification/) problem, and these problems used to be [very difficult to solve](https://xkcd.com/1425/). However, recent advances in the field of machine learning have made creating and using image classification models quite easy.
 
 The second problem was that I needed some software that could find, test and hide images of needles that I encounter on the internet. The BBC news website is _by far_ the most common source of offending images in my life, so I considered making a proxy website for my own personal use (I even came up with a name: Needle Free BBC). This would have the advantage of being easily available on all of my devices but the disadvantage of limiting the operational scope to a single website. I ended up deciding that a browser plugin was a more complete solution.
 
@@ -37,7 +37,7 @@ The more astute readers may have already noticed my predicament.
 
 The call was marginal at best, but I decided that it would be preferable to consolidate all of my needle viewing into a few hours. The alternative was living with the prospect of frequently encountering such images for months and maybe years to come. My combined dataset (training and validation) contained 966 images and 548 of those were of needles. Doing this gathering made me feel pretty sick, and it is safe to say that I am glad this part of the project is behind me.
 
-Images of needles is also a pretty broad, and slightly misleading, category. The images in my dataset were primarily of people receiving injections as these bother me the most.
+It is worth mentioning that my definition for whether or not an image contained a needle was pretty broad. I included images of people receiving vaccinations where the needle was not particularly visible. These images actually bother me the most, so the dataset contained lots of them.
 
 I also cheated a bit when building my model. Training a good image classification model from scratch requires a huge amount of data. You can get a head start by using a pre-trained image classification model and then adding some extra layers on the end which you train against your own dataset. A reasonable mental model of this is that the pre-trained image classification model already knows how to "see", and I added a bit on the end that taught it how to see needles.
 
