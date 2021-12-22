@@ -37,7 +37,7 @@ The more astute readers may have already noticed my predicament.
 
 The call was marginal at best, but I decided that it would be preferable to consolidate all of my needle viewing into a few hours. The alternative was living with the prospect of frequently encountering such images for months and maybe years to come.
 
-Initially it was difficult (and slow) to find enough good training examples for my dataset. The BBC website has an offensive amount of needle photos, but not the hundreds that I needed to train my model. Luckily, they cite their supplier.
+Initially it was difficult (and slow) to find enough good training examples for my dataset. The BBC website hosts an offensive number of needle photos, but not the hundreds that I needed to train my model. Luckily, they cite their supplier.
 
 ![getty images attributation](/images/needlephobia/getty-images-attributation.png)
 
