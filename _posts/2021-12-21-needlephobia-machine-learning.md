@@ -29,7 +29,7 @@ The second problem was that I needed some software that could find, test and hid
 
 <iframe style="margin-bottom: 1em;" width="560" height="315" src="https://www.youtube.com/embed/R9OHn5ZF4Uo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-The first thing that I needed to gather to build my model was training data. If I was going to teach a model to guess whether an image contained a needle, that meant that I needed lots of images of needles (I also needed lots of images of things that are not needles). The more images I had, the more accurate my model was going to be.
+The first thing that I needed to gather was training data. If I was going to teach my model to guess whether an image contained a needle, that meant that I needed lots of images of needles (I also needed lots of images of things that are not needles). The more images I had, the more accurate my model was going to be.
 
 The more astute readers may have already noticed my predicament.
 
