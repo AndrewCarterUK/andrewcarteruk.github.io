@@ -37,9 +37,9 @@ The more astute readers may have already noticed my predicament.
 
 The call was marginal at best, but I decided that it would be preferable to consolidate all of my needle viewing into a few hours. The alternative was living with the prospect of frequently encountering such images for months and maybe years to come. My combined dataset (training and validation) contained 966 images and 548 of those were of needles. Doing this gathering made me feel pretty sick, and it is safe to say that I am glad this part of the project is behind me.
 
-It is worth mentioning that my definition for whether or not an image contained a needle was pretty broad. I included images of people receiving vaccinations where the needle was not particularly visible. These images actually bother me the most, so the dataset contained lots of them.
+It is worth mentioning that my definition for whether or not an image contained a needle was pretty broad and I included images of people receiving vaccinations where the needle was not particularly visible. These images actually bother me the most, so the dataset contained lots of them.
 
-I also cheated a bit when building my model. Training a good image classification model from scratch requires a huge amount of data. You can get a head start by using a pre-trained image classification model and then adding some extra layers on the end which you train against your own dataset. A reasonable mental model of this is that the pre-trained image classification model already knows how to "see", and I added a bit on the end that taught it how to see needles.
+I also cheated a bit when building my model. Training a good image classification model from scratch requires a huge amount of data. You can get a head start by using a pre-trained image classification model and then adding some extra layers on the end which you train against your own dataset. A reasonable mental model of this is that the pre-trained image classification model already knows how to see, and I added a bit on the end that taught it how to recognise needles.
 
 The [Keras](https://keras.io/) machine learning API is so good that it is trivial and expressive to define this model in Python:
 
