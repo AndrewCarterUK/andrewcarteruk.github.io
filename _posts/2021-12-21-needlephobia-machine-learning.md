@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Dealing with Needlephobia using Machine Learning
+title: Dealing with Needlephobia Using Machine Learning
 date: 2021-12-21
 categories: programming
 excerpt: How to create a Google Chrome extension that protects you from pictures of needles on the internet.
