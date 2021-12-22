@@ -6,7 +6,7 @@ categories: programming
 excerpt: How to create a Google Chrome extension that protects you from pictures of needles on the internet.
 ---
 
-Recently, news websites have been overloaded with images of people getting vaccinated. As a needlephobe, this invasion of my [safe space](https://www.youtube.com/watch?v=sXQkXXBqj_U) has not gone unnoticed. I had previously thought that this news cycle might soon pass, but I recently realised that we will be talking about vaccinations and boosters for a while yet.
+For the last year and a bit, news websites around the world have been competing with each other to see how many photos they can host of people with needles sticking out of their arms. As a needlephobe, this invasion of my [safe space](https://www.youtube.com/watch?v=sXQkXXBqj_U) has not gone unnoticed. I had previously thought that the news cycle might soon pass, but I realised recently that we will be talking about vaccinations and boosters for a while yet.
 
 ![news website](/images/needlephobia/news-website.png)
 
@@ -35,7 +35,13 @@ The more astute readers may have already noticed my predicament.
 
 ![gru meme](/images/needlephobia/gru-meme.jpg)
 
-The call was marginal at best, but I decided that it would be preferable to consolidate all of my needle viewing into a few hours. The alternative was living with the prospect of frequently encountering such images for months and maybe years to come. My combined dataset (training and validation) contained 966 images and 548 of those were of needles. Doing this gathering made me feel pretty sick, and it is safe to say that I am glad this part of the project is behind me.
+The call was marginal at best, but I decided that it would be preferable to consolidate all of my needle viewing into a few hours. The alternative was living with the prospect of frequently encountering such images for months and maybe years to come.
+
+Initially it was difficult (and slow) to find enough good training examples for my dataset. The BBC website has an offensive amount of needle photos, but not the hundreds that I needed to train my model. Luckily, they cite their supplier.
+
+![getty images attributation](/images/needlephobia/getty-images-attributation.png)
+
+If the BBC website is a crack den for needle photos, then Getty Images is the coca plantation. When I was done my combined dataset (training and validation) contained 966 images and 548 of those were of needles. Doing this gathering made me feel pretty sick, and it is safe to say that I am glad this part of the project is behind me.
 
 It is worth mentioning that my definition for whether or not an image contained a needle was pretty broad and I included images of people receiving vaccinations where the needle was not particularly visible. These images actually bother me the most, so the dataset contained lots of them.
 
@@ -154,6 +160,12 @@ async function main() {
 
 Initially, the plugin generated a few false positives. I switched the behaviour so that instead of hiding photos it added a red or a green border depending on the classification. This was valuable because it made it easy to see the types of images that were confusing the model. I could then expand the training dataset to include more difficult training data, which greatly improved the results.
 
-I considered making this extension publicly available on the Chrome Web Store, but if you want to do this you need to pay to register as a developer. I cannot really be bothered to pay to give something away for free. [All the code is up on GitHub](https://github.com/AndrewCarterUK/Needlephobe); so if anyone is motivated they can package it up and distribute it.
+![borders examples](/images/needlephobia/getty-images-borders.png)
+
+I considered making this extension publicly available on the Chrome Web Store, but if you want to do this then you need to pay to register as a developer and you probably need to actually maintain the extension afterwards.
+
+![aint nobody got time for that](/images/needlephobia/aint-nobody-got-time-for-that.gif)
+
+[All the code is up on GitHub](https://github.com/AndrewCarterUK/Needlephobe); so if anyone is motivated they can package it up and distribute it.
 
 In conclusion, if you ever feel like your irrational fears are holding you back in life, just use software engineering to change the world around you so that you do not have to confront them anymore.
