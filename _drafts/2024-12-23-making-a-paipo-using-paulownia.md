@@ -5,7 +5,7 @@ date:   2023-12-23 20:00:00
 categories: woodwork
 ---
 
-This year, in our family secret santa game, I was assigned the responsibility for providing a gift for somebody who likes to spend time at the beach. After doing some research, I decided that I was going to set upon the challenge of building a paipo. A paipo is a traditional Polynesian bellyboard, the name is derived from the Hawaiian "Pae Po'o", which means to surf headfirst.
+This year, the secret santa gift exchange for my partners family, I was assigned the responsibility for providing a gift for somebody who likes to spend time at the beach. After doing some research, I decided that I was going to set upon the challenge of building a paipo. A paipo is a traditional Polynesian bellyboard, the name is derived from the Hawaiian "Pae Po'o", which means to surf headfirst.
 
 I wanted the paipo to be wooden, and my research led me to selecting paulownia as the best species to use. Paulownia is lightweight, easy to work and has water resistant properties. I purchased a 25mm thickness edge-glued panel from a UK supplier called [Paulownia Timber](https://www.paulowniatimber.co.uk/paulownia-edge-glued-panels). The dimensions of the panel I purchased was 2400x600mm, and I wanted the paipo to be 1200x390mm, giving me enough for three boards with some additional gluing.
 
